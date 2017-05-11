@@ -5,6 +5,6 @@ I'm a graduate student at Northeastern University. I have some experience in dat
 This repository is the working space for the course CS5610 Web Development.
 
 # Links
-i.   Link to the hosted environment: https://webdev-summer-1-2017.herokuapp.com
-ii.  Link to my project: https://webdev-summer-1-2017.herokuapp.com/project/index.html
-iii. Link to my assignment: https://webdev-summer-1-2017.herokuapp.com/assignment/index.html
+1. Link to the hosted environment: https://webdev-summer-1-2017.herokuapp.com
+1. Link to my project: https://webdev-summer-1-2017.herokuapp.com/project/index.html
+1. Link to my assignment: https://webdev-summer-1-2017.herokuapp.com/assignment/index.html
