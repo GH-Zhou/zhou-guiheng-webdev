@@ -8,9 +8,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
-
-var ourApp = require ("./lectures/angular/app.js");
-ourApp(app);
+// var ourApp = require ("./lectures/angular/app.js");
+// ourApp(app);
 
 require ("./test/app.js")(app);
 
