@@ -2,26 +2,42 @@
 <html lang="en" ng-app="BlogApp">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <!--<script src="../../../js/angular.min.js"></script>!-->
+    <!--<script src="../../../js/angular.min.js"></script> convenient for local work but discouraged-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="../../../ccs/bootstrap.min.css" rel="stylesheet"/>-->
+    <!--"min" means minimize the time to download it.-->
     <script src="app.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <div>
-        <h1>My First Angular App</h1>
+<!--class declared by bootstrap-->
+    <div class="container-fluid">
+        <h1>ブログ</h1>
 
-        <!-- View rendering (html) !-->
-        <div>
-            Title:
-            <input/>
-            Body:
-            <textarea></textarea>
-            <button>Post Blog</button>
-            <ul>
-                <li>
-                    <h3>My First App</h3>
-                    <p>hahahahahahha</p>
+        <!-- VIEW rendering (html) !-->
+        <!--assign a VIEW ng-controller -->
+        <div ng-controller="BlogPostListController">
+            タイトル:
+            <input ng-model="post.title" class="form-control"/>
+            コメント:
+            <textarea ng-model="post.body" class="form-control"></textarea>
+            <button ng-click="addPost(post)" class="btn btn-block btn-primary">ポストする</button>
+            <button ng-click="updatePost(post)" class="btn btn-block btn-success">更新する</button>
+
+            <ul class="list-group">
+                <!--posts is the array initialized in app.js-->
+                <!--post is different from post.title in <input> above-->
+                <li ng-repeat="post in posts" class="list-group-item">
+                    <span ng-click="selectPost($index)" class="glyphicon glyphicon-pencil pull-right"></span>
+                    <span ng-click="deletePost($index)" class="glyphicon glyphicon-remove pull-right"></span>
+                    <h3>{{post.title}}</h3>
+                    <p>
+                        {{post.body}}
+                    </p>
+                    <lable>
+                        {{post.date | date}}
+                    </lable>
                 </li>
             </ul>
         </div>
