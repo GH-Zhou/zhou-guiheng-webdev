@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Intro to CSS</title>
+        <style>
+            p {
+                background-color: green;
+            }
+
+            .yellowBg {
+                background-color: yellow;
+            }
+
+            #intro {
+                background-color: gray;
+            }
+
+            h1 {
+                color: red !important;
+                background-color: blue !important;
+            }
+
+            h1 {
+                color: white;
+                background-color: red;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Intro to CSS</h1>
+
+        <p id="intro" class="yellowBg">
+            Intro Paragraph
+        </p>
+
+        <p style="color:red;background-color: blue">
+            Inline styles have highest precedence
+        </p>
+
+        <p class="yellowBg">
+            Separate paragraph to show element styling
+        </p>
+
+        <p>
+            Paragraph with no ID or class or style attribute
+        </p>
+    </body>
+</html>
