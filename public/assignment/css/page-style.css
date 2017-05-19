@@ -23,8 +23,8 @@ body {
 }
 
 .navbar-default {
-    background-color: #137acf;
-    border-color: #137acf;
+    background-color: #637a87;
+    border-color: #637a87;
 }
 
 .navbar-default .navbar-brand,
@@ -44,12 +44,12 @@ body {
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     z-index: 2;
     color: #fff;
-    background-color: #637a87;
-    border-color: #637a87;
+    background-color: #137acf;
+    border-color: #137acf;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #137acf;
-    border-color: #137acf;
+    background-color: #637a87;
+    border-color: #637a87;
 }
