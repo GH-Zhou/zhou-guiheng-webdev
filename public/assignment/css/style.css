@@ -22,6 +22,12 @@ body {
     width: 100%;
 }
 
+.navbar-brand,
+.navbar-header.navbar-brand,
+.row a {
+    white-space: nowrap;
+}
+
 .navbar-default {
     background-color: #137acf;
     border-color: #137acf;
@@ -52,4 +58,8 @@ body {
     color: #fff;
     background-color: #137acf;
     border-color: #137acf;
+}
+
+a:hover {
+    text-decoration: none;
 }

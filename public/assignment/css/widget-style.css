@@ -1,0 +1,89 @@
+input.form-control, textarea.form-control {
+    margin-bottom: 10px;
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.navbar.navbar-default.navbar-fixed-top .navbar-header,
+.navbar.navbar-default.navbar-fixed-bottom .navbar-header,
+.row.navbar-text {
+    width: 100%;
+}
+
+.navbar-default {
+    background-color: #ebeef0;
+    border-color: #ebeef0;
+}
+
+.navbar-default .navbar-brand,
+.navbar.navbar-default a,
+.navbar-default .navbar-link,
+.container-fluid > .navbar-header {
+    color: #137acf;
+}
+
+.navbar-brand,
+.navbar-header.navbar-brand {
+    white-space: nowrap;
+}
+
+.row .container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #137acf;
+    border-color: #137acf;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.wd-widget {
+    margin-bottom: 10px;
+}
+
+.wd-widget > img {
+    width: 100%;
+}
+
+.wd-widget > .wd-widget-toolbar {
+    position: absolute;
+    right: 15px;
+    background: white;
+    opacity: 0.8;
+    padding: 4px;
+    border-bottom-left-radius: 10px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wd-widget-toolbar {
+    z-index: 1
+}
+
+#logo {
+    width: 200px;
+}
