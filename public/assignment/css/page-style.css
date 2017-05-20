@@ -8,12 +8,9 @@ body {
 }
 
 /* no space -> AND */
-.navbar.navbar-default.navbar-fixed-top {
-    /*padding-right: 15px;*/
-}
-
-.navbar.navbar-default.navbar-fixed-bottom {
-    /*padding-right: 15px;*/
+.row.navbar-header > .col-xs-8,
+.row.navbar-header > .col-xs-7 {
+    padding-right: 0;
 }
 
 .navbar.navbar-default.navbar-fixed-top .navbar-header,
@@ -26,6 +23,10 @@ body {
 .navbar-header.navbar-brand,
 .row a {
     white-space: nowrap;
+}
+
+#title {
+    color: #ebeef0;
 }
 
 .navbar-default {

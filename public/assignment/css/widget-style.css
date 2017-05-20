@@ -7,6 +7,11 @@ body {
     padding-bottom: 60px;
 }
 
+/* no space -> AND */
+.row.navbar-header > .col-xs-7 {
+    padding-right: 0;
+}
+
 .navbar.navbar-default.navbar-fixed-top .navbar-header,
 .navbar.navbar-default.navbar-fixed-bottom .navbar-header,
 .row.navbar-text {
@@ -23,6 +28,10 @@ body {
 .navbar-default .navbar-link,
 .container-fluid > .navbar-header {
     color: #137acf;
+}
+
+#title {
+    color: #637a87;
 }
 
 .navbar-brand,
