@@ -1,0 +1,34 @@
+<script src="../js/jquery-3.2.1.min.js"></script>
+
+<script>
+    $(init);
+
+    function init() {
+        $("#p1").click(p1Clicked);
+        $("#ADD").click(addAandB);
+    }
+
+    function p1Clicked() {
+        $("body").append("<p>New Paragraph");
+    }
+
+    function addAandB() {
+        var a = $("#A").val();
+        var b = $("#B").val();
+        a = parseInt(a);
+        b = parseInt(b);
+        var c = a + b;
+        $("#C").val(c);
+    }
+</script>
+
+<h1>Handling Events with jQuery</h1>
+
+<p id="p1">
+    这是一个段落。This is a paragraph. これはパラグラフである。
+</p>
+
+<input id="A"/>
+<input id="B"/>
+<button id="ADD">Add A and B</button>
+<input id="C"/>

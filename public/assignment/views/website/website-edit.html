@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>American Airlines - New Website</title>
+    <title>American Airlines - Edit Website</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/website-style.css" rel="stylesheet"/>
+    <link href="../../css/website-style.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -36,8 +36,8 @@
 
             <div class="col-xs-8">
                 <div class="navbar-header navbar-brand">
-                    <a id="title" href="website-new.html">
-                        New Website
+                    <a id="title" href="website-edit.html">
+                        Edit Website
                     </a>
                     <p class="pull-right">
                         <a href="website-list.html" class="navbar-link">
@@ -187,13 +187,16 @@
             <input type="text"
                    class="form-control"
                    placeholder="eg: Newsroom"
+                   value="Newsroom"
                    id="name"/>
 
             <label for="description">Description</label>
             <textarea class="form-control"
                       rows="5"
                       placeholder="eg: Offering the latest news of American Airlines"
-                      id="description"></textarea>
+                      id="description">Offering the latest news of American Airlines</textarea>
+
+            <a href="website-list.html" class="btn btn-block btn-danger">Delete</a>
 
         </div>
     </div>
@@ -203,7 +206,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="../user/profile.html" class="navbar-link">
+                <a href="../user/templates/profile.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-user">
                     </span>
                 </a>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manipulating the DOM with jQuery</title>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(init);
+
+        function init() {
+            // programmatically
+            $("h1").html("Changing HTML content with jQuery");
+
+            $("body").append("<h2>Appending content with jQuery</h2>");
+
+            var ul = $("<ul>");
+            for (var i = 0; i < 10; i++){
+                var li = $("<li>");
+                li.append("Line Item " + i);
+                ul.append(li);
+            }
+            $("body").append(ul);
+
+            $("p")
+                .css("color", "white")
+                .css("background-color", "red");
+
+            $("#p2")
+                .css({"color": "white",
+                      "background-color": "blue"
+                });
+
+        }
+    </script>
+</head>
+<body>
+    <h1>Manipulating the DOM with jQuery</h1>
+    <p>
+        This is a paragraph
+    </p>
+    <p id="p2">
+        This is another paragraph
+    </p>
+</body>
+</html>
