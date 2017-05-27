@@ -1,0 +1,85 @@
+<link href="../../../../assignment/css/website-style.css" rel="stylesheet"/>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row navbar-header">
+
+            <div class="col-sm-5 col-xs-4">
+                <a class="navbar-brand" href="../../user/templates/profile.view.client.html">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    Profile
+                </a>
+            </div>
+
+            <div class="col-sm-7 col-xs-8">
+                <div class="navbar-header navbar-brand">
+                    <a id="title" href="website-list.view.client.html">
+                        Website List
+                    </a>
+                    <p class="pull-right">
+                        <a href="#!/user/{{model.uid}}/website/new" class="navbar-link">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <ul class="list-group">
+
+        <li class="list-group-item active">
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-xs-9">
+                    Website Name
+                </div>
+                <div class="col-lg-3 visible-lg">
+                    Created
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Accessed
+                </div>
+                <div class="col-xs-3">
+                </div>
+            </div>
+        </li>
+
+        <li ng-repeat="website in model.websites" class="list-group-item">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-xs-9">
+                    <a href="../../page/templates/page-list.view.client.html">
+                        {{website.name}}
+                    </a>
+                </div>
+                <div class="col-lg-3 visible-lg">
+                    {{website.created | date}}
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    {{website.accessed | date}}
+                </div>
+                <div class="col-xs-3">
+                    <a href="#!/user/{{model.uid}}/website/{{website._id}}">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-user">
+                    </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

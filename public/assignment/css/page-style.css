@@ -21,7 +21,10 @@ body {
 
 .navbar-brand,
 .navbar-header.navbar-brand,
-.row a {
+.row a,
+.col-lg-3.col-md-6.col-xs-9,
+.col-lg-3.visible-lg,
+.col-md-3.hidden-sm.hidden-xs {
     white-space: nowrap;
 }
 

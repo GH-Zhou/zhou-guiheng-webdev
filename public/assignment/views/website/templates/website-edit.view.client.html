@@ -1,0 +1,131 @@
+<link href="../../../../assignment/css/website-style.css" rel="stylesheet"/>
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row navbar-header">
+
+            <div class="col-md-1 col-sm-3 col-xs-4">
+                <a class="navbar-brand" href="website-list.view.client.html">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+
+            <div class="col-md-2 hidden-sm hidden-xs">
+                <a class="navbar-brand" href="website-list.view.client.html">
+                    Website List
+                </a>
+            </div>
+
+            <div class="col-sm-1 hidden-xs">
+                <p class="navbar-text pull-right">
+                    <a href="website-new.view.client.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-xs-8">
+                <div class="navbar-header navbar-brand">
+                    <a id="title" href="website-edit.view.client.html">
+                        Edit Website
+                    </a>
+                    <p class="pull-right">
+                        <a href="website-list.view.client.html" class="navbar-link">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-4 hidden-xs">
+            <div class="container-fluid">
+                <ul class="list-group">
+
+                    <li class="list-group-item active">
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-7 col-xs-10">
+                                Website Name
+                            </div>
+                            <div class="col-lg-3 visible-lg">
+                                Created
+                            </div>
+                            <div class="col-md-3 hidden-sm hidden-xs">
+                                Accessed
+                            </div>
+                            <div class="col-xs-2">
+                            </div>
+                        </div>
+                    </li>
+
+                    <li ng-repeat="website in model.websites" class="list-group-item">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-xs-9">
+                                <a href="../../page/templates/page-list.view.client.html">
+                                    {{website.name}}
+                                </a>
+                            </div>
+                            <div class="col-lg-3 visible-lg">
+                                {{website.created | date}}
+                            </div>
+                            <div class="col-md-3 hidden-sm hidden-xs">
+                                {{website.accessed | date}}
+                            </div>
+                            <div class="col-xs-3">
+                                <a href="#!/user/{{model.uid}}/website/{{website._id}}">
+                                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+
+            <label for="name">Name</label>
+            <input type="text"
+                   class="form-control"
+                   ng-model="model.website.name"
+                   placeholder="eg: Newsroom"
+                   id="name"/>
+
+            <label for="description">Description</label>
+            <textarea class="form-control"
+                      rows="5"
+                      ng-model="model.website.description"
+                      placeholder="eg: Offering the latest news of American Airlines"
+                      id="description"></textarea>
+
+            <a ng-click="model.updateWebsite(model.wid, model.website)"
+               class="btn btn-block btn-success">
+                Update
+            </a>
+            <a ng-click="model.deleteWebsite(model.wid)"
+               class="btn btn-block btn-danger">
+                Delete
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-user">
+                    </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

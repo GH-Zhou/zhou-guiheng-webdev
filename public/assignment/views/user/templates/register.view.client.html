@@ -4,26 +4,35 @@
     <div class="container-fluid">
         <h1>Join AAdvantage</h1>
 
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+
         <label for="username">Username</label>
         <input type="text"
                id="username"
+               ng-model="username"
                class="form-control"
                placeholder="AmericanAir"/>
 
         <label for="password">Password</label>
         <input type="password"
                id="password"
+               ng-model="password"
                class="form-control"
                placeholder="AAL2017password"/>
 
-        <label for="vpassword">Verify Password</label>
+        <label for="password2">Verify Password</label>
         <input type="password"
-               id="vpassword"
+               id="password2"
+               ng-model="password2"
                class="form-control"
                placeholder="AAL2017password"/>
 
-        <a class="btn btn-primary btn-block"
-           href="#!/profile">Register</a>
+        <a ng-click="model.register(username, password, password2)"
+           class="btn btn-primary btn-block">
+            Register
+        </a>
         <a class="btn btn-danger  btn-block"
            href="#!/login">Cancel</a>
     </div>

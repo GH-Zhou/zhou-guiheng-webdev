@@ -17,7 +17,10 @@
     </div>
 </nav>
 
+<div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+
     <div class="container-fluid">
+
         <form>
             <div class="form-group">
                 <label for="username">Username</label>
@@ -27,7 +30,9 @@
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
+                <!-- Should we include email? The example users don't have email attribute. -->
+                <input type="email"
+                       class="form-control" id="email" placeholder="alice@wonderland.com">
             </div>
             <div class="form-group">
                 <label for="first-name">First Name</label>
@@ -44,8 +49,12 @@
         </form>
 
         <a class="btn btn-primary btn-block"
-           href="../../website/website-list.html">Websites</a>
-        <a class="btn btn-danger  btn-block"
+           href="#!/user/{{model.uid}}/website">Websites</a>
+        <a class="btn btn-success btn-block"
+           ng-click="model.updateUser(model.uid, model.user)">Update</a>
+        <a class="btn btn-danger btn-block"
+           ng-click="model.deleteUser(model.uid)">Delete</a>
+        <a class="btn btn-warning  btn-block"
            href="#!/login">Logout</a>
     </div>
 

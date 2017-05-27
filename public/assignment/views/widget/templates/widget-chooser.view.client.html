@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>American Airlines - Choose Widget</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../css/widget-style.css" rel="stylesheet"/>
-</head>
-<body>
+<link href="../../../../assignment/css/widget-style.css" rel="stylesheet"/>
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="row navbar-header">
 
             <div class="col-xs-5">
-                <a class="navbar-brand" href="widget-list.html">
+                <a class="navbar-brand" href="widget-list.view.client.html">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                     Widget List
                 </a>
@@ -35,8 +25,14 @@
 <div class="container-fluid">
     <ul class="list-group">
 
+
         <li class="list-group-item">
-            <a href="widget-heading.html">Header</a>
+            <a ng-click="model.switchEditor('HEADING')">Header</a>
+            <div ng-show="model.heading">
+                <div ng-include="'views/widget/editors/widget-heading-edit.view.client.html'"></div>
+                <a class="btn btn-primary btn-block"
+                   ng-click="model.createWidget(model.widget, 'HEADING')">Create</a>
+            </div>
         </li>
 
         <li class="list-group-item">
@@ -60,11 +56,21 @@
         </li>
 
         <li class="list-group-item">
-            <a href="widget-image.html">Image</a>
+            <a ng-click="model.switchEditor('IMAGE')">Image</a>
+            <div ng-show="model.image">
+                <div ng-include="'views/widget/editors/widget-image-edit.view.client.html'"></div>
+                <a class="btn btn-primary btn-block"
+                   ng-click="model.createWidget(model.widget, 'IMAGE')">Create</a>
+            </div>
         </li>
 
         <li class="list-group-item">
-            <a href="widget-youtube.html">Youtube</a>
+            <a ng-click="model.switchEditor('YOUTUBE')">Youtube</a>
+            <div ng-show="model.youtube">
+                <div ng-include="'views/widget/editors/widget-youtube-edit.view.client.html'"></div>
+                <a class="btn btn-primary btn-block"
+                   ng-click="model.createWidget(model.widget, 'YOUTUBE')">Create</a>
+            </div>
         </li>
 
         <li class="list-group-item">
@@ -82,7 +88,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="../user/templates/profile.view.client.html" class="navbar-link">
+                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-user">
                     </span>
                 </a>
@@ -90,6 +96,3 @@
         </div>
     </div>
 </nav>
-
-</body>
-</html>
