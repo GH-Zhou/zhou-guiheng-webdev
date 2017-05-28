@@ -6,28 +6,28 @@
     function EditWebsiteController ($routeParams,
                                     $location,
                                     websiteService) {
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
-        // model.wid = $routeParams.wid;
-        model.wid = $routeParams['wid'];
-        model.deleteWebsite = deleteWebsite;
-        model.updateWebsite = updateWebsite;
+        vm.uid = $routeParams['uid'];
+        // vm.wid = $routeParams.wid;
+        vm.wid = $routeParams['wid'];
+        vm.deleteWebsite = deleteWebsite;
+        vm.updateWebsite = updateWebsite;
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.uid);
-            model.website = websiteService.findWebsiteById(model.wid);
+            vm.websites = websiteService.findWebsitesByUser(vm.uid);
+            vm.website = websiteService.findWebsiteById(vm.wid);
         }
         init();
 
         function deleteWebsite (wid) {
             websiteService.deleteWebsite(wid);
-            $location.url('/user/' + model.uid + '/website');
+            $location.url('/user/' + vm.uid + '/website');
         }
 
         function updateWebsite (wid, website) {
             websiteService.updateWebsite(wid, website);
-            $location.url('/user/' + model.uid + '/website');
+            $location.url('/user/' + vm.uid + '/website');
         }
     }
 })();

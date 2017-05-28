@@ -4,11 +4,11 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#!/user/{{vm.uid}}">
                 Profile
             </a>
             <p class="navbar-text pull-right">
-                <a href="profile.view.client.html" class="navbar-link">
+                <a ng-click="vm.updateUser(vm.uid, vm.user)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -17,56 +17,44 @@
     </div>
 </nav>
 
-<div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
 
     <div class="container-fluid">
-
+        <div ng-show="vm.message" class="alert alert-info">{{vm.message}}</div>
         <form>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input ng-model="model.user.username"
+                <input ng-model="vm.user.username"
                        type="text"
                        class="form-control" id="username" placeholder="Username">
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <!-- Should we include email? The example users don't have email attribute. -->
-                <input type="email"
+                <input ng-model="vm.user.email"
+                       type="email"
                        class="form-control" id="email" placeholder="alice@wonderland.com">
             </div>
             <div class="form-group">
                 <label for="first-name">First Name</label>
-                <input ng-model="model.user.firstName"
+                <input ng-model="vm.user.firstName"
                        type="text"
                        class="form-control" id="first-name" placeholder="Alice">
             </div>
             <div class="form-group">
                 <label for="last-name">Last Name</label>
-                <input ng-model="model.user.lastName"
+                <input ng-model="vm.user.lastName"
                        type="text"
                        class="form-control" id="last-name" placeholder="Wonderland">
             </div>
         </form>
 
         <a class="btn btn-primary btn-block"
-           href="#!/user/{{model.uid}}/website">Websites</a>
+           href="#!/user/{{vm.uid}}/website">Websites</a>
         <a class="btn btn-success btn-block"
-           ng-click="model.updateUser(model.uid, model.user)">Update</a>
+           ng-click="vm.updateUser(vm.uid, vm.user)">Update</a>
         <a class="btn btn-danger btn-block"
-           ng-click="model.deleteUser(model.uid)">Delete</a>
+           ng-click="vm.deleteUser(vm.uid)">Delete</a>
         <a class="btn btn-warning  btn-block"
            href="#!/login">Logout</a>
     </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-right">
-                <a href="profile.view.client.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-user">
-                    </span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
+<div ng-include="'views/common/footer.view.client.html'"></div>

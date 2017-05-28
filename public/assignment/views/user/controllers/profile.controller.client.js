@@ -5,18 +5,18 @@
 
     function ProfileController($location, $routeParams, userService) {
 
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
+        vm.uid = $routeParams['uid'];
 
-        model.user = userService.findUserById(model.uid);
+        vm.user = userService.findUserById(vm.uid);
 
-        model.updateUser = updateUser;
-        model.deleteUser = deleteUser;
+        vm.updateUser = updateUser;
+        vm.deleteUser = deleteUser;
 
         function updateUser (userId, user) {
             userService.updateUser(userId, user);
-            model.message = "Updated successfully!";
+            vm.message = "Updated successfully!";
         }
 
         function deleteUser (userId) {

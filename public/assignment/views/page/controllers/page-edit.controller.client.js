@@ -6,29 +6,29 @@
     function EditPageController ($routeParams,
                                  $location,
                                  pageService) {
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
-        model.wid = $routeParams['wid'];
-        model.pid = $routeParams['pid'];
+        vm.uid = $routeParams['uid'];
+        vm.wid = $routeParams['wid'];
+        vm.pid = $routeParams['pid'];
 
-        model.deletePage = deletePage;
-        model.updatePage = updatePage;
+        vm.deletePage = deletePage;
+        vm.updatePage = updatePage;
 
         function init() {
-            model.pages = pageService.findPagesByWebsiteId(model.wid);
-            model.page = pageService.findPageById(model.pid);
+            vm.pages = pageService.findPagesByWebsiteId(vm.wid);
+            vm.page = pageService.findPageById(vm.pid);
         }
         init();
 
         function deletePage (pid) {
             pageService.deletePage(pid);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
         }
 
         function updatePage (pid, page) {
             pageService.updatePage(pid, page);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
         }
     }
 })();

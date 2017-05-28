@@ -4,13 +4,13 @@
         .controller('PageListController', PageListController);
 
     function PageListController ($routeParams, pageService) {
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
-        model.wid = $routeParams['wid'];
+        vm.uid = $routeParams['uid'];
+        vm.wid = $routeParams['wid'];
 
         function init() {
-            model.pages = pageService.findPagesByWebsiteId(model.wid);
+            vm.pages = pageService.findPagesByWebsiteId(vm.wid);
         }
         init();
 

@@ -2,12 +2,14 @@
 <label for="name">Name</label>
 <input type="text"
        id="name"
+       ng-model="vm.widget.name"
        placeholder="Widget Name"
        class="form-control"/>
 
 <label for="text">Text</label>
 <input type="text"
        id="text"
+       ng-model="vm.widget.text"
        placeholder="Widget Text"
        class="form-control"/>
 
@@ -15,7 +17,7 @@
 <input type="text"
        value="https://youtu.be/LXb28mVZiJo"
        id="url"
-       ng-model="model.widget.url"
+       ng-model="vm.widget.url"
        placeholder="eg: https://youtu.be/example"
        class="form-control"/>
 
@@ -23,6 +25,6 @@
 <input type="text"
        id="width"
        value="100%"
-       ng-model="model.widget.width"
+       ng-model="vm.widget.width"
        placeholder="eg: 100%"
        class="form-control"/>

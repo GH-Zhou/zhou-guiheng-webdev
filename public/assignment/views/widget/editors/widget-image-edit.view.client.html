@@ -2,12 +2,14 @@
 <label for="name">Name</label>
 <input type="text"
        id="name"
+       ng-model="vm.widget.name"
        placeholder="Widget Name"
        class="form-control"/>
 
 <label for="text">Text</label>
 <input type="text"
        id="text"
+       ng-model="vm.widget.text"
        placeholder="Widget Text"
        class="form-control"/>
 
@@ -16,14 +18,14 @@
        value="http://s21.q4cdn.com/616071541/files/doc_downloads/Images/American-777-300ER-with-New-Livery.jpg"
        id="url"
        placeholder="eg: http://www.cdn.com/example.jpg"
-       ng-model="model.widget.url"
+       ng-model="vm.widget.url"
        class="form-control"/>
 
 <label for="width">Width</label>
 <input type="text"
        value="100%"
        id="width"
-       ng-model="model.widget.width"
+       ng-model="vm.widget.width"
        placeholder="eg: 100%"
        class="form-control"/>
 

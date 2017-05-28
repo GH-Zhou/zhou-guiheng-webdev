@@ -6,22 +6,22 @@
     function NewPageController ($routeParams,
                                 $location,
                                 pageService) {
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
-        model.wid = $routeParams['wid'];
-        model.createPage = createPage;
+        vm.uid = $routeParams['uid'];
+        vm.wid = $routeParams['wid'];
+        vm.createPage = createPage;
 
         function init() {
-            model.pages = pageService.findPagesByWebsiteId(model.wid);
+            vm.pages = pageService.findPagesByWebsiteId(vm.wid);
         }
         init();
 
         function createPage (page) {
-            page.developerId = model.uid;
-            page.websiteId = model.wid;
+            page.developerId = vm.uid;
+            page.websiteId = vm.wid;
             pageService.createPage(page);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
         }
     }
 })();

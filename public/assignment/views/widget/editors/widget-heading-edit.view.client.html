@@ -2,6 +2,7 @@
 <label for="name">Name</label>
 <input type="text"
        id="name"
+       ng-model="vm.widget.name"
        placeholder="Widget Name"
        class="form-control"/>
 
@@ -10,7 +11,7 @@
        value="American Airlines Group Reports Record April Traffic Results"
        id="text"
        placeholder="Widget Text"
-       ng-model="model.widget.text"
+       ng-model="vm.widget.text"
        class="form-control"/>
 
 <label for="size">Size</label>
@@ -18,4 +19,4 @@
        id="size"
        placeholder="1"
        class="form-control"
-       ng-model="model.widget.size"/>
+       ng-model="vm.widget.size"/>

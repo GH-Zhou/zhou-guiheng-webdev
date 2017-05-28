@@ -4,12 +4,12 @@
         .controller('WebsiteListController', WebsiteListController);
 
     function WebsiteListController ($routeParams, websiteService) {
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
+        vm.uid = $routeParams['uid'];
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.uid);
+            vm.websites = websiteService.findWebsitesByUser(vm.uid);
         }
         init();
 

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <h1>Login as an AAdvantage Member</h1>
 
-        <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+        <div ng-show="vm.message" class="alert alert-info">{{vm.message}}</div>
 
         <label for="username">Username</label>
         <input ng-model="username"
@@ -20,7 +20,7 @@
                class="form-control"
                placeholder="AAL2017password"/>
 
-        <a data-ng-click="model.login(username, password)"
+        <a data-ng-click="vm.login(username, password)"
            class="btn btn-primary btn-block">
             Login
         </a>

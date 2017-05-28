@@ -6,20 +6,20 @@
     function NewWebsiteController ($routeParams,
                                     $location,
                                     websiteService) {
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
-        model.createWebsite = createWebsite;
+        vm.uid = $routeParams['uid'];
+        vm.createWebsite = createWebsite;
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.uid);
+            vm.websites = websiteService.findWebsitesByUser(vm.uid);
         }
         init();
 
         function createWebsite (website) {
-            website.developerId = model.uid;
+            website.developerId = vm.uid;
             websiteService.createWebsite(website);
-            $location.url('/user/' + model.uid + '/website');
+            $location.url('/user/' + vm.uid + '/website');
         }
     }
 })();

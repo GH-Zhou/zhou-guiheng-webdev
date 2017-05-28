@@ -5,7 +5,7 @@
         <div class="row navbar-header">
 
             <div class="col-xs-5">
-                <a class="navbar-brand" href="../templates/widget-list.view.client.html">
+                <a class="navbar-brand" href="#!/user/{{vm.uid}}/website/{{vm.wid}}/page/{{vm.pid}}/widget">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                     Widget List
                 </a>
@@ -13,11 +13,11 @@
 
             <div class="col-xs-7">
                 <div class="navbar-header navbar-brand">
-                    <a id="title" href="widget-heading.html">
+                    <a id="title" href="#!/user/{{vm.uid}}/website/{{vm.wid}}/page/{{vm.pid}}/widget/{{vm.wgid}}">
                         Edit Widget
                     </a>
                     <p class="pull-right">
-                        <a href="../templates/widget-list.view.client.html" class="navbar-link">
+                        <a ng-click="vm.updateWidget(vm.wgid, vm.widget)" class="navbar-link">
                             <span class="glyphicon glyphicon-ok"></span>
                         </a>
                     </p>
@@ -28,7 +28,7 @@
 </nav>
 
 <div class="container-fluid">
-    <div ng-switch="model.widget.widgetType">
+    <div ng-switch="vm.widget.widgetType">
         <div ng-switch-when="HEADING">
             <div ng-include="'views/widget/editors/widget-heading-edit.view.client.html'"></div>
         </div>
@@ -43,20 +43,10 @@
     </div>
 
     <a class="btn btn-success btn-block"
-       ng-click="model.updateWidget(model.wgid, model.widget)">Update</a>
+       ng-click="vm.updateWidget(vm.wgid, vm.widget)">Update</a>
     <a class="btn btn-danger btn-block"
-       ng-click="model.deleteWidget(model.wgid)">Delete</a>
+       ng-click="vm.deleteWidget(vm.wgid)">Delete</a>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-right">
-                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-user">
-                    </span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

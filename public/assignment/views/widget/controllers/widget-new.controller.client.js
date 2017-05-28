@@ -6,46 +6,23 @@
     function NewWidgetController ($routeParams,
                                   $location,
                                   widgetService) {
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
-        model.wid = $routeParams['wid'];
-        model.pid = $routeParams['pid'];
+        vm.uid = $routeParams['uid'];
+        vm.wid = $routeParams['wid'];
+        vm.pid = $routeParams['pid'];
 
-        model.createWidget = createWidget;
-        model.switchEditor = switchEditor;
-
-        model.heading = false;
-        model.image = false;
-        model.youtube = false;
+        vm.createWidget = createWidget;
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pid);
+            vm.widgets = widgetService.findWidgetsByPageId(vm.pid);
         }
         init();
 
-        function createWidget (widget, widgetType) {
-            widget.developerId = model.uid;
-            widget.websiteId = model.wid;
-            widget.pageId = model.pid;
-            widgetService.createWidget(widget, widgetType);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget');
+        function createWidget (widgetType) {
+            widgetId = widgetService.createWidget(widgetType, vm.pid);
+            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget/' + widgetId);
         }
 
-        function switchEditor (widgetType) {
-            switch(widgetType) {
-                case "HEADING":
-                    model.heading = !model.heading;
-                    break;
-                case "IMAGE":
-                    model.image = !model.image;
-                    break;
-                case "YOUTUBE":
-                    model.youtube = !model.youtube;
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 })();

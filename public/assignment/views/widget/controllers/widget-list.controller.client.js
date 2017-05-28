@@ -6,17 +6,17 @@
     function WidgetListController ($sce,
                                    $routeParams,
                                    widgetService) {
-        var model = this;
+        var vm = this;
 
-        model.uid = $routeParams['uid'];
-        model.wid = $routeParams['wid'];
-        model.pid = $routeParams['pid'];
+        vm.uid = $routeParams['uid'];
+        vm.wid = $routeParams['wid'];
+        vm.pid = $routeParams['pid'];
 
-        model.trust = trust;
-        model.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
+        vm.trust = trust;
+        vm.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pid);
+            vm.widgets = widgetService.findWidgetsByPageId(vm.pid);
         }
         init();
 

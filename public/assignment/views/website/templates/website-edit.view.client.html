@@ -6,20 +6,20 @@
         <div class="row navbar-header">
 
             <div class="col-md-1 col-sm-3 col-xs-4">
-                <a class="navbar-brand" href="website-list.view.client.html">
+                <a class="navbar-brand" href="#!/user/{{vm.uid}}/website">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
 
             <div class="col-md-2 hidden-sm hidden-xs">
-                <a class="navbar-brand" href="website-list.view.client.html">
+                <a class="navbar-brand" href="#!/user/{{vm.uid}}/website">
                     Website List
                 </a>
             </div>
 
             <div class="col-sm-1 hidden-xs">
                 <p class="navbar-text pull-right">
-                    <a href="website-new.view.client.html" class="navbar-link">
+                    <a href="#!/user/{{vm.uid}}/website/new" class="navbar-link">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </p>
@@ -27,11 +27,11 @@
 
             <div class="col-xs-8">
                 <div class="navbar-header navbar-brand">
-                    <a id="title" href="website-edit.view.client.html">
+                    <a id="title" href="#!/user/{{vm.uid}}/website/{{vm.wid}}">
                         Edit Website
                     </a>
                     <p class="pull-right">
-                        <a href="website-list.view.client.html" class="navbar-link">
+                        <a ng-click="vm.updateWebsite(vm.wid, vm.website)" class="navbar-link">
                             <span class="glyphicon glyphicon-ok"></span>
                         </a>
                     </p>
@@ -64,10 +64,10 @@
                         </div>
                     </li>
 
-                    <li ng-repeat="website in model.websites" class="list-group-item">
+                    <li ng-repeat="website in vm.websites" class="list-group-item">
                         <div class="row">
                             <div class="col-lg-3 col-md-6 col-xs-9">
-                                <a href="../../page/templates/page-list.view.client.html">
+                                <a href="#!/user/{{vm.uid}}/website/{{website._id}}/page">
                                     {{website.name}}
                                 </a>
                             </div>
@@ -78,7 +78,7 @@
                                 {{website.accessed | date}}
                             </div>
                             <div class="col-xs-3">
-                                <a href="#!/user/{{model.uid}}/website/{{website._id}}">
+                                <a href="#!/user/{{vm.uid}}/website/{{website._id}}">
                                     <span class="glyphicon glyphicon-cog pull-right"></span>
                                 </a>
                             </div>
@@ -93,22 +93,22 @@
             <label for="name">Name</label>
             <input type="text"
                    class="form-control"
-                   ng-model="model.website.name"
+                   ng-model="vm.website.name"
                    placeholder="eg: Newsroom"
                    id="name"/>
 
             <label for="description">Description</label>
             <textarea class="form-control"
                       rows="5"
-                      ng-model="model.website.description"
+                      ng-model="vm.website.description"
                       placeholder="eg: Offering the latest news of American Airlines"
                       id="description"></textarea>
 
-            <a ng-click="model.updateWebsite(model.wid, model.website)"
+            <a ng-click="vm.updateWebsite(vm.wid, vm.website)"
                class="btn btn-block btn-success">
                 Update
             </a>
-            <a ng-click="model.deleteWebsite(model.wid)"
+            <a ng-click="vm.deleteWebsite(vm.wid)"
                class="btn btn-block btn-danger">
                 Delete
             </a>
@@ -117,15 +117,4 @@
     </div>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-right">
-                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-user">
-                    </span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
+<div ng-include="'views/common/footer.view.client.html'"></div>

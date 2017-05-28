@@ -5,36 +5,36 @@
 
     function RegisterController($location, userService) {
 
-        var model = this;
+        var vm = this;
 
-        model.register = register;
+        vm.register = register;
 
         function register(username, password, password2) {
 
             if (username === null || username === '' || typeof username === 'undefined') {
-                model.error = 'Username cannot be empty!';
+                vm.error = 'Username cannot be empty!';
                 return;
             }
 
             if (password === null || password === '' || typeof password === 'undefined') {
-                model.error = 'Password cannot be empty!';
+                vm.error = 'Password cannot be empty!';
                 return;
             }
 
             if (password2 === null || password2 === '' || typeof password2 === 'undefined') {
-                model.error = 'Verifying Password cannot be empty!';
+                vm.error = 'Verifying Password cannot be empty!';
                 return;
             }
 
             if (password !== password2) {
-                model.error = "Passwords must match!";
+                vm.error = "Passwords must match!";
                 return;
             }
             var found = userService.findUserByUsername(username);
 
             if (found !== null) {
-                // model.message = "Welcome " + username;
-                model.error = "Sorry, the username you just picked is already taken.";
+                // vm.message = "Welcome " + username;
+                vm.error = "Sorry, the username you just picked is already taken.";
             } else {
                 var newUser = {
                     username: username,
