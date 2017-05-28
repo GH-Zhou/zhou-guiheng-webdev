@@ -5,7 +5,7 @@
         <div class="row navbar-header">
 
             <div class="col-xs-5">
-                <a class="navbar-brand" href="#!/user/{{vm.uid}}/website/{{vm.wid}}/page/{{vm.pid}}/widget">
+                <a class="navbar-brand" ng-click="vm.updateWidget(vm.wgid, vm.oldWidget)">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                     Widget List
                 </a>

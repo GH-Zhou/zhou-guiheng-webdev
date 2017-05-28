@@ -21,6 +21,9 @@
         }
         init();
 
+        vm.oldPages = angular.copy(vm.pages);
+        vm.oldPage = angular.copy(vm.page);
+
         function deletePage (pid) {
             pageService.deletePage(pid);
             $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');

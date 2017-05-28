@@ -6,13 +6,13 @@
         <div class="row navbar-header">
 
             <div class="col-md-1 col-sm-3 col-xs-4">
-                <a class="navbar-brand" href="#!/user/{{vm.uid}}/website">
+                <a class="navbar-brand" ng-click="vm.updateWebsite(vm.wid, vm.oldWebsite)">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
 
             <div class="col-md-2 hidden-sm hidden-xs">
-                <a class="navbar-brand" href="#!/user/{{vm.uid}}/website">
+                <a class="navbar-brand" ng-click="vm.updateWebsite(vm.wid, vm.oldWebsite)">
                     Website List
                 </a>
             </div>
@@ -64,21 +64,21 @@
                         </div>
                     </li>
 
-                    <li ng-repeat="website in vm.websites" class="list-group-item">
+                    <li ng-repeat="oldWebsite in vm.oldWebsites" class="list-group-item">
                         <div class="row">
                             <div class="col-lg-3 col-md-6 col-xs-9">
-                                <a href="#!/user/{{vm.uid}}/website/{{website._id}}/page">
-                                    {{website.name}}
+                                <a href="#!/user/{{vm.uid}}/website/{{oldWebsite._id}}/page">
+                                    {{oldWebsite.name}}
                                 </a>
                             </div>
                             <div class="col-lg-3 visible-lg">
-                                {{website.created | date}}
+                                {{oldWebsite.created | date}}
                             </div>
                             <div class="col-md-3 hidden-sm hidden-xs">
-                                {{website.accessed | date}}
+                                {{oldWebsite.accessed | date}}
                             </div>
                             <div class="col-xs-3">
-                                <a href="#!/user/{{vm.uid}}/website/{{website._id}}">
+                                <a href="#!/user/{{vm.uid}}/website/{{oldWebsite._id}}">
                                     <span class="glyphicon glyphicon-cog pull-right"></span>
                                 </a>
                             </div>

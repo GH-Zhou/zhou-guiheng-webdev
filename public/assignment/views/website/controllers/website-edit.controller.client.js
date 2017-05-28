@@ -11,6 +11,7 @@
         vm.uid = $routeParams['uid'];
         // vm.wid = $routeParams.wid;
         vm.wid = $routeParams['wid'];
+
         vm.deleteWebsite = deleteWebsite;
         vm.updateWebsite = updateWebsite;
 
@@ -19,6 +20,9 @@
             vm.website = websiteService.findWebsiteById(vm.wid);
         }
         init();
+
+        vm.oldWebsites = angular.copy(vm.websites);
+        vm.oldWebsite = angular.copy(vm.website);
 
         function deleteWebsite (wid) {
             websiteService.deleteWebsite(wid);

@@ -22,6 +22,9 @@
         }
         init();
 
+        vm.oldWidgets = angular.copy(vm.widgets);
+        vm.oldWidget = angular.copy(vm.widget);
+
         function deleteWidget (wgid) {
             widgetService.deleteWidget(wgid);
             $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget');
