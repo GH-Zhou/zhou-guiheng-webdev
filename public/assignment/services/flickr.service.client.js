@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('WebAppMaker')
-        .factory('flickrService', flickrService);
+        .service('flickrService', flickrService);
 
     function flickrService($http) {
 

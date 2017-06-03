@@ -29,10 +29,12 @@
        placeholder="eg: 100%"
        class="form-control"/>
 
+<label>Search photos on Flickr</label>
 <a class="btn btn-info btn-block" href="#!/user/{{vm.uid}}/website/{{vm.wid}}/page/{{vm.pid}}/widget/{{vm.widget._id}}/search">
     Search
 </a>
 
+<label>Upload photo from your device</label>
 <form action="/api/upload"   method="post" enctype="multipart/form-data">
     <input  name="myFile"    type="file" class="form-control"/>
     <input  name="width"     value="{{vm.widget.width}}" style="display: none"/>
