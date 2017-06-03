@@ -5,6 +5,7 @@ app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
 app.get('/api/widget/:widgetId', findWidgetById);
 app.put('/api/widget/:widgetId', updateWidget);
 app.delete('/api/widget/:widgetId', deleteWidget);
+app.put('/page/:pageId/widget', sortWidget);
 
 var widgets = [
     {"_id": "123", "name": "heading1", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -60,6 +61,15 @@ function deleteWidget(req, res) {
     });
     var index = widgets.indexOf(widget);
     widgets.splice(index, 1);
+    res.sendStatus(200);
+}
+
+function sortWidget(req, res) {
+    var initial = req.query['initial'];
+    var final = req.query['final'];
+    widget = widgets[initial];
+    widgets.splice(initial, 1);
+    widgets.splice(final, 0, widget);
     res.sendStatus(200);
 }
 

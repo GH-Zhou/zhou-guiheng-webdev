@@ -8,12 +8,14 @@
                                    widgetService) {
         var vm = this;
 
+
         vm.uid = $routeParams['uid'];
         vm.wid = $routeParams['wid'];
         vm.pid = $routeParams['pid'];
 
         vm.trust = trust;
         vm.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
+
 
         function init() {
             widgetService

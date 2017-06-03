@@ -3,13 +3,14 @@
         .module('WebAppMaker')
         .service('widgetService', widgetService);
 
-    function widgetService ($http) {
+    function widgetService ($routeParams, $http) {
 
         this.findAllWidgetsForPage = findAllWidgetsForPage;
         this.findWidgetById = findWidgetById;
         this.deleteWidget = deleteWidget;
         this.createWidget = createWidget;
         this.updateWidget = updateWidget;
+        this.sortWidget = sortWidget;
 
 
         function findAllWidgetsForPage (pageId) {
@@ -55,6 +56,16 @@
                 .then(function (response) {
                     return response.data;
                 });
+        }
+
+        function sortWidget (initial, final) {
+            var url = "/page/"+ $routeParams['pid'] + "/widget?initial=" + initial + "&final=" + final;
+            console.log(url);
+            return $http
+                .put(url);
+                // .then(function (response) {
+                //     return response.data;
+                // });
         }
     }
 })();
