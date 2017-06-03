@@ -1,0 +1,40 @@
+<link href="../../../../assignment/css/widget-style.css" rel="stylesheet"/>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row navbar-header">
+
+            <div class="col-xs-5">
+                <a class="navbar-brand" href="#!/user/{{vm.uid}}/website/{{vm.wid}}/page/{{vm.pid}}/widget/{{vm.widget._id}}">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    Edit Widget
+                </a>
+            </div>
+
+            <div class="col-xs-7">
+                <div class="navbar-header navbar-brand">
+                    <a id="title" href="#!/user/{{vm.uid}}/website/{{vm.wid}}/page/{{vm.pid}}/widget/{{vm.widget._id}}/search">
+                        Search Flickr
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="input-group">
+        <input ng-model="searchText"
+               type="text"
+               class="form-control">
+        <span class="input-group-btn">
+        <a ng-click="vm.searchPhotos(searchText)" class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+    </span>
+    </div>
+</div>
+
+{{vm.photos}}
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

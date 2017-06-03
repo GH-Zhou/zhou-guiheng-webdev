@@ -12,14 +12,21 @@
         vm.createWebsite = createWebsite;
 
         function init() {
-            vm.websites = websiteService.findWebsitesByUser(vm.uid);
+            websiteService
+                .findWebsitesByUser(vm.uid)
+                .then(function (websites) {
+                    vm.websites = websites;
+                });
         }
         init();
 
         function createWebsite (website) {
             website.developerId = vm.uid;
-            websiteService.createWebsite(website);
-            $location.url('/user/' + vm.uid + '/website');
+            websiteService
+                .createWebsite(website)
+                .then(function () {
+                    $location.url('/user/' + vm.uid + '/website');
+                });
         }
     }
 })();

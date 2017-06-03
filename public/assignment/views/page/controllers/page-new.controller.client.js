@@ -13,15 +13,21 @@
         vm.createPage = createPage;
 
         function init() {
-            vm.pages = pageService.findPagesByWebsiteId(vm.wid);
+            pageService
+                .findAllPagesForWebsite(vm.wid)
+                .then(function (pages) {
+                    vm.pages = pages;
+                });
         }
         init();
 
         function createPage (page) {
-            page.developerId = vm.uid;
             page.websiteId = vm.wid;
-            pageService.createPage(page);
-            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
+            pageService
+                .createPage(page)
+                .then(function () {
+                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
+                });
         }
     }
 })();

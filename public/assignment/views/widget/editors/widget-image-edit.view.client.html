@@ -29,7 +29,17 @@
        placeholder="eg: 100%"
        class="form-control"/>
 
-<label for="upload">Upload</label>
-<input type="file"
-       id="upload"
-       class="form-control"/>
+<a class="btn btn-info btn-block" href="#!/user/{{vm.uid}}/website/{{vm.wid}}/page/{{vm.pid}}/widget/{{vm.widget._id}}/search">
+    Search
+</a>
+
+<form action="/api/upload"   method="post" enctype="multipart/form-data">
+    <input  name="myFile"    type="file" class="form-control"/>
+    <input  name="width"     value="{{vm.widget.width}}" style="display: none"/>
+    <input  name="userId"    value="{{vm.uid}}"   style="display: none"/>
+    <input  name="websiteId" value="{{vm.wid}}"   style="display: none"/>
+    <input  name="pageId"    value="{{vm.pid}}"   style="display: none"/>
+    <input  name="widgetId"  value="{{vm.widget._id}}"   style="display: none"/>
+    <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+</form>
+

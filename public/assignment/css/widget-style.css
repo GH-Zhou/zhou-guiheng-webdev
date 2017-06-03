@@ -1,4 +1,4 @@
-input.form-control, textarea.form-control, select.form-control {
+input.form-control, textarea.form-control, select.form-control, button.btn, .btn.btn-info.btn-block {
     margin-bottom: 10px;
 }
 

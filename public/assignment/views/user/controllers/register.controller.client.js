@@ -30,18 +30,30 @@
                 vm.error = "Passwords must match!";
                 return;
             }
-            var found = userService.findUserByUsername(username);
 
-            if (found !== null) {
-                // vm.message = "Welcome " + username;
-                vm.error = "Sorry, the username you just picked is already taken.";
-            } else {
-                var newUser = {
-                    username: username,
-                    password: password
-                };
-                newUser = userService.createUser(newUser);
-                $location.url('/user/' + newUser._id);
+            userService
+                .findUserByUsername(username)
+                .then(checkUser);
+
+            function checkUser(user) {
+                if (user) {
+                    vm.error = "Sorry, the username you just picked is already taken.";
+                } else {
+                    var newUser = {
+                        username: username,
+                        password: password
+                    };
+
+                    userService
+                        .createUser(newUser)
+                        .then(register);
+
+                    function register(user) {
+                        $location.url('/user/' + user._id);
+                    }
+
+                }
+
             }
         }
     }

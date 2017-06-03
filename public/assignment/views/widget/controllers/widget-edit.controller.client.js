@@ -17,22 +17,35 @@
         vm.updateWidget = updateWidget;
 
         function init() {
-            vm.widgets = widgetService.findWidgetsByPageId(vm.pid);
-            vm.widget = widgetService.findWidgetById(vm.wgid);
+            widgetService
+                .findAllWidgetsForPage(vm.pid)
+                .then(function (widgets) {
+                    vm.widgets = widgets;
+                    vm.oldWidgets = angular.copy(vm.widgets);
+                });
+            widgetService
+                .findWidgetById(vm.wgid)
+                .then(function (widget) {
+                    vm.widget = widget;
+                    vm.oldWidget = angular.copy(vm.widget);
+                });
         }
         init();
 
-        vm.oldWidgets = angular.copy(vm.widgets);
-        vm.oldWidget = angular.copy(vm.widget);
-
         function deleteWidget (wgid) {
-            widgetService.deleteWidget(wgid);
-            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget');
+            widgetService
+                .deleteWidget(wgid)
+                .then(function (){
+                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget');
+                });
         }
 
         function updateWidget (wgid, widget) {
-            widgetService.updateWidget(wgid, widget);
-            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget');
+            widgetService
+                .updateWidget(wgid, widget)
+                .then(function (){
+                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget');
+                });
         }
     }
 })();

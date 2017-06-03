@@ -16,22 +16,36 @@
         vm.updatePage = updatePage;
 
         function init() {
-            vm.pages = pageService.findPagesByWebsiteId(vm.wid);
-            vm.page = pageService.findPageById(vm.pid);
+            pageService
+                .findAllPagesForWebsite(vm.wid)
+                .then(function (pages) {
+                    vm.pages = pages;
+                    vm.oldPages = angular.copy(vm.pages);
+                });
+            pageService
+                .findPageById(vm.pid)
+                .then(function (page) {
+                    vm.page = page;
+                    vm.oldPage = angular.copy(vm.page);
+                });
         }
         init();
 
-        vm.oldPages = angular.copy(vm.pages);
-        vm.oldPage = angular.copy(vm.page);
-
         function deletePage (pid) {
-            pageService.deletePage(pid);
-            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
+            pageService
+                .deletePage(pid)
+                .then(function (){
+                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
+                });
         }
 
         function updatePage (pid, page) {
-            pageService.updatePage(pid, page);
-            $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
+            pageService
+                .updatePage(pid, page)
+                .then(function (){
+                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
+                });
+
         }
     }
 })();

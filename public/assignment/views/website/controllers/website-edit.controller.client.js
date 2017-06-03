@@ -16,22 +16,35 @@
         vm.updateWebsite = updateWebsite;
 
         function init() {
-            vm.websites = websiteService.findWebsitesByUser(vm.uid);
-            vm.website = websiteService.findWebsiteById(vm.wid);
+            websiteService
+                .findAllWebsitesForUser(vm.uid)
+                .then(function (websites) {
+                    vm.websites = websites;
+                    vm.oldWebsites = angular.copy(vm.websites);
+                });
+            websiteService
+                .findWebsiteById(vm.wid)
+                .then(function (website) {
+                    vm.website = website;
+                    vm.oldWebsite = angular.copy(vm.website);
+                });
         }
         init();
 
-        vm.oldWebsites = angular.copy(vm.websites);
-        vm.oldWebsite = angular.copy(vm.website);
-
         function deleteWebsite (wid) {
-            websiteService.deleteWebsite(wid);
-            $location.url('/user/' + vm.uid + '/website');
+            websiteService
+                .deleteWebsite(wid)
+                .then(function () {
+                    $location.url('/user/' + vm.uid + '/website');
+                });
         }
 
         function updateWebsite (wid, website) {
-            websiteService.updateWebsite(wid, website);
-            $location.url('/user/' + vm.uid + '/website');
+            websiteService
+                .updateWebsite(wid, website)
+                .then(function () {
+                    $location.url('/user/' + vm.uid + '/website');
+                });
         }
     }
 })();

@@ -16,7 +16,11 @@
         vm.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
 
         function init() {
-            vm.widgets = widgetService.findWidgetsByPageId(vm.pid);
+            widgetService
+                .findAllWidgetsForPage(vm.pid)
+                .then(function (widgets) {
+                    vm.widgets = widgets;
+                });
         }
         init();
 
