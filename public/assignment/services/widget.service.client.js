@@ -60,7 +60,6 @@
 
         function sortWidget (initial, final) {
             var url = "/page/"+ $routeParams['pid'] + "/widget?initial=" + initial + "&final=" + final;
-            console.log(url);
             return $http
                 .put(url);
                 // .then(function (response) {

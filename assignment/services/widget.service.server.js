@@ -67,9 +67,22 @@ function deleteWidget(req, res) {
 function sortWidget(req, res) {
     var initial = req.query['initial'];
     var final = req.query['final'];
-    widget = widgets[initial];
-    widgets.splice(initial, 1);
-    widgets.splice(final, 0, widget);
+    var cachedWidgets = [];
+    var length = widgets.length;
+    for (var i = length - 1; i >= 0; i--) {
+        if (widgets[i].pageId === req.params.pageId) {
+            cachedWidgets.unshift(widgets[i]);
+            widgets.splice(i, 1);
+        }
+    }
+    console.log(cachedWidgets);
+    console.log(widgets);
+    var widget = cachedWidgets[initial];
+    cachedWidgets.splice(initial, 1);
+    cachedWidgets.splice(final, 0, widget);
+    console.log(cachedWidgets);
+    widgets = widgets.concat(cachedWidgets);
+    console.log(widgets);
     res.sendStatus(200);
 }
 
