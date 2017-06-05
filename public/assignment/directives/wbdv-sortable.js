@@ -17,9 +17,6 @@
                     final = ui.item.index();
                     widgetService
                         .sortWidget(initial, final);
-                        // .then(function (){
-                        //     $location.url('/user/' + scope.uid + '/website/' + scope.wid + '/page/' + scope.pid + '/widget/');
-                        // });
                 }
             })
         }

@@ -75,14 +75,10 @@ function sortWidget(req, res) {
             widgets.splice(i, 1);
         }
     }
-    console.log(cachedWidgets);
-    console.log(widgets);
     var widget = cachedWidgets[initial];
     cachedWidgets.splice(initial, 1);
     cachedWidgets.splice(final, 0, widget);
-    console.log(cachedWidgets);
     widgets = widgets.concat(cachedWidgets);
-    console.log(widgets);
     res.sendStatus(200);
 }
 
