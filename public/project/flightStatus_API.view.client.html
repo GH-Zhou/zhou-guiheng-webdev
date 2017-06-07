@@ -23,7 +23,7 @@
                    id="date"/>
         </div>
         <div class="col-xs-2">
-            <label for="flightno"></label>
+            <label></label>
             <a ng-click="vm.getFlightStatus(vm.flightNumber, vm.date)"
                class="btn btn-block btn-primary">
                 Search
@@ -31,31 +31,39 @@
         </div>
     </div>
     <br/>
-    <div ng-show="vm.array">
-        <h3 id="FlightHeader">Flights with {{vm.flightNumber}}</h3>
+    <div ng-show="vm.departureFrom">
+        <h3 id="FlightHeader">Flights with {{vm.oldFlightNumber}}</h3>
         <div class="table-responsive">
             <table class="table table-striped" id="table">
                 <thead>
                 <tr>
                     <td>Departure from</td>
                     <td>Departure Time Local</td>
-                    <td>Terminal Departure</td>
+                    <td>Departure Time Status</td>
                     <td>Gate Departure</td>
                     <td>Arrival At</td>
-                    <td>Arrival Time Local</td>
-                    <td>Terminal Arrival</td>
+                    <td>Arrival Time</td>
+                    <td>Arrival Time Status</td>
                     <td>Gate Arrival</td>
-                    <td>Marketing Flight Number</td>
                     <td>Operating Flight Number</td>
                     <td>Aircraft Code</td>
                     <td>FlightStatus</td>
-                    <td>Time Status</td>
                 </tr>
                 </thead>
 
                 <tbody id="tbody">
                 <tr>
-                    <td ng-repeat="attr in vm.attr">{{attr}}</td>
+                    <td>{{vm.departureFrom}}</td>
+                    <td>{{vm.departureTimeLocal}}</td>
+                    <td>{{vm.departureTimeStatus}}</td>
+                    <td>{{vm.gateDeparture}}</td>
+                    <td>{{vm.arrivalAt}}</td>
+                    <td>{{vm.arrivalTimeLocal}}</td>
+                    <td>{{vm.arrivalTimeStatus}}</td>
+                    <td>{{vm.gateArrival}}</td>
+                    <td>{{vm.operatingFlightNumber}}</td>
+                    <td>{{vm.aircraftCode}}</td>
+                    <td>{{vm.flightStatus}}</td>
                 </tr>
                 </tbody>
             </table>
