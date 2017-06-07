@@ -1,0 +1,71 @@
+<title>Get the all the Flight Information of a particular Flight</title>
+<body>
+<div class="container">
+    <br>
+
+    <h1>Flight Status Response</h1>
+
+    <div class="row">
+        <div class="col-xs-5">
+            <label for="flightno">Flight Number</label>
+            <input type="text"
+                   class="form-control"
+                   ng-model="vm.flightNumber"
+                   placeholder="eg: LH400"
+                   id="flightno"/>
+        </div>
+        <div class="col-xs-5">
+            <label for="date">Date</label>
+            <input type="date"
+                   class="form-control"
+                   ng-model="vm.date"
+                   placeholder="eg: yyyy-MM-dd"
+                   id="date"/>
+        </div>
+        <div class="col-xs-2">
+            <label for="flightno"></label>
+            <a ng-click="vm.getFlightStatus(vm.flightNumber, vm.date)"
+               class="btn btn-block btn-primary">
+                Search
+            </a>
+        </div>
+    </div>
+    <br/>
+    <div ng-show="vm.array">
+        <h3 id="FlightHeader">Flights with {{vm.flightNumber}}</h3>
+        <div class="table-responsive">
+            <table class="table table-striped" id="table">
+                <thead>
+                <tr>
+                    <td>Departure from</td>
+                    <td>Departure Time Local</td>
+                    <td>Terminal Departure</td>
+                    <td>Gate Departure</td>
+                    <td>Arrival At</td>
+                    <td>Arrival Time Local</td>
+                    <td>Terminal Arrival</td>
+                    <td>Gate Arrival</td>
+                    <td>Marketing Flight Number</td>
+                    <td>Operating Flight Number</td>
+                    <td>Aircraft Code</td>
+                    <td>FlightStatus</td>
+                    <td>Time Status</td>
+                </tr>
+                </thead>
+
+                <tbody id="tbody">
+                <tr>
+                    <td ng-repeat="attr in vm.attr">{{attr}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--<pre class="pre-scrollable">-->
+		<!--</pre>-->
+</div>
+
+<script type="text/javascript">
+
+</script>
+</body>
