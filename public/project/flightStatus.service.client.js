@@ -36,19 +36,7 @@
                 var aircraftCode = response.data.FlightStatusResource.Flights.Flight.Equipment.AircraftCode;
                 var flightStatus = response.data.FlightStatusResource.Flights.Flight.FlightStatus.Definition;
 
-                attributes.departureFrom = departureFrom;
-                attributes.departureTimeLocal = departureTimeLocal;
-                attributes.departureTimeStatus = departureTimeStatus;
-                attributes.gateDeparture = gateDeparture;
-                attributes.arrivalAt = arrivalAt;
-                attributes.arrivalTimeLocal = arrivalTimeLocal;
-                attributes.arrivalTimeStatus = arrivalTimeStatus;
-                attributes.gateArrival = gateArrival;
-                attributes.operatingFlightNumber = operatingFlightNumber;
-                attributes.aircraftCode = aircraftCode;
-                attributes.flightStatus = flightStatus;
-                console.log(attributes);
-                return attributes;
+                return response.data.FlightStatusResource.Flights.Flight;
             });
         }
 

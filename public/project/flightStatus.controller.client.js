@@ -22,18 +22,8 @@
 
             FlightStatusService
                 .getFlightStatus(url, bearer_token)
-                .then(function (attributes){
-                    vm.departureFrom = attributes.departureFrom;
-                    vm.departureTimeLocal = attributes.departureTimeLocal;
-                    vm.departureTimeStatus = attributes.departureTimeStatus;
-                    vm.gateDeparture = attributes.gateDeparture;
-                    vm.arrivalAt = attributes.arrivalAt;
-                    vm.arrivalTimeLocal = attributes.arrivalTimeLocal;
-                    vm.arrivalTimeStatus = attributes.arrivalTimeStatus;
-                    vm.gateArrival = attributes.gateArrival;
-                    vm.operatingFlightNumber = attributes.operatingFlightNumber;
-                    vm.aircraftCode = attributes.aircraftCode;
-                    vm.flightStatus = attributes.flightStatus;
+                .then(function (flight){
+                    vm.flight = flight;
                 });
         }
         init();

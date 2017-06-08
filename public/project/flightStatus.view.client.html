@@ -11,17 +11,24 @@
         <div class="table-responsive">
             <table class="table table-striped" id="table">
                 <tbody id="tbody">
-                    <tr><th>Departure from</th><td>{{vm.departureFrom}}</td></tr>
-                    <tr><th>Departure Time Local</th><td>{{vm.departureTimeLocal}}</td></tr>
-                    <tr><th>Departure Time Status</th><td>{{vm.departureTimeStatus}}</td></tr>
-                    <tr><th>Gate Departure</th><td>{{vm.gateDeparture}}</td></tr>
-                    <tr><th>Arrival At</th><td>{{vm.arrivalAt}}</td></tr>
-                    <tr><th>Arrival Time Local</th><td>{{vm.arrivalTimeLocal}}</td></tr>
-                    <tr><th>Arrival Time Status</th><td>{{vm.arrivalTimeStatus}}</td></tr>
-                    <tr><th>Gate Arrival</th><td>{{vm.gateArrival}}</td></tr>
-                    <tr><th>Operating Flight Number</th><td>{{vm.operatingFlightNumber}}</td></tr>
-                    <tr><th>Aircraft Code</th><td>{{vm.aircraftCode}}</td></tr>
-                    <tr><th>FlightStatus</th><td>{{vm.flightStatus}}</td></tr>
+                    <tr><th>Departure from</th><td>{{vm.flight.Departure.AirportCode}}</td></tr>
+                    <tr><th>Departure Time Local</th><td>{{vm.flight.Departure.ActualTimeLocal.DateTime}}</td></tr>
+                    <tr><th>Departure Time Status</th><td>{{vm.flight.Departure.TimeStatus.Definition}}</td></tr>
+                    <tr><th>Terminal Departure</th><td>{{vm.flight.Departure.Terminal.Name}}</td></tr>
+                    <tr><th>Gate Departure</th><td>{{vm.flight.Departure.Terminal.Gate}}</td></tr>
+
+                    <tr><th>Arrival at</th><td>{{vm.flight.Arrival.AirportCode}}</td></tr>
+                    <tr><th>Arrival Time Local</th><td>{{vm.flight.Arrival.ActualTimeLocal.DateTime}}</td></tr>
+                    <tr><th>Arrival Time Status</th><td>{{vm.flight.Arrival.TimeStatus.Definition}}</td></tr>
+                    <tr><th>Terminal Arrival</th><td>{{vm.flight.Arrival.Terminal.Name}}</td></tr>
+                    <tr><th>Gate Arrival</th><td>{{vm.flight.Arrival.Terminal.Gate}}</td></tr>
+                    
+                    <tr><th>Marketing Carrier</th><td>{{vm.flight.MarketingCarrier.AirlineID}}</td></tr>
+                    <tr><th>Marketing Flight Number</th><td>{{vm.flight.MarketingCarrier.FlightNumber}}</td></tr>
+                    <tr><th>Operating Carrier</th><td>{{vm.flight.OperatingCarrier.AirlineID}}</td></tr>
+                    <tr><th>Operating Flight Number</th><td>{{vm.flight.OperatingCarrier.FlightNumber}}</td></tr>
+                    <tr><th>Aircraft Code</th><td>{{vm.flight.Equipment.AircraftCode}}</td></tr>
+                    <tr><th>FlightStatus</th><td>{{vm.flight.FlightStatus.Definition}}</td></tr>
                 </tbody>
             </table>
         </div>
