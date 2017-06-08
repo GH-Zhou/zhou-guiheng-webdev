@@ -3,7 +3,7 @@
 <div class="container">
     <br>
 
-    <h1>Flight Information (Departures) Response</h1>
+    <h1>Flight Information - Departures</h1>
 
     <div class="row">
         <div class="col-xs-4">
@@ -70,11 +70,11 @@
                 <tbody ng-repeat="flight in vm.flights" id="tbody">
                     <tr>
                         <td>{{flight.Departure.AirportCode}}</td>
-                        <td>{{flight.Departure.ActualTimeLocal.DateTime}}</td>
+                        <td>{{flight.Departure.ActualTimeLocal.DateTime.slice(-5)}}</td>
                         <td>{{flight.Departure.TimeStatus.Definition}}</td>
-                        <td>{{flight.Departure.Terminal.Gate}}, T{{flight.Departure.Terminal.Name}}</td>
+                        <td>{{flight.Departure.Terminal.Gate}}</td>
                         <td>{{flight.Arrival.AirportCode}}</td>
-                        <td>{{flight.Arrival.ActualTimeLocal.DateTime}}</td>
+                        <td>{{flight.Arrival.ActualTimeLocal.DateTime.slice(-5)}}</td>
                         <td>{{flight.Arrival.TimeStatus.Definition}}</td>
                         <td>{{flight.Arrival.Terminal.Name}}</td>
                         <td>{{flight.OperatingCarrier.AirlineID}}{{flight.OperatingCarrier.FlightNumber}}</td>

@@ -10,7 +10,7 @@
         vm.getAllFlightInformationByAirport = getAllFlightInformationByAirport;
 
         vm.airport = $routeParams['airport'];
-        vm.date = new Date($routeParams['date']);
+        vm.date = new Date($routeParams['date'].replace('-', '\/'));
         vm.timeStart = $routeParams['timeStart'];
 
         function getAllFlightInformationByAirport(airport, date, time_start) {
