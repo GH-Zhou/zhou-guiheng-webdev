@@ -1,4 +1,5 @@
 var app = require('../../express');
+var userModel = require('../models/user/user.model.server');
 
 app.get    ('/api/user/:userId', findUserById);
 app.get    ('/api/user', findUserByUsername);
@@ -17,10 +18,19 @@ var users = [
 // all parameters send to req
 function findUserById (req, res) {
     userId = req.params['userId'];
-    var user = users.find(function (user) {
-        return user._id === userId;
-    });
-    res.send(user);
+
+    userModel
+        .findUserById(userId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.send(err);
+        });
+
+    // var user = users.find(function (user) {
+    //     return user._id === userId;
+    // });
+    // res.send(user);
 }
 
 function findUserByCredentials (req, res) {
@@ -39,10 +49,16 @@ function findUserByCredentials (req, res) {
 
 function createUser (req, res) {
     var user = req.body;
-    user._id = (new Date()).getTime() + "";
-    user.created = new Date();
-    users.push(user);
-    res.send(user);
+    userModel
+        .createUser(user)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.send(err);
+        });
+    // user._id = (new Date()).getTime() + "";
+    // user.created = new Date();
+    // users.push(user);
 }
 
 function updateUser (req, res) {
