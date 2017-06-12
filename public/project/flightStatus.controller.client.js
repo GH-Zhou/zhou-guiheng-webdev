@@ -16,7 +16,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/flightstatus/';
 
-            var bearer_token = "7hyack5dp8b85j5mpht2m8hd";
+            var bearer_token = "kbg4qevjzyxwrvzy3kahapex";
 
             url += vm.flightNumber + '/' + vm.date;
 

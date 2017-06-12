@@ -5,6 +5,9 @@
 
     function configuration($routeProvider) {
         $routeProvider
+            .when('/', {
+                templateUrl: 'home.html'
+            })
             .when('/operations/flightstatus/departures/:airport/:date/:timeStart', {
                 templateUrl: 'flightDepartureInfo.view.client.html',
                 controller: 'FlightDepartureInfoController',

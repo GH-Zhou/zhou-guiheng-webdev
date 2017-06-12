@@ -15,7 +15,7 @@
 
         vm.trust = trust;
         vm.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
-
+        vm.widgetUrl = widgetUrl;
 
         function init() {
             widgetService
@@ -36,6 +36,11 @@
             var linkUrlParts = linkUrl.split('/');
             embedUrl += linkUrlParts[linkUrlParts.length - 1];
             return $sce.trustAsResourceUrl(embedUrl);
+        }
+
+        function widgetUrl(widget) {
+            var url = "views/widget/templates/widget-" + widget.type.toLowerCase() + ".view.client.html";
+            return url;
         }
 
     }
