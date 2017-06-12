@@ -53,10 +53,10 @@
                                 Page Name
                             </div>
                             <div class="col-lg-3 visible-lg">
-                                Created
+                                Title
                             </div>
                             <div class="col-md-3 hidden-sm hidden-xs">
-                                Accessed
+                                Created
                             </div>
                             <div class="col-xs-3">
                             </div>
@@ -71,10 +71,10 @@
                                 </a>
                             </div>
                             <div class="col-lg-3 visible-lg">
-                                {{oldPage.created | date}}
+                                {{oldPage.title}}
                             </div>
                             <div class="col-md-3 hidden-sm hidden-xs">
-                                {{oldPage.accessed | date}}
+                                {{oldPage.dateCreated | date}}
                             </div>
                             <div class="col-xs-3">
                                 <a href="#!/user/{{vm.uid}}/website/{{vm.wid}}/page/{{oldPage._id}}">
@@ -101,6 +101,13 @@
                    ng-model="vm.page.title"
                    placeholder="Page Title"
                    id="form-title"/>
+
+            <label for="description">Description</label>
+            <textarea class="form-control"
+                      rows="5"
+                      ng-model="vm.page.description"
+                      placeholder="eg: Offering the latest news of American Airlines"
+                      id="description"></textarea>
 
             <a ng-click="vm.updatePage(vm.pid, vm.page)"
                class="btn btn-block btn-success">

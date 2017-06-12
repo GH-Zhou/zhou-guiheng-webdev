@@ -50,16 +50,16 @@
                     <li class="list-group-item active">
 
                         <div class="row">
-                            <div class="col-lg-4 col-md-7 col-xs-10">
+                            <div class="col-lg-3 col-md-6 col-xs-9">
                                 Website Name
                             </div>
                             <div class="col-lg-3 visible-lg">
-                                Created
+                                Description
                             </div>
                             <div class="col-md-3 hidden-sm hidden-xs">
-                                Accessed
+                                Created
                             </div>
-                            <div class="col-xs-2">
+                            <div class="col-xs-3">
                             </div>
                         </div>
                     </li>
@@ -72,10 +72,10 @@
                                 </a>
                             </div>
                             <div class="col-lg-3 visible-lg">
-                                {{oldWebsite.created | date}}
+                                {{oldWebsite.description}}
                             </div>
                             <div class="col-md-3 hidden-sm hidden-xs">
-                                {{oldWebsite.accessed | date}}
+                                {{oldWebsite.dateCreated | date}}
                             </div>
                             <div class="col-xs-3">
                                 <a href="#!/user/{{vm.uid}}/website/{{oldWebsite._id}}">

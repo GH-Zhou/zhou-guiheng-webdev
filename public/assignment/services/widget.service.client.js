@@ -10,7 +10,7 @@
         this.deleteWidget = deleteWidget;
         this.createWidget = createWidget;
         this.updateWidget = updateWidget;
-        this.sortWidget = sortWidget;
+        this.reorderWidget = reorderWidget;
 
 
         function findAllWidgetsForPage (pageId) {
@@ -40,7 +40,7 @@
                 });
         }
 
-        function createWidget (widget, pageId) {
+        function createWidget (pageId, widget) {
             var url = "/api/page/" + pageId + "/widget";
             return $http
                 .post(url, widget)
@@ -58,13 +58,13 @@
                 });
         }
 
-        function sortWidget (initial, final) {
-            var url = "/page/"+ $routeParams['pid'] + "/widget?initial=" + initial + "&final=" + final;
+        function reorderWidget (start, end) {
+            var url = "/page/"+ $routeParams['pid'] + "/widget?start=" + start + "&end=" + end;
             return $http
-                .put(url);
-                // .then(function (response) {
-                //     return response.data;
-                // });
+                .put(url)
+                .then(function (response) {
+                    return response.data;
+                });
         }
     }
 })();

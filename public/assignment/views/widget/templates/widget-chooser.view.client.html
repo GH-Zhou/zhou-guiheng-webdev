@@ -26,7 +26,7 @@
     <ul class="list-group">
 
         <li class="list-group-item">
-            <a ng-click="vm.createWidget('HEADING')">Header</a>
+            <a ng-click="vm.createWidget(vm.pid, 'HEADING')">Header</a>
         </li>
 
         <li class="list-group-item">
@@ -34,11 +34,11 @@
         </li>
 
         <li class="list-group-item">
-            <a href="">HTML</a>
+            <a ng-click="vm.createWidget(vm.pid, 'HTML')">HTML</a>
         </li>
 
         <li class="list-group-item">
-            <a href="">Text Input</a>
+            <a ng-click="vm.createWidget(vm.pid, 'TEXT')">Text Input</a>
         </li>
 
         <li class="list-group-item">
@@ -50,11 +50,11 @@
         </li>
 
         <li class="list-group-item">
-            <a ng-click="vm.createWidget('IMAGE')">Image</a>
+            <a ng-click="vm.createWidget(vm.pid, 'IMAGE')">Image</a>
         </li>
 
         <li class="list-group-item">
-            <a ng-click="vm.createWidget('YOUTUBE')">Youtube</a>
+            <a ng-click="vm.createWidget(vm.pid, 'YOUTUBE')">Youtube</a>
         </li>
 
         <li class="list-group-item">

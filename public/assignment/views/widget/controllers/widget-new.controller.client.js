@@ -16,31 +16,36 @@
 
         function init() {
             widgetService
-                .findAllWidgetsForPage(vm.wid)
+                .findAllWidgetsForPage(vm.pid)
                 .then(function (widgets) {
                     vm.widgets = widgets;
                 });
         }
         init();
 
-        function createWidget (widgetType) {
+        function createWidget (pid, widgetType) {
             switch (widgetType) {
                 case "HEADING":
-                    widget =  {'_id': '', 'name': '', 'widgetType': '', 'pageId': '', 'size': '', 'text': ''};
+                    widget =  {'name': '', 'type': 'HEADING', '_page': '', 'size': '', 'text': '', 'order': 10000};
+                    break;
+                case "HTML":
+                    widget =  {'name': '', 'type': 'HTML', '_page': '', 'text': '', 'order': 10000};
+                    break;
+                case "TEXT":
+                    widget =  {'name': '', 'type': 'TEXT', '_page': '', 'rows': '', 'placeholder': '', 'formatted': '', 'order': 10000};
                     break;
                 case "IMAGE":
-                    widget =  {'_id': '', 'name': '', 'widgetType': '', 'pageId': '', 'width': '', 'url': '', 'text': ''};
+                    widget =  {'name': '', 'type': 'IMAGE', '_page': '', 'width': '', 'url': '', 'text': '', 'order': 10000};
                     break;
                 case "YOUTUBE":
-                    widget =  {'_id': '', 'name': '', 'widgetType': '', 'pageId': '', 'width': '', 'url': '', 'text': ''};
+                    widget =  {'name': '', 'type': 'YOUTUBE', '_page': '', 'width': '', 'url': '', 'text': '', 'order': 10000};
                     break;
                 default:
                     break;
             }
-            widget.widgetType = widgetType;
-            widget.pageId = vm.pid;
+            // widget.pageId = vm.pid;
             widgetService
-                .createWidget(widget, vm.pid)
+                .createWidget(pid, widget)
                 .then(function (widget) {
                     $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget/' + widget._id);
                 });

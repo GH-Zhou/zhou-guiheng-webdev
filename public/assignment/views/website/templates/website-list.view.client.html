@@ -37,10 +37,10 @@
                     Website Name
                 </div>
                 <div class="col-lg-3 visible-lg">
-                    Created
+                    Description
                 </div>
                 <div class="col-md-3 hidden-sm hidden-xs">
-                    Accessed
+                    Created
                 </div>
                 <div class="col-xs-3">
                 </div>
@@ -55,10 +55,10 @@
                     </a>
                 </div>
                 <div class="col-lg-3 visible-lg">
-                    {{website.created | date}}
+                    {{website.description}}
                 </div>
                 <div class="col-md-3 hidden-sm hidden-xs">
-                    {{website.accessed | date}}
+                    {{website.dateCreated | date}}
                 </div>
                 <div class="col-xs-3">
                     <a href="#!/user/{{vm.uid}}/website/{{website._id}}">

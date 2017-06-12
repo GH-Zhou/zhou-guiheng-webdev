@@ -39,8 +39,8 @@
                 });
         }
 
-        function createWebsite (website) {
-            var url = "/api/user/" + website.developerId + "/website";
+        function createWebsite (userId, website) {
+            var url = "/api/user/" + userId + "/website";
             return $http
                 .post(url, website)
                 .then(function (response) {

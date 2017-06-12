@@ -20,10 +20,10 @@
         }
         init();
 
-        function createWebsite (website) {
-            website.developerId = vm.uid;
+        function createWebsite (uid, website) {
+            // website._user = vm.uid;
             websiteService
-                .createWebsite(website)
+                .createWebsite(uid, website)
                 .then(function () {
                     $location.url('/user/' + vm.uid + '/website');
                 });

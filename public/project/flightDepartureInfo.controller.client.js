@@ -26,7 +26,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/flightstatus/departures/';
 
-            var bearer_token = "qwgdt6tkqm7rxx9m28b4gdw8";
+            var bearer_token = "7hyack5dp8b85j5mpht2m8hd";
 
             url += airport + '/' + date + 'T' +  time_start + "?limit=100";
 

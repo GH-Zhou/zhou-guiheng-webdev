@@ -5,7 +5,8 @@
 
     function EditWidgetController ($routeParams,
                                  $location,
-                                 widgetService) {
+                                 widgetService,
+                                   $timeout) {
         var vm = this;
 
         vm.uid = $routeParams['uid'];
@@ -28,7 +29,34 @@
                 .then(function (widget) {
                     vm.widget = widget;
                     vm.oldWidget = angular.copy(vm.widget);
+
+                    if (vm.widget.type === "HEADING") {
+                        $timeout(function () {
+                            vm.options = [{
+                                size: "1",
+                                title: "1 (Largest)"
+                            }, {
+                                size: "2",
+                                title: "2 (Very Large)"
+                            }, {
+                                size: "3",
+                                title: "3 (Large)"
+                            }, {
+                                size: "4",
+                                title: "4 (Small)"
+                            }, {
+                                size: "5",
+                                title: "5 (Very Small)"
+                            }, {
+                                size: "6",
+                                title: "6 (Smallest)"
+                            }];
+                        });
+                        // initialize the selection
+                        vm.widget.size = "" + widget.size;
+                    }
                 });
+
         }
         init();
 

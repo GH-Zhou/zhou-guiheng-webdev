@@ -21,10 +21,10 @@
         }
         init();
 
-        function createPage (page) {
-            page.websiteId = vm.wid;
+        function createPage (wid, page) {
+            // page._website = vm.wid;
             pageService
-                .createPage(page)
+                .createPage(wid, page)
                 .then(function () {
                     $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
                 });

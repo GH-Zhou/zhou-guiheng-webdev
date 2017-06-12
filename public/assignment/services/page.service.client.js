@@ -39,8 +39,8 @@
                 });
         }
 
-        function createPage (page) {
-            var url = "/api/website/" + page.websiteId + "/page";
+        function createPage (websiteId, page) {
+            var url = "/api/website/" + websiteId + "/page";
             return $http
                 .post(url, page)
                 .then(function (response) {
