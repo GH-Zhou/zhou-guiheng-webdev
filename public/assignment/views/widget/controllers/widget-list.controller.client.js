@@ -5,11 +5,12 @@
 
     function WidgetListController ($sce,
                                    $routeParams,
+                                   currentUser,
                                    widgetService) {
         var vm = this;
 
 
-        vm.uid = $routeParams['uid'];
+        vm.uid = currentUser._id;
         vm.wid = $routeParams['wid'];
         vm.pid = $routeParams['pid'];
 

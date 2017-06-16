@@ -78,6 +78,7 @@ function reorderWidget(pageId, start, end) {
                 return widgetModel.create(widgets, function (err, docs) { return docs; });
             });
         })
+        // 1. find current ORDERED list of widgets on this page.
         .sort('order')
         .exec(function(err, docs) { return docs; });
 

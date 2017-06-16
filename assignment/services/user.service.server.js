@@ -1,19 +1,133 @@
 var app = require('../../express');
 var userModel = require('../models/user/user.model.server');
+var passport      = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require("bcrypt-nodejs");
+passport.use(new LocalStrategy(localStrategy));
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
+
+var FacebookStrategy = require('passport-facebook').Strategy;
+var facebookConfig = {
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+};
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+
 
 app.get    ('/api/user/:userId', findUserById);
 app.get    ('/api/user', findUserByUsername);
+app.get    ('/api/users', isAdmin, findAllUsers);
 app.get    ('/api/user', findUserByCredentials);
-app.post   ('/api/user', createUser);
-app.put    ('/api/user/:userId', updateUser);
-app.delete ('/api/user/:userId', deleteUser);
+app.post   ('/api/user', isAdmin, createUser);
+app.delete ('/api/user/:userId', isAdmin, deleteUser);
+app.put    ('/api/user/:userId', updateUser); // to be protected
+app.post   ('/api/login', passport.authenticate('local'), login);
+app.post   ('/api/logout', logout);
+app.get    ('/api/loggedin', loggedin);
+app.get    ('/api/checkAdmin', checkAdmin);
+app.post   ('/api/register', register);
+app.post   ('/api/unregister', unregister);
 
-// var users = [
-//     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder",   email: "alice@gmail.com"  },
-//     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley",   email: "bob@gmail.com"},
-//     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia",   email: "charly@gmail.com"},
-//     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi",  email: "jannunzi@neu.edu"}
-// ];
+app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/assignment/index.html#!/profile',
+        failureRedirect: '/#!/login'
+    }));
+
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+        next(); // continue to next middleware;
+    } else {
+        res.sendStatus(401);
+    }
+}
+
+function findAllUsers(req, res) {
+    userModel
+        .findAllUsers()
+        .then(function (users) {
+            res.json(users);
+        })
+}
+
+function localStrategy(username, password, done) {
+    userModel
+        .findUserByCredentials(username, password)
+        .then(
+            function(user) {
+                if(user && bcrypt.compareSync(password, user.password)) {
+                    done(null, user);
+                } else {
+                    done(null, false);
+                }
+            },
+            function(err) {
+                done(err, false);
+            }
+        );
+}
+
+function serializeUser(user, done) {
+    done(null, user);
+}
+
+function deserializeUser(user, done) {
+    userModel
+        .findUserById(user._id)
+        .then(
+            function(user){
+                done(null, user);
+            },
+            function(err){
+                done(err, null);
+            }
+        );
+}
+
+function login(req, res) {
+    var user = req.user;
+    res.json(user);
+}
+
+function logout(req, res) {
+    req.logOut();
+    res.sendStatus(200);
+}
+
+function loggedin(req, res) {
+    res.send(req.isAuthenticated() ? req.user : '0');
+}
+
+function checkAdmin(req, res) {
+    res.send(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1 ? req.user : '0');
+}
+
+function register(req, res) {
+    var userObj = req.body;
+    userObj.password = bcrypt.hashSync(userObj.password);
+
+    userModel
+        .createUser(userObj)
+        .then(function (user) {
+            req.login(user, function (status) {
+                res.send(status);
+            });
+        });
+}
+
+function unregister(req, res) {
+    userModel
+        .deleteUser(req.user._id)
+        .then(function (user) {
+            req.logout();
+            res.sendStatus(200);
+        });
+}
+
 
 // all parameters send to req
 function findUserById (req, res) {
@@ -26,11 +140,6 @@ function findUserById (req, res) {
         }, function (err) {
             res.send(err);
         });
-
-    // var user = users.find(function (user) {
-    //     return user._id === userId;
-    // });
-    // res.send(user);
 }
 
 function findUserByCredentials (req, res) {
@@ -44,15 +153,6 @@ function findUserByCredentials (req, res) {
         }, function () {
             res.sendStatus(404);
         });
-    // for (var u in users) {
-    //     var user = users[u];
-    //     if (user.username === username &&
-    //         user.password === password) {
-    //         res.json(user);
-    //         return;
-    //     }
-    // }
-
 }
 
 function createUser (req, res) {
@@ -64,9 +164,6 @@ function createUser (req, res) {
         }, function (err) {
             res.send(err);
         });
-    // user._id = (new Date()).getTime() + "";
-    // user.created = new Date();
-    // users.push(user);
 }
 
 function updateUser (req, res) {
@@ -80,14 +177,6 @@ function updateUser (req, res) {
         }, function (err) {
             res.send(err);
         });
-
-    // for (var u in users) {
-    //     if (users[u]._id === userId) {
-    //         users[u] = user;
-    //         res.sendStatus(200);
-    //         return;
-    //     }
-    // }
 }
 
 function deleteUser (req, res) {
@@ -100,13 +189,6 @@ function deleteUser (req, res) {
         }, function (err) {
             res.send(err);
         });
-
-    // var user = users.find(function (user) {
-    //    return user._id === userId;
-    // });
-    // var index = users.indexOf(user);
-    // users.splice(index, 1);
-    // res.sendStatus(200);
 }
 
 function findUserByUsername (req, res) {
@@ -120,13 +202,41 @@ function findUserByUsername (req, res) {
             user = null;
             res.send(user);
         });
-    // for (var u in users) {
-    //     var user = users[u];
-    //     if (user.username === username) {
-    //         res.json(user);
-    //         return;
-    //     }
-    // }
-    // user = null;
-    // res.send(user);
+}
+
+function facebookStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    // var email = profile.email;
+                    // var emailParts = email.split("@");
+                    var newFacebookUser = {
+                        username:  profile.displayName,
+                        // firstName: profile.name.givenName,
+                        // lastName:  profile.name.familyName,
+                        // email:     email,
+                        facebook: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newFacebookUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
 }

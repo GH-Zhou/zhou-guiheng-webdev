@@ -6,10 +6,11 @@
    function FlickrSearchController($routeParams,
                                    $location,
                                    flickrService,
+                                   currentUser,
                                    widgetService) {
        var vm = this;
 
-       vm.uid = $routeParams['uid'];
+       vm.uid = currentUser._id;
        vm.wid = $routeParams['wid'];
        vm.pid = $routeParams['pid'];
        vm.wgid = $routeParams['wgid'];
@@ -42,7 +43,7 @@
            widgetService
                .updateWidget(vm.wgid, widget)
                .then(function (){
-                   $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget/' + vm.wgid);
+                   $location.url('/website/' + vm.wid + '/page/' + vm.pid + '/widget/' + vm.wgid);
                });
        }
 

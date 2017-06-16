@@ -5,10 +5,11 @@
 
     function EditPageController ($routeParams,
                                  $location,
+                                 currentUser,
                                  pageService) {
         var vm = this;
 
-        vm.uid = $routeParams['uid'];
+        vm.uid = currentUser._id;
         vm.wid = $routeParams['wid'];
         vm.pid = $routeParams['pid'];
 
@@ -35,7 +36,7 @@
             pageService
                 .deletePage(pid)
                 .then(function (){
-                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
+                    $location.url('/website/' + vm.wid + '/page');
                 });
         }
 
@@ -43,7 +44,7 @@
             pageService
                 .updatePage(pid, page)
                 .then(function (){
-                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page');
+                    $location.url('/website/' + vm.wid + '/page');
                 });
 
         }

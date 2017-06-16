@@ -4,12 +4,13 @@
         .controller('EditWidgetController', EditWidgetController);
 
     function EditWidgetController ($routeParams,
-                                 $location,
-                                 widgetService,
+                                   $location,
+                                   widgetService,
+                                   currentUser,
                                    $timeout) {
         var vm = this;
 
-        vm.uid = $routeParams['uid'];
+        vm.uid = currentUser._id;
         vm.wid = $routeParams['wid'];
         vm.pid = $routeParams['pid'];
         vm.wgid = $routeParams['wgid'];
@@ -64,7 +65,7 @@
             widgetService
                 .deleteWidget(wgid)
                 .then(function (){
-                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget');
+                    $location.url('/website/' + vm.wid + '/page/' + vm.pid + '/widget');
                 });
         }
 
@@ -72,7 +73,7 @@
             widgetService
                 .updateWidget(wgid, widget)
                 .then(function (){
-                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget');
+                    $location.url('/website/' + vm.wid + '/page/' + vm.pid + '/widget');
                 });
         }
     }

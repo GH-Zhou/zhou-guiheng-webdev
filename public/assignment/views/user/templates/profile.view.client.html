@@ -4,7 +4,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#!/user/{{vm.uid}}">
+            <a class="navbar-brand" href="#!/profile">
                 Profile
             </a>
             <p class="navbar-text pull-right">
@@ -54,13 +54,13 @@
     </form>
 
     <a class="btn btn-primary btn-block"
-       href="#!/user/{{vm.uid}}/website">Websites</a>
+       href="#!/website">Websites</a>
     <a class="btn btn-success btn-block"
        ng-click="vm.updateUser(vm.uid, vm.user)">Update</a>
     <a class="btn btn-danger btn-block"
-       ng-click="vm.deleteUser(vm.uid)">Delete</a>
+       ng-click="vm.unregister()">Unregister</a>
     <a class="btn btn-warning  btn-block"
-       href="#!/login">Logout</a>
+       ng-click="vm.logout()">Logout</a>
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

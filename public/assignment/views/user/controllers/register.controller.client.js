@@ -7,9 +7,9 @@
 
         var vm = this;
 
-        vm.register = register;
+        vm._register = _register;
 
-        function register(username, password, password2) {
+        function _register(username, password, password2) {
 
             if (username === null || username === '' || typeof username === 'undefined') {
                 vm.error = 'Username cannot be empty!';
@@ -45,13 +45,10 @@
                     };
 
                     userService
-                        .createUser(newUser)
-                        .then(register);
-
-                    function register(user) {
-                        $location.url('/user/' + user._id);
-                    }
-
+                        .register(newUser)
+                        .then(function () {
+                            $location.url('/profile');
+                        });
                 }
 
             }

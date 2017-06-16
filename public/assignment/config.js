@@ -6,14 +6,20 @@
     function configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/user/templates/login.view.client.html',
-                controller: 'LoginController',
-                controllerAs: 'vm'
+                templateUrl: 'views/home/home.html',
+                controller: 'MainController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .when('default', {
-                templateUrl: 'views/user/templates/login.view.client.html',
-                controller: 'LoginController',
-                controllerAs: 'vm'
+                templateUrl: 'views/home/home.html',
+                controller: 'MainController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
@@ -25,61 +31,159 @@
                 controller: 'RegisterController',
                 controllerAs: 'vm'
             })
-            .when('/user/:uid', {
+            .when('/admin', {
+                templateUrl: 'views/admin/templates/admin.view.client.html',
+                controller: 'adminUserController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/user', {
+                templateUrl: 'views/admin/templates/admin-users.view.client.html',
+                controller: 'adminUserController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'ProfileController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             // path parameters /:
-            .when('/user/:uid/website', {
+            .when('/website', {
                 templateUrl: 'views/website/templates/website-list.view.client.html',
                 controller: 'WebsiteListController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/new', {
+            .when('/website/new', {
                 templateUrl: 'views/website/templates/website-new.view.client.html',
                 controller: 'NewWebsiteController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/:wid', {
+            .when('/website/:wid', {
                 templateUrl: 'views/website/templates/website-edit.view.client.html',
                 controller: 'EditWebsiteController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/:wid/page', {
+            .when('/website/:wid/page', {
                 templateUrl: 'views/page/templates/page-list.view.client.html',
                 controller: 'PageListController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/:wid/page/new', {
+            .when('/website/:wid/page/new', {
                 templateUrl: 'views/page/templates/page-new.view.client.html',
                 controller: 'NewPageController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/:wid/page/:pid', {
+            .when('/website/:wid/page/:pid', {
                 templateUrl: 'views/page/templates/page-edit.view.client.html',
                 controller: 'EditPageController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/:wid/page/:pid/widget', {
+            .when('/website/:wid/page/:pid/widget', {
                 templateUrl: 'views/widget/templates/widget-list.view.client.html',
                 controller: 'WidgetListController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/:wid/page/:pid/widget/new', {
+            .when('/website/:wid/page/:pid/widget/new', {
                 templateUrl: 'views/widget/templates/widget-chooser.view.client.html',
                 controller: 'NewWidgetController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/:wid/page/:pid/widget/:wgid', {
+            .when('/website/:wid/page/:pid/widget/:wgid', {
                 templateUrl: 'views/widget/templates/widget-edit.view.client.html',
                 controller: 'EditWidgetController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:uid/website/:wid/page/:pid/widget/:wgid/search', {
+            .when('/website/:wid/page/:pid/widget/:wgid/search', {
                 templateUrl: 'views/widget/templates/widget-flickr-search.view.client.html',
                 controller: 'FlickrSearchController',
-                controllerAs: 'vm'
-            })
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            });
+    }
+
+    function checkLoggedIn(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .loggedin()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/login');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function checkAdmin(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .checkAdmin()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function checkCurrentUser(userService, $q, $location) {
+        var deferred = $q.defer();
+
+        userService
+            .loggedin()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.resolve({});
+                    // $location.url('/login');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
     }
 })();

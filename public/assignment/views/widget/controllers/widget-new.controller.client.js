@@ -5,10 +5,11 @@
 
     function NewWidgetController ($routeParams,
                                   $location,
+                                  currentUser,
                                   widgetService) {
         var vm = this;
 
-        vm.uid = $routeParams['uid'];
+        vm.uid = currentUser._id;
         vm.wid = $routeParams['wid'];
         vm.pid = $routeParams['pid'];
 
@@ -47,7 +48,7 @@
             widgetService
                 .createWidget(pid, widget)
                 .then(function (widget) {
-                    $location.url('/user/' + vm.uid + '/website/' + vm.wid + '/page/' + vm.pid + '/widget/' + widget._id);
+                    $location.url('/website/' + vm.wid + '/page/' + vm.pid + '/widget/' + widget._id);
                 });
         }
 

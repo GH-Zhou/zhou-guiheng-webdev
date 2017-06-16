@@ -147,7 +147,7 @@ function uploadImage(req, res) {
     var width         = req.body.width;
     var myFile        = req.file;
 
-    var userId = req.body.userId;
+    // var userId = req.body.userId;
     var websiteId = req.body.websiteId;
     var pageId = req.body.pageId;
 
@@ -168,7 +168,7 @@ function uploadImage(req, res) {
             widgetModel
                 .updateWidget(widgetId, widget)
                 .then(function () {
-                    var callbackUrl   = "/assignment/index.html#!/user/" + userId + "/website/"+ websiteId + "/page/" + pageId + "/widget/" + widgetId;
+                    var callbackUrl   = "/assignment/index.html#!/website/"+ websiteId + "/page/" + pageId + "/widget/" + widgetId;
                     res.redirect(callbackUrl);
                 }, function (err) {
                     res.send(err);
