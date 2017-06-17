@@ -4,32 +4,43 @@
     <div class="container-fluid">
         <h1>Join AAdvantage</h1>
 
-        <div ng-show="vm.error" class="alert alert-danger">
-            {{vm.error}}
-        </div>
-
         <label for="username">Username</label>
         <input type="text"
                id="username"
-               ng-model="username"
+               ng-model="vm.username"
+               ng-class="{submitted:vm.submitted1}"
                class="form-control"
-               placeholder="AmericanAir"/>
+               placeholder="AmericanAir" required/>
+        <div ng-show="vm.error1" class="alert alert-danger">
+            {{vm.error1}}
+        </div>
 
         <label for="password">Password</label>
         <input type="password"
                id="password"
-               ng-model="password"
+               ng-model="vm.password"
+               ng-class="{submitted:vm.submitted2}"
                class="form-control"
-               placeholder="AAL2017password"/>
+               placeholder="AAL2017password" required/>
+        <div ng-show="vm.error2" class="alert alert-danger">
+            {{vm.error2}}
+        </div>
 
         <label for="password2">Verify Password</label>
         <input type="password"
                id="password2"
-               ng-model="password2"
+               ng-model="vm.password2"
+               ng-class="{submitted:vm.submitted3}"
                class="form-control"
-               placeholder="AAL2017password"/>
+               placeholder="AAL2017password" required/>
+        <div ng-show="vm.error3" class="alert alert-danger">
+            {{vm.error3}}
+        </div>
+        <div ng-show="vm.error4" class="alert alert-danger">
+            {{vm.error4}}
+        </div>
 
-        <a ng-click="vm._register(username, password, password2)"
+        <a ng-click="vm._register(vm.username, vm.password, vm.password2)"
            class="btn btn-primary btn-block">
             Register
         </a>

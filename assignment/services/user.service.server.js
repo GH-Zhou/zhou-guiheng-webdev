@@ -16,7 +16,6 @@ var facebookConfig = {
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
-
 app.get    ('/api/user/:userId', findUserById);
 app.get    ('/api/user', findUserByUsername);
 app.get    ('/api/users', isAdmin, findAllUsers);
@@ -35,7 +34,7 @@ app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
         successRedirect: '/assignment/index.html#!/profile',
-        failureRedirect: '/#!/login'
+        failureRedirect: '/assignment/index.html#!/login'
     }));
 
 function isAdmin(req, res, next) {
@@ -216,8 +215,8 @@ function facebookStrategy(token, refreshToken, profile, done) {
                     // var emailParts = email.split("@");
                     var newFacebookUser = {
                         username:  profile.displayName,
-                        // firstName: profile.name.givenName,
-                        // lastName:  profile.name.familyName,
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
                         // email:     email,
                         facebook: {
                             id:    profile.id,

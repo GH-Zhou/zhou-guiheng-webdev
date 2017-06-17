@@ -70,6 +70,11 @@
         }
 
         function updateWidget (wgid, widget) {
+            if (widget.name === null || widget.name === '' || typeof widget.name === 'undefined') {
+                vm.error = "Name required!";
+                vm.submitted = true;
+                return;
+            }
             widgetService
                 .updateWidget(wgid, widget)
                 .then(function (){

@@ -3,22 +3,28 @@
 
     <div class="container-fluid">
         <h1>Login as an AAdvantage Member</h1>
-
-        <div ng-show="vm.message" class="alert alert-info">{{vm.message}}</div>
+        <div ng-show="vm.error3" class="alert alert-danger">{{vm.error3}}</div>
 
         <label for="username">Username</label>
         <input ng-model="username"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="false"
                type="text"
+               ng-class="{submitted:vm.submitted1}"
                id="username"
                class="form-control"
-               placeholder="AmericanAir"/>
+               placeholder="AmericanAir" required/>
+        <div ng-show="vm.error1" class="alert alert-danger">{{vm.error1}}</div>
 
         <label for="password">Password</label>
         <input ng-model="password"
                type="password"
+               ng-class="{submitted:vm.submitted2}"
                id="password"
                class="form-control"
-               placeholder="AAL2017password"/>
+               placeholder="AAL2017password" required/>
+        <div ng-show="vm.error2" class="alert alert-danger">{{vm.error2}}</div>
 
         <a data-ng-click="vm.login(username, password)"
            class="btn btn-primary btn-block">

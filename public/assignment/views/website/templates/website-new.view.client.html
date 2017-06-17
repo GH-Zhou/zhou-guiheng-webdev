@@ -94,8 +94,10 @@
             <input type="text"
                    class="form-control"
                    ng-model="website.name"
+                   ng-class="{submitted:vm.submitted}"
                    placeholder="eg: Newsroom"
-                   id="name"/>
+                   id="name" required/>
+            <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 
             <label for="description">Description</label>
             <textarea class="form-control"

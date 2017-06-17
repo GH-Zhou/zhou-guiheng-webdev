@@ -41,6 +41,11 @@
         }
 
         function updatePage (pid, page) {
+            if (page.name === null || page.name === '' || typeof page.name === 'undefined') {
+                vm.error = "Name required!";
+                vm.submitted = true;
+                return;
+            }
             pageService
                 .updatePage(pid, page)
                 .then(function (){

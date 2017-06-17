@@ -41,6 +41,11 @@
         }
 
         function updateWebsite (wid, website) {
+            if (website.name === null || website.name === '' || typeof website.name === 'undefined') {
+                vm.error = "Name required!";
+                vm.submitted = true;
+                return;
+            }
             websiteService
                 .updateWebsite(wid, website)
                 .then(function () {

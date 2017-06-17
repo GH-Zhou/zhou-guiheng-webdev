@@ -67,3 +67,8 @@ body {
 a:hover {
     text-decoration: none;
 }
+
+input.submitted.ng-invalid
+{
+    border:1px solid #f00;
+}

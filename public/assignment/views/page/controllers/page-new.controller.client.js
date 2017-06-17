@@ -23,6 +23,11 @@
         init();
 
         function createPage (wid, page) {
+            if (page === null || page === '' || typeof page === 'undefined') {
+                vm.error = "Name required!";
+                vm.submitted = true;
+                return;
+            }
             pageService
                 .createPage(wid, page)
                 .then(function () {

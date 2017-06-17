@@ -93,7 +93,10 @@
             <input class="form-control"
                    placeholder="Page Name"
                    ng-model="vm.page.name"
-                   id="name"/>
+                   ng-class="{submitted:vm.submitted}"
+                   id="name" required/>
+            <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+
 
             <label for="form-title">Title</label>
             <input type="text"

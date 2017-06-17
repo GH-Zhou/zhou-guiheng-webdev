@@ -96,3 +96,8 @@ a:hover {
 #logo {
     width: 200px;
 }
+
+input.submitted.ng-invalid
+{
+    border:1px solid #f00;
+}

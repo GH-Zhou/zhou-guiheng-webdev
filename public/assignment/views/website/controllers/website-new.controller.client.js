@@ -22,6 +22,11 @@
         init();
 
         function createWebsite (uid, website) {
+            if (website === null || website === '' || typeof website === 'undefined') {
+                vm.error = "Name required!";
+                vm.submitted = true;
+                return;
+            }
             // website._user = vm.uid;
             websiteService
                 .createWebsite(uid, website)

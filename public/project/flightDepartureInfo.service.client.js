@@ -19,6 +19,7 @@
                 console.log(response);
                 return response.data.FlightStatusResource.Flights.Flight;
             });
+
         }
 
         // $http({
