@@ -64,8 +64,26 @@ body {
 
 .btn-primary {
     color: #fff;
-    background-color: #137acf;
-    border-color: #137acf;
+    background-color: #f9ba00;
+    border-color: #f9ba00;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #e0a700;
+    border-color: #e0a700;
+}
+
+.btn-facebook {
+    color: #fff;
+    background-color: #3b5998;
+    border-color: #3b5998;
+}
+
+.btn-facebook:hover, .btn-facebook:focus, .btn-facebook:active, .btn-facebook.active, .open>.dropdown-toggle.btn-facebook {
+    color: #fff;
+    background-color: #355088;
+    border-color: #355088;
 }
 
 a {
@@ -83,4 +101,9 @@ a:hover {
 .glyphicon {
     padding-top: 7px;
     color: #00235f;
+}
+
+input.submitted.ng-invalid
+{
+    border:1px solid #f00;
 }

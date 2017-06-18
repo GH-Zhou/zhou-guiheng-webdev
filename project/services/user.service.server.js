@@ -17,25 +17,25 @@ var facebookConfig = {
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
-app.get    ('/api/user/:userId', findUserById);
-app.get    ('/api/user', findUserByUsername);
-app.get    ('/api/users', isAdmin, findAllUsers);
-app.get    ('/api/user', findUserByCredentials);
-app.post   ('/api/user', isAdmin, createUser);
-app.delete ('/api/user/:userId', isAdmin, deleteUser);
-app.put    ('/api/user/:userId', updateUser); // to be protected
-app.post   ('/api/login', passport.authenticate('local'), login);
-app.post   ('/api/logout', logout);
-app.get    ('/api/loggedin', loggedin);
-app.get    ('/api/checkAdmin', checkAdmin);
-app.post   ('/api/register', register);
-app.post   ('/api/unregister', unregister);
+app.get    ('/api/lufthansa/user/:userId', findUserById);
+app.get    ('/api/lufthansa/user', findUserByUsername);
+app.get    ('/api/lufthansa/users', isAdmin, findAllUsers);
+app.get    ('/api/lufthansa/user', findUserByCredentials);
+app.post   ('/api/lufthansa/user', isAdmin, createUser);
+app.delete ('/api/lufthansa/user/:userId', isAdmin, deleteUser);
+app.put    ('/api/lufthansa/user/:userId', updateUser); // to be protected
+app.post   ('/api/lufthansa/login', passport.authenticate('Project'), login);
+app.post   ('/api/lufthansa/logout', logout);
+app.get    ('/api/lufthansa/loggedin', loggedin);
+app.get    ('/api/lufthansa/checkAdmin', checkAdmin);
+app.post   ('/api/lufthansa/register', register);
+app.post   ('/api/lufthansa/unregister', unregister);
 
-app.get ('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
+app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/assignment/index.html#!/profile',
-        failureRedirect: '/assignment/index.html#!/login'
+        successRedirect: '/project/index.html#!/profile',
+        failureRedirect: '/project/index.html#!/login'
     }));
 
 function isAdmin(req, res, next) {

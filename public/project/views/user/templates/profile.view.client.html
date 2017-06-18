@@ -1,0 +1,63 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/profile">
+                Profile
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="vm.updateUser(vm.uid, vm.user)" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok">
+                    </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div ng-show="vm.message" class="alert alert-info">{{vm.message}}</div>
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input ng-model="vm.user.username"
+                   type="text"
+                   class="form-control" id="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input ng-model="vm.user.email"
+                   type="email"
+                   class="form-control" id="email" placeholder="alice@wonderland.com">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input ng-model="vm.user.phone"
+                   type="text"
+                   class="form-control" id="phone" placeholder="012-345-6789">
+        </div>
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input ng-model="vm.user.firstName"
+                   type="text"
+                   class="form-control" id="first-name" placeholder="Alice">
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input ng-model="vm.user.lastName"
+                   type="text"
+                   class="form-control" id="last-name" placeholder="Wonderland">
+        </div>
+    </form>
+
+    <a class="btn btn-success btn-block"
+       ng-click="vm.updateUser(vm.uid, vm.user)">Update</a>
+    <a class="btn btn-danger btn-block"
+       ng-click="vm.unregister()">Unregister</a>
+    <a class="btn btn-warning  btn-block"
+       ng-click="vm.logout()">Logout</a>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
