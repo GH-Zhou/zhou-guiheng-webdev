@@ -5,7 +5,7 @@
 
     function MainController(currentUser, userService) {
         var vm = this;
-        vm.currentUser = currentUser;
+        vm.user = currentUser;
         vm.logout = logout;
 
         function logout(){

@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../../../../../Style/eAIP.content.css" rel="stylesheet" type="text/css" />
+    <link href="../../../../../Style/zTree/zTreeStyle/zTreeStyle.css" rel="stylesheet"
+          type="text/css" />
+    <title></title>
+    <script src="../../../../../Scripts/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../../../Scripts/Cookie.js" type="text/javascript"></script>
+    <script src="../../../../../Scripts/zTree/jquery.ztree.core-3.5.js" type="text/javascript"></script>
+    <script src="../../../../../Scripts/pdfjs/common.js"></script>
+    <script type="text/javascript">
+        void('render function');
+        var oldAirport = "";
+        var zNodes = [{id:'AMD',pId:'',name:'AMD',name_ch:'修订单',resourceID:'AMD.pdf',remark:'AMD',sup:'',statu:'1'},
+            {id:'00',pId:'-1',name:'PART 1  GENERAL (GEN)',name_ch:'第一部分 总则 (GEN)',resourceID:'DIR',remark:'0',sup:'',statu:'1',open:'false'},
+            {id:'00_00',pId:'00',name:'GEN 0',name_ch:'GEN 0',resourceID:'DIR',remark:'0',sup:'',statu:'1',open:'false'},
+            {id:'00_00_03',pId:'00_00',name:'GEN 0.3 RECORD OF AIP SUPPLEMENTS AND AICS',name_ch:'GEN 0.3 航行资料汇编补充资料及航行资料通报记录',resourceID:'GEN 0.3',remark:'0',sup:'',statu:'1'},
+            {id:'00_00_04',pId:'00_00',name:'GEN 0.4 CHECKLIST OF AIP PAGES',name_ch:'GEN 0.4 航行资料汇编页面校核单',resourceID:'GEN 0.4',pdf:'',remark:'0',sup:'',statu:'1'},
+            {id:'00_03',pId:'00',name:'GEN 3. SERVICES',name_ch:'GEN 3 服务',resourceID:'DIR',remark:'0',sup:'',statu:'1',open:'false'},
+            {id:'00_03_06',pId:'00_03',name:'GEN 3.6 SEARCH AND RESCUE (SAR)',name_ch:'GEN 3.6 搜寻和救援',resourceID:'DIR',remark:'0',sup:'',statu:'1',open:'false'},
+            {id:'00_03_06_02',pId:'00_03_06',name:'GEN 3.6.2 SEARCH AND RESCUE REGIONS OF CHINA',name_ch:'GEN 3.6.2 中国搜寻救援图',resourceID:'GEN 3.6.2',pdf:'',remark:'0',sup:'',statu:'1'},
+            {id:'01',pId:'-1',name:'PART 2  EN-ROUTE (ENR)',name_ch:'第二部分 航路 (ENR)',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_00',pId:'01',name:'ENR 0',name_ch:'ENR 0',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_00_06',pId:'01_00',name:'ENR 0.6 TABLE OF CONTENTS TO PART 2',name_ch:'ENR 0.6 第二部分目录',resourceID:'ENR 0.6',pdf:'',remark:'1',sup:'',statu:'0'},
+            {id:'01_01',pId:'01',name:'ENR 1. GENERAL RULES AND PROCEDURES',name_ch:'ENR 1 总则和程序',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_01_01',pId:'01_01',name:'ENR 1.1 GENERAL RULES',name_ch:'ENR 1.1 总则',resourceID:'ENR 1.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_02',pId:'01_01',name:'ENR 1.2 VISUAL FLIGHT RULES',name_ch:'ENR 1.2 目视飞行规则',resourceID:'ENR 1.2',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_03',pId:'01_01',name:'ENR 1.3 INSTRUMENT FLIGHT RULES',name_ch:'ENR 1.3 仪表飞行规则',resourceID:'ENR 1.3',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_04',pId:'01_01',name:'ENR 1.4 ATS AIRSPACE CLASSIFICATION',name_ch:'ENR 1.4 空中交通服务空域分类',resourceID:'ENR 1.4',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_05',pId:'01_01',name:'ENR 1.5 HOLDING, APPROACH AND DEPARTURE PROCEDURES',name_ch:'ENR 1.5 等待、进近和离场程序',resourceID:'ENR 1.5',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_06',pId:'01_01',name:'ENR 1.6 RADAR SERVICES AND PROCEDURES',name_ch:'ENR 1.6 雷达服务和程序',resourceID:'ENR 1.6',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_07',pId:'01_01',name:'ENR 1.7 ALTIMETER SETTING PROCEDURES',name_ch:'ENR 1.7 高度表拔正程序',resourceID:'ENR 1.7',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_08',pId:'01_01',name:'ENR 1.8 REGIONAL SUPPLEMENTARY PROCEDURES',name_ch:'ENR 1.8 地区补充程序',resourceID:'ENR 1.8',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_09',pId:'01_01',name:'ENR 1.9 AIR TRAFFIC FLOW MANAGEMENT',name_ch:'ENR 1.9 空中交通流量管理',resourceID:'ENR 1.9',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_10',pId:'01_01',name:'ENR 1.10 FLIGHT PLANNING',name_ch:'ENR 1.10 飞行计划',resourceID:'ENR 1.10',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_11',pId:'01_01',name:'ENR 1.11 ADDRESSING OF FLIGHT PLAN MESSAGES',name_ch:'ENR 1.11 飞行计划报收电地址',resourceID:'ENR 1.11',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_12',pId:'01_01',name:'ENR 1.12 INTERCEPTION OF CIVIL AIRCRAFT',name_ch:'ENR 1.12 民用航空器的拦截',resourceID:'ENR 1.12',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_13',pId:'01_01',name:'ENR 1.13 UNLAWFUL INTERFERENCE',name_ch:'ENR 1.13 非法干扰',resourceID:'ENR 1.13',remark:'1',sup:'',statu:'0'},
+            {id:'01_01_14',pId:'01_01',name:'ENR 1.14 REPORTING OF AIR TRAFFIC INCIDENTS',name_ch:'ENR 1.14 空中交通事件报告',resourceID:'ENR 1.14',remark:'1',sup:'',statu:'0'},
+            {id:'01_02',pId:'01',name:'ENR 2. AIR TRAFFIC SERVICE AIRSPACE',name_ch:'ENR 2 空中交通服务空域',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_02_01',pId:'01_02',name:'ENR 2.1 FLIGHT INFORMATION REGIONS AND CONTROL AREAS',name_ch:'ENR 2.1 飞行情报区和管制区',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_02_01_01',pId:'01_02_01',name:'ENR 2.1.1 Flight information regions',name_ch:'ENR 2.1.1 飞行情报区',resourceID:'ENR 2.1.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_01_02',pId:'01_02_01',name:'ENR 2.1.2 Flight information regions of China',name_ch:'ENR 2.1.2 飞行情报区图',resourceID:'ENR 2.1.2',pdf:'',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_01_03',pId:'01_02_01',name:'ENR 2.1.3 Control areas',name_ch:'ENR 2.1.3 管制区',resourceID:'ENR 2.1.3',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_01_04',pId:'01_02_01',name:'ENR 2.1.4 Rules relating to flights within Sanya FIR/CTA',name_ch:'ENR 2.1.4 三亚飞行情报区、管制区飞行规定',resourceID:'ENR 2.1.4',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_02',pId:'01_02',name:'ENR 2.2 TERMINAL CONTROL AREAS AND APPROACH CONTROL AREAS',name_ch:'ENR 2.2 终端管制区和进近管制区',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_02_02_01',pId:'01_02_02',name:'ENR 2.2.1 Terminal control areas and approach control areas',name_ch:'ENR 2.2.1 终端管制区和进近管制区',resourceID:'ENR 2.2.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_02_02',pId:'01_02_02',name:'ENR 2.2.2 Other Rules',name_ch:'ENR 2.2.2 其它规定',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_02_02_02_01',pId:'01_02_02_02',name:'ENR 2.2.2.1 Rules relating to flights within Beijing control area, Beijing approach control area and Tianjin approach control area',name_ch:'ENR 2.2.2.1 北京管制区、北京进近管制区和天津进近管制区飞行规定',resourceID:'ENR 2.2.2.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_02_02_02',pId:'01_02_02_02',name:'ENR 2.2.2.2 Area chart-Beijing',name_ch:'ENR 2.2.2.2 区域图-北京',resourceID:'ENR 2.2.2.2',pdf:'',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_02_02_03',pId:'01_02_02_02',name:'ENR 2.2.2.3 Rules relating to flights within Guangzhou control area, Guangzhou approach control area and Zhuhai terminal control area',name_ch:'ENR 2.2.2.3 广州管制区、广州进近管制区和珠海终端管制区飞行规定',resourceID:'ENR 2.2.2.3',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_02_02_04',pId:'01_02_02_02',name:'ENR 2.2.2.4 Area chart-Guangzhou and Zhuhai',name_ch:'ENR 2.2.2.4 区域图-广州和珠海',resourceID:'ENR 2.2.2.4',pdf:'',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_02_02_05',pId:'01_02_02_02',name:'ENR 2.2.2.5 STAR AND SID of MACAO/Macao',name_ch:'ENR 2.2.2.5 澳门机场进、离场图',resourceID:'ENR 2.2.2.5',pdf:'',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_02_02_06',pId:'01_02_02_02',name:'ENR 2.2.2.6 Rules relating to flights within Shanghai control area, Shanghai approach control area and Hangzhou approach control area',name_ch:'ENR 2.2.2.6 上海管制区、上海进近管制区和杭州进近管制区飞行规定',resourceID:'ENR 2.2.2.6',remark:'1',sup:'',statu:'0'},
+            {id:'01_02_02_02_07',pId:'01_02_02_02',name:'ENR 2.2.2.7 Area chart-Shanghai and Hangzhou',name_ch:'ENR 2.2.2.7 区域图-上海和杭州',resourceID:'ENR 2.2.2.7',pdf:'',remark:'1',sup:'',statu:'0'},
+            {id:'01_03',pId:'01',name:'ENR 3. ATS ROUTES',name_ch:'ENR 3 空中交通服务航路',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_03_01',pId:'01_03',name:'ENR 3.1 GENERAL RULES',name_ch:'ENR 3.1 总则',resourceID:'ENR 3.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_02',pId:'01_03',name:'ENR 3.2 INTERNATIONAL AIR ROUTES',name_ch:'ENR 3.2 国际航路',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_03_02_01',pId:'01_03_02',name:'ENR 3.2.1 Air routes of Series A',name_ch:'ENR 3.2.1 A 系列航路',resourceID:'ENR 3.2.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_02_02',pId:'01_03_02',name:'ENR 3.2.2 Air routes of Series B',name_ch:'ENR 3.2.2 B 系列航路',resourceID:'ENR 3.2.2',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_02_03',pId:'01_03_02',name:'ENR 3.2.3 Air routes of Series G',name_ch:'ENR 3.2.3 G 系列航路',resourceID:'ENR 3.2.3',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_02_04',pId:'01_03_02',name:'ENR 3.2.4 Air routes of Series R',name_ch:'ENR 3.2.4 R 系列航路',resourceID:'ENR 3.2.4',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_02_05',pId:'01_03_02',name:'ENR 3.2.5 Air routes of Series V',name_ch:'ENR 3.2.5 V 系列航路',resourceID:'ENR 3.2.5',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_02_06',pId:'01_03_02',name:'ENR 3.2.6 Air routes of Series W',name_ch:'ENR 3.2.6 W 系列航路',resourceID:'ENR 3.2.6',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_03',pId:'01_03',name:'ENR 3.3 AREA NAVIGATION ROUTES',name_ch:'ENR 3.3 区域导航航路',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_03_03_01',pId:'01_03_03',name:'ENR 3.3.1 Area navigation routes',name_ch:'ENR 3.3.1 区域导航航路',resourceID:'ENR 3.3.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_03_02',pId:'01_03_03',name:'ENR 3.3.2 Other Rules',name_ch:'ENR 3.3.2 其它规定',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_03_03_02_01',pId:'01_03_03_02',name:'ENR 3.3.2.1 Implementation of a revised ATS route structure and RNP 10 operations in the South China Sea area',name_ch:'ENR 3.3.2.1 南中国海地区实施修改的ATS 航路结构及RNP 10运行',resourceID:'ENR 3.3.2.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_03_02_02',pId:'01_03_03_02',name:'ENR 3.3.2.2 RVSM Policy and Procedures in the Oceanic Airspace of Sanya FIR',name_ch:'ENR 3.3.2.2 三亚飞行情报区海洋空域缩小垂直间隔标准的政策和程序',resourceID:'ENR 3.3.2.2',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_03_02_03',pId:'01_03_03_02',name:'ENR 3.3.2.3 Implementation of Strategic Lateral Offset Procedures in the Oceanic Airspace of Sanya FIR',name_ch:'ENR 3.3.2.3 三亚飞行情报区海洋空域实施策略横向偏移程序',resourceID:'ENR 3.3.2.3',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_03_02_04',pId:'01_03_03_02',name:'ENR 3.3.2.4 L888, Y1, Y2',name_ch:'ENR 3.3.2.4 L888, Y1, Y2',resourceID:'ENR 3.3.2.4',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_03_02_05',pId:'01_03_03_02',name:'ENR 3.3.2.5 M503',name_ch:'ENR 3.3.2.5 M503',resourceID:'ENR 3.3.2.5',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_04',pId:'01_03',name:'ENR 3.4 HELICOPTER ROUTES',name_ch:'ENR 3.4 直升机航路',resourceID:'ENR 3.4',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_05',pId:'01_03',name:'ENR 3.5 OTHER ROUTES',name_ch:'ENR 3.5 其它航路',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_03_05_01',pId:'01_03_05',name:'ENR 3.5.1 A593 ALTERNATE ROUTE ',name_ch:'ENR 3.5.1 A593 的备份航路',resourceID:'ENR 3.5.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_05_02',pId:'01_03_05',name:'ENR 3.5.2 AKARA－Fukue Corridor',name_ch:'ENR 3.5.2 AKARA －福江空中走廊',resourceID:'ENR 3.5.2',remark:'1',sup:'',statu:'0'},
+            {id:'01_03_06',pId:'01_03',name:'ENR 3.6 EN-ROUTE HOLDING',name_ch:'ENR 3.6 航路等待',resourceID:'ENR 3.6',remark:'1',sup:'',statu:'0'},
+            {id:'01_04',pId:'01',name:'ENR 4. RADIO NAVIGATION AIDS/SYSTEMS',name_ch:'ENR 4 无线电导航设施/系统',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_04_01',pId:'01_04',name:'ENR 4.1 RADIO NAVIGATION AIDS—EN-ROUTE',name_ch:'ENR 4.1 航路无线电导航设施',resourceID:'ENR 4.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_04_02',pId:'01_04',name:'ENR 4.2 SPECIAL NAVIGATION SYSTEMS',name_ch:'ENR 4.2 特殊导航系统',resourceID:'ENR 4.2',remark:'1',sup:'',statu:'0'},
+            {id:'01_04_03',pId:'01_04',name:'ENR 4.3 NAME-CODE DESIGNATORS FOR SIGNIFICANT POINTS',name_ch:'ENR 4.3 重要点的名称代码',resourceID:'ENR 4.3',remark:'1',sup:'',statu:'0'},
+            {id:'01_04_04',pId:'01_04',name:'ENR 4.4 AERONAUTICAL GROUND LIGHTS—EN-ROUTE',name_ch:'ENR 4.4 航路航行地面灯光',resourceID:'ENR 4.4',remark:'1',sup:'',statu:'0'},
+            {id:'01_05',pId:'01',name:'ENR 5. NAVIGATION WARNINGS',name_ch:'ENR 5 航行警告',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_05_01',pId:'01_05',name:'ENR 5.1 PROHIBITED AREA, DANGER AREA AND RESTRICTED AREA',name_ch:'ENR 5.1 禁区、危险区和限制区',resourceID:'DIR',remark:'1',sup:'',statu:'0',open:'false'},
+            {id:'01_05_01_01',pId:'01_05_01',name:'ENR 5.1.1 General rules',name_ch:'ENR 5.1.1 总则',resourceID:'ENR 5.1.1',remark:'1',sup:'',statu:'0'},
+            {id:'01_05_01_02',pId:'01_05_01',name:'ENR 5.1.2 Prohibited Areas',name_ch:'ENR 5.1.2 禁区',resourceID:'ENR 5.1.2',remark:'1',sup:'',statu:'0'},
+            {id:'01_05_01_03',pId:'01_05_01',name:'ENR 5.1.3 Danger Areas',name_ch:'ENR 5.1.3 危险区',resourceID:'ENR 5.1.3',remark:'1',sup:'',statu:'0'},
+            {id:'01_05_01_04',pId:'01_05_01',name:'ENR 5.1.4 Restricted Areas',name_ch:'ENR 5.1.4 限制区',resourceID:'ENR 5.1.4',remark:'1',sup:'',statu:'0'},
+            {id:'01_05_02',pId:'01_05',name:'ENR 5.2 MILITARY EXERCISE AND TRAINING AREAS AND AIR DEFENSE IDENTIFICATION ZONE',name_ch:'ENR 5.2 军事演习、训练区及防空识别区',resourceID:'ENR 5.2',remark:'1',sup:'',statu:'0'},
+            {id:'01_05_03',pId:'01_05',name:'ENR 5.3 OTHER ACTIVITIES OF A DANGEROUS NATURE',name_ch:'ENR 5.3 其它危险性活动',resourceID:'ENR 5.3',remark:'1',sup:'',statu:'0'},
+            {id:'01_05_04',pId:'01_05',name:'ENR 5.4 AIR NAVIGATION OBSTACLES—EN-ROUTE',name_ch:'ENR 5.4 航路上的航行障碍物',resourceID:'ENR 5.4',remark:'1',sup:'',statu:'0'},
+            {id:'01_05_05',pId:'01_05',name:'ENR 5.5 AERIAL SPORTING AND RECREATIONAL ACTIVITIES',name_ch:'ENR 5.5 航空运动和航空俱乐部活动',resourceID:'ENR 5.5',remark:'1',sup:'',statu:'0'},
+            {id:'01_05_06',pId:'01_05',name:'ENR 5.6 BIRD MIGRATION AND AREAS WITH SENSITIVE FAUNA',name_ch:'ENR 5.6 鸟类的迁栖和敏感动物区',resourceID:'ENR 5.6',remark:'1',sup:'',statu:'0'},
+            {id:'02',pId:'-1',name:'PART 3  AERODROMES (AD)',name_ch:'第三部分 机场 (AD)',resourceID:'DIR',remark:'2',sup:'',statu:'1',open:'false'},
+            {id:'02_00',pId:'02',name:'AD 0',name_ch:'AD 0',resourceID:'DIR',remark:'2',sup:'',statu:'1',open:'false'},
+            {id:'02_00_06',pId:'02_00',name:'AD 0.6 TABLE OF CONTENTS',name_ch:'AD 0.6 目录',resourceID:'AD 0.6',pdf:'',remark:'2',sup:'',statu:'1'},
+            {id:'02_01',pId:'02',name:'AD 1. AERODROMES — INTRODUCTION',name_ch:'AD 1 机场 -- 简介',resourceID:'DIR',remark:'2',sup:'',statu:'1',open:'false'},
+            {id:'02_01_03',pId:'02_01',name:'AD 1.3 INDEX TO AERODROMES',name_ch:'AD 1.3 机场索引',resourceID:'AD 1.3',remark:'2',sup:'',statu:'1'},
+            {id:'AD',pId:'02',name:'AD 2.AERODROMES',name_ch:'AD 2 机场清单',resourceID:'DIR',remark:'AD',sup:'',statu:'1',open:'true'},
+            {id:'ZBAA',pId:'AD',name:'ZBAA-BEIJING/Capital',name_ch:'ZBAA-北京/首都',resourceID:'ZBAA',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBAA-atsComFacility',pId:'ZBAA',name:'AD 2.18 ATS communication facilities',name_ch:'AD 2.18 空中交通服务通信设施',resourceID:'ZBAA',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBAA-localTrafficReg',pId:'ZBAA',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZBAA',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBAA-localTrafficReg-42',pId:'ZBAA-localTrafficReg',name:'2. Use of runways and taxiways',name_ch:'2. 跑道和滑行道的使用',resourceID:'ZBAA',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBMZ',pId:'AD',name:'ZBMZ-MANZHOULI/Xijiao',name_ch:'ZBMZ-满洲里/西郊',resourceID:'ZBMZ',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBMZ-airportPosMetiarial',pId:'ZBMZ',name:'AD 2.2 Aerodrome geographical and administrative data',name_ch:'AD 2.2 机场地理位置和管理资料',resourceID:'ZBMZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBMZ-handlingFacility',pId:'ZBMZ',name:'AD 2.4 Handling services and facilities',name_ch:'AD 2.4 地勤服务和设施',resourceID:'ZBMZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBYN',pId:'AD',name:'ZBYN-TAIYUAN/Wusu',name_ch:'ZBYN-太原/武宿',resourceID:'ZBYN',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBYN-CNMSDeviceItem',pId:'ZBYN',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZBYN',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBYN-localTrafficReg',pId:'ZBYN',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZBYN',remark:'AD',sup:'',statu:'1'},
+            {id:'ZBYN-localTrafficReg-42',pId:'ZBYN-localTrafficReg',name:'2. Use of runways and taxiways',name_ch:'2. 跑道和滑行道的使用',resourceID:'ZBYN',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGGG',pId:'AD',name:'ZGGG-GUANGZHOU/Baiyun',name_ch:'ZGGG-广州/白云',resourceID:'ZGGG',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGGG-CNMSDeviceItem',pId:'ZGGG',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZGGG',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGGG-localTrafficReg',pId:'ZGGG',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZGGG',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGGG-localTrafficReg-42',pId:'ZGGG-localTrafficReg',name:'2. Use of runways and taxiways',name_ch:'2. 跑道和滑行道的使用',resourceID:'ZGGG',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGHA',pId:'AD',name:'ZGHA-CHANGSHA/Huanghua',name_ch:'ZGHA-长沙/黄花',resourceID:'ZGHA',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGHA-airportApronTaxiway',pId:'ZGHA',name:'AD 2.8 Aprons, taxiways and check locations data',name_ch:'AD 2.8 停机坪、滑行道及校正位置数据',resourceID:'ZGHA',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGHA-airportSurfaceGuideCMS',pId:'ZGHA',name:'AD 2.9 Surface movement guidance and control system and markings',name_ch:'AD 2.9 地面活动引导和管制系统与标识',resourceID:'ZGHA',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGHA-atsComFacility',pId:'ZGHA',name:'AD 2.18 ATS communication facilities',name_ch:'AD 2.18 空中交通服务通信设施',resourceID:'ZGHA',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGHA-localTrafficReg',pId:'ZGHA',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZGHA',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGHA-localTrafficReg-43',pId:'ZGHA-localTrafficReg',name:'3. Use of aprons and parking stands',name_ch:'3. 机坪和机位的使用',resourceID:'ZGHA',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGHA-Chart',pId:'ZGHA',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'da6312f1-ca27-4f9e-bfb1-9a287b86cb82',pId:'ZGHA-Chart',name:'ZGHA-1A:ADC',name_ch:'ZGHA-1A:ADC',resourceID:'ZGHA-1A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'f8a6867d-4ac2-45fa-b0fb-7762e37d1c81',pId:'ZGHA-Chart',name:'ZGHA-1B:ADC',name_ch:'ZGHA-1B:ADC',resourceID:'ZGHA-1B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'88b493f5-920b-4142-9c49-bee8ac85a4da',pId:'ZGHA-Chart',name:'ZGHA-2:APDC',name_ch:'ZGHA-2:APDC',resourceID:'ZGHA-2.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZGOW',pId:'AD',name:'ZGOW-JIEYANG/Chaoshan',name_ch:'ZGOW-揭阳/潮汕',resourceID:'ZGOW',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGOW-releaseDistance',pId:'ZGOW',name:'AD 2.13 Declared distances',name_ch:'AD 2.13 公布距离',resourceID:'ZGOW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGOW-localTrafficReg',pId:'ZGOW',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZGOW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGOW-localTrafficReg-42',pId:'ZGOW-localTrafficReg',name:'2. Use of runways and taxiways',name_ch:'2. 跑道和滑行道的使用',resourceID:'ZGOW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ',pId:'AD',name:'ZGSZ-SHENZHEN/Baoan',name_ch:'ZGSZ-深圳/宝安',resourceID:'ZGSZ',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ-areaTerrainObstacle',pId:'ZGSZ',name:'AD 2.10 Aerodrome obstacles',name_ch:'AD 2.10 机场障碍物',resourceID:'ZGSZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ-atsComFacility',pId:'ZGSZ',name:'AD 2.18 ATS communication facilities',name_ch:'AD 2.18 空中交通服务通信设施',resourceID:'ZGSZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ-CNMSDeviceItem',pId:'ZGSZ',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZGSZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ-localTrafficReg',pId:'ZGSZ',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZGSZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ-areaTerrainObstacle-51',pId:'ZGSZ-areaTerrainObstacle',name:'Obstacles within a circle with a radius of 15km',name_ch:'Obstacles within a circle with a radius of 15km',resourceID:'ZGSZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ-areaTerrainObstacle-52',pId:'ZGSZ-areaTerrainObstacle',name:'Obstacles between two circles with the radius of 15km and 50km',name_ch:'Obstacles between two circles with the radius of 15km and 50km',resourceID:'ZGSZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ-localTrafficReg-42',pId:'ZGSZ-localTrafficReg',name:'2. Use of runways and taxiways',name_ch:'2. 跑道和滑行道的使用',resourceID:'ZGSZ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZGSZ-Chart',pId:'ZGSZ',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'9ad233d9-d0c1-43c3-a507-94757b846088',pId:'ZGSZ-Chart',name:'ZGSZ-2A:APDC',name_ch:'ZGSZ-2A:APDC',resourceID:'ZGSZ-2A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'05235e22-286e-4df0-bde2-a6dfa549488d',pId:'ZGSZ-Chart',name:'ZGSZ-2B:APDC',name_ch:'ZGSZ-2B:APDC',resourceID:'ZGSZ-2B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZHCC',pId:'AD',name:'ZHCC-ZHENGZHOU/Xinzheng',name_ch:'ZHCC-郑州/新郑',resourceID:'ZHCC',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZHCC-Chart',pId:'ZHCC',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'2530c662-750d-48c0-ae6e-1ea4013a66bc',pId:'ZHCC-Chart',name:'ZHCC-9E:STAR RWY12L/12R',name_ch:'ZHCC-9E:STAR RWY12L/12R',resourceID:'ZHCC-9E.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'9c8794cf-ab23-41d1-9476-5ff7fc79789c',pId:'ZHCC-Chart',name:'ZHCC-9F:STAR RWY30L/30R',name_ch:'ZHCC-9F:STAR RWY30L/30R',resourceID:'ZHCC-9F.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZJSY',pId:'AD',name:'ZJSY-SANYA/Phoenix',name_ch:'ZJSY-三亚/凤凰',resourceID:'ZJSY',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZJSY-airportApronTaxiway',pId:'ZJSY',name:'AD 2.8 Aprons, taxiways and check locations data',name_ch:'AD 2.8 停机坪、滑行道及校正位置数据',resourceID:'ZJSY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZJSY-localTrafficReg',pId:'ZJSY',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZJSY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZJSY-localTrafficReg-43',pId:'ZJSY-localTrafficReg',name:'3. Use of aprons and parking stands',name_ch:'3. 机坪和机位的使用',resourceID:'ZJSY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZJSY-Chart',pId:'ZJSY',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'cc5776f7-af62-4b4a-8101-876d030a0707',pId:'ZJSY-Chart',name:'ZJSY-1:ADC',name_ch:'ZJSY-1:ADC',resourceID:'ZJSY-1.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'95ecf1d3-ec1d-48ba-87ab-0e05a714cda0',pId:'ZJSY-Chart',name:'ZJSY-2:APDC',name_ch:'ZJSY-2:APDC',resourceID:'ZJSY-2.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZPPP',pId:'AD',name:'ZPPP-KUNMING/Changshui',name_ch:'ZPPP-昆明/长水',resourceID:'ZPPP',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZPPP-atsComFacility',pId:'ZPPP',name:'AD 2.18 ATS communication facilities',name_ch:'AD 2.18 空中交通服务通信设施',resourceID:'ZPPP',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSAM',pId:'AD',name:'ZSAM-XIAMEN/Gaoqi',name_ch:'ZSAM-厦门/高崎',resourceID:'ZSAM',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSAM-airportApronTaxiway',pId:'ZSAM',name:'AD 2.8 Aprons, taxiways and check locations data',name_ch:'AD 2.8 停机坪、滑行道及校正位置数据',resourceID:'ZSAM',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSAM-localTrafficReg',pId:'ZSAM',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZSAM',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSAM-localTrafficReg-43',pId:'ZSAM-localTrafficReg',name:'3. Use of aprons and parking stands',name_ch:'3. 机坪和机位的使用',resourceID:'ZSAM',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSAM-Chart',pId:'ZSAM',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'d9de4440-2305-455d-9a44-e1e54fd38175',pId:'ZSAM-Chart',name:'ZSAM-1:ADC',name_ch:'ZSAM-1:ADC',resourceID:'ZSAM-1.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'24c1dab9-723f-4bf1-a548-0cf18589f29b',pId:'ZSAM-Chart',name:'ZSAM-2:APDC',name_ch:'ZSAM-2:APDC',resourceID:'ZSAM-2.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZSHC',pId:'AD',name:'ZSHC-HANGZHOU/Xiaoshan',name_ch:'ZSHC-杭州/萧山',resourceID:'ZSHC',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSHC-localTrafficReg',pId:'ZSHC',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZSHC',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSHC-localTrafficReg-43',pId:'ZSHC-localTrafficReg',name:'3. Use of aprons and parking stands',name_ch:'3. 机坪和机位的使用',resourceID:'ZSHC',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSHC-Chart',pId:'ZSHC',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'6fa388d1-572f-4700-998f-e3b3390e0ded',pId:'ZSHC-Chart',name:'ZSHC-1A:ADC',name_ch:'ZSHC-1A:ADC',resourceID:'ZSHC-1A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'45edc630-530c-4e03-ac6a-05af4d02d754',pId:'ZSHC-Chart',name:'ZSHC-1B:ADC',name_ch:'ZSHC-1B:ADC',resourceID:'ZSHC-1B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'26a41a8d-5398-4810-bce4-4524de0ce36c',pId:'ZSHC-Chart',name:'ZSHC-2:APDC',name_ch:'ZSHC-2:APDC',resourceID:'ZSHC-2.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZSNB',pId:'AD',name:'ZSNB-NINGBO/Lishe',name_ch:'ZSNB-宁波/栎社',resourceID:'ZSNB',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNB-CNMSDeviceItem',pId:'ZSNB',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZSNB',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ',pId:'AD',name:'ZSNJ-NANJING/Lukou',name_ch:'ZSNJ-南京/禄口',resourceID:'ZSNJ',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-airportPosMetiarial',pId:'ZSNJ',name:'AD 2.2 Aerodrome geographical and administrative data',name_ch:'AD 2.2 机场地理位置和管理资料',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-airportApronTaxiway',pId:'ZSNJ',name:'AD 2.8 Aprons, taxiways and check locations data',name_ch:'AD 2.8 停机坪、滑行道及校正位置数据',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-airportSurfaceGuideCMS',pId:'ZSNJ',name:'AD 2.9 Surface movement guidance and control system and markings',name_ch:'AD 2.9 地面活动引导和管制系统与标识',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-rwyPhysical',pId:'ZSNJ',name:'AD 2.12 Runway physical characteristics',name_ch:'AD 2.12 跑道物理特征',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-appRwyLight',pId:'ZSNJ',name:'AD 2.14 Approach and runway lighting',name_ch:'AD 2.14 进近和跑道灯光',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-airportAdditionalLightPower',pId:'ZSNJ',name:'AD 2.15 Other lighting, secondary power supply',name_ch:'AD 2.15 其它灯光,备份电源',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-CNMSDeviceItem',pId:'ZSNJ',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-localTrafficReg',pId:'ZSNJ',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-localTrafficReg-43',pId:'ZSNJ-localTrafficReg',name:'3. Use of aprons and parking stands',name_ch:'3. 机坪和机位的使用',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-localTrafficReg-46',pId:'ZSNJ-localTrafficReg',name:'6. Rules for deicing',name_ch:'6. 除冰规则',resourceID:'ZSNJ',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSNJ-Chart',pId:'ZSNJ',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'ca1c08a7-6076-4089-9354-084213741d0e',pId:'ZSNJ-Chart',name:'ZSNJ-2:APDC',name_ch:'ZSNJ-2:APDC',resourceID:'ZSNJ-2.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ad8b3274-1b57-4756-a776-5cf2e2778e43',pId:'ZSNJ-Chart',name:'ZSNJ-4A:AOC RWY06/24',name_ch:'ZSNJ-4A:AOC RWY06/24',resourceID:'ZSNJ-4A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZSOF',pId:'AD',name:'ZSOF-HEFEI/Xinqiao',name_ch:'ZSOF-合肥/新桥',resourceID:'ZSOF',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSOF-airportSurfaceGuideCMS',pId:'ZSOF',name:'AD 2.9 Surface movement guidance and control system and markings',name_ch:'AD 2.9 地面活动引导和管制系统与标识',resourceID:'ZSOF',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD',pId:'AD',name:'ZSPD-SHANGHAI/Pudong',name_ch:'ZSPD-上海/浦东',resourceID:'ZSPD',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD-airportApronTaxiway',pId:'ZSPD',name:'AD 2.8 Aprons, taxiways and check locations data',name_ch:'AD 2.8 停机坪、滑行道及校正位置数据',resourceID:'ZSPD',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD-CNMSDeviceItem',pId:'ZSPD',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZSPD',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD-localTrafficReg',pId:'ZSPD',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZSPD',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD-flightProcedure',pId:'ZSPD',name:'AD 2.22 Flight Procedures',name_ch:'AD 2.22 飞行程序',resourceID:'ZSPD',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD-localTrafficReg-42',pId:'ZSPD-localTrafficReg',name:'2. Use of runways and taxiways',name_ch:'2. 跑道和滑行道的使用',resourceID:'ZSPD',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD-localTrafficReg-43',pId:'ZSPD-localTrafficReg',name:'3. Use of aprons and parking stands',name_ch:'3. 机坪和机位的使用',resourceID:'ZSPD',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD-flightProcedure-38',pId:'ZSPD-flightProcedure',name:'10. Data for RNAV flight procedures',name_ch:'10. 区域导航飞行程序相关数据',resourceID:'ZSPD',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSPD-Chart',pId:'ZSPD',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'c908b7b1-c748-4c21-a8f3-98ae8fe0be99',pId:'ZSPD-Chart',name:'ZSPD-1A:ADC',name_ch:'ZSPD-1A:ADC',resourceID:'ZSPD-1A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'656a29c0-003f-4bad-a5d3-b004918ab643',pId:'ZSPD-Chart',name:'ZSPD-1B:ADC',name_ch:'ZSPD-1B:ADC',resourceID:'ZSPD-1B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'e28b8b47-6a50-4486-8642-f186a8b47974',pId:'ZSPD-Chart',name:'ZSPD-2:APDC',name_ch:'ZSPD-2:APDC',resourceID:'ZSPD-2.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'2c1d1ba7-30c5-4f4d-b579-09dea95a7d8a',pId:'ZSPD-Chart',name:'ZSPD-7A:SID RWY16L/16R/17L/17R',name_ch:'ZSPD-7A:SID RWY16L/16R/17L/17R',resourceID:'ZSPD-7A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'d594c573-1d78-4e57-ae4d-d5846af4d71a',pId:'ZSPD-Chart',name:'ZSPD-7B:SID RWY34L/34R/35L/35R',name_ch:'ZSPD-7B:SID RWY34L/34R/35L/35R',resourceID:'ZSPD-7B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'3be36dee-a474-434d-8d48-e2dbb4868d90',pId:'ZSPD-Chart',name:'ZSPD-9C:STAR RNAV RWY16L/16R/17L/17R',name_ch:'ZSPD-9C:STAR RNAV RWY16L/16R/17L/17R',resourceID:'ZSPD-9C.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'b585f411-7be4-4173-af76-eff915b125ba',pId:'ZSPD-Chart',name:'ZSPD-9D:STAR RNAV RWY34L/34R/35L/35R',name_ch:'ZSPD-9D:STAR RNAV RWY34L/34R/35L/35R',resourceID:'ZSPD-9D.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZSSS',pId:'AD',name:'ZSSS-SHANGHAI/Hongqiao',name_ch:'ZSSS-上海/虹桥',resourceID:'ZSSS',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSSS-airportSurfaceGuideCMS',pId:'ZSSS',name:'AD 2.9 Surface movement guidance and control system and markings',name_ch:'AD 2.9 地面活动引导和管制系统与标识',resourceID:'ZSSS',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSSS-atsComFacility',pId:'ZSSS',name:'AD 2.18 ATS communication facilities',name_ch:'AD 2.18 空中交通服务通信设施',resourceID:'ZSSS',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSSS-CNMSDeviceItem',pId:'ZSSS',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZSSS',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSSS-localTrafficReg',pId:'ZSSS',name:'AD 2.20 Local traffic regulations',name_ch:'AD 2.20 本地飞行规定',resourceID:'ZSSS',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSSS-localTrafficReg-42',pId:'ZSSS-localTrafficReg',name:'2. Use of runways and taxiways',name_ch:'2. 跑道和滑行道的使用',resourceID:'ZSSS',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSSS-localTrafficReg-43',pId:'ZSSS-localTrafficReg',name:'3. Use of aprons and parking stands',name_ch:'3. 机坪和机位的使用',resourceID:'ZSSS',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSSS-Chart',pId:'ZSSS',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'c9396617-3fd0-4983-ab5a-295e6af9a3d9',pId:'ZSSS-Chart',name:'ZSSS-2B:APDC',name_ch:'ZSSS-2B:APDC',resourceID:'ZSSS-2B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'a3e34de6-5e46-40da-9889-de7a48ca142a',pId:'ZSSS-Chart',name:'ZSSS-2C:APDC',name_ch:'ZSSS-2C:APDC',resourceID:'ZSSS-2C.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'7f99605b-aa92-4cb6-81ac-36b3296923f9',pId:'ZSSS-Chart',name:'ZSSS-2D:APDC',name_ch:'ZSSS-2D:APDC',resourceID:'ZSSS-2D.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'a331af0a-df4d-43e3-918f-aa68cd21ba5b',pId:'ZSSS-Chart',name:'ZSSS-2E:APDC',name_ch:'ZSSS-2E:APDC',resourceID:'ZSSS-2E.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'c8bd6cf4-f9e3-433a-8858-0840993249dc',pId:'ZSSS-Chart',name:'ZSSS-2F:APDC',name_ch:'ZSSS-2F:APDC',resourceID:'ZSSS-2F.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'f6390892-87b7-41c9-9c46-d39f74bda023',pId:'ZSSS-Chart',name:'ZSSS-2G:APDC',name_ch:'ZSSS-2G:APDC',resourceID:'ZSSS-2G.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'c091d048-65c8-4296-b00d-e391b66576e8',pId:'ZSSS-Chart',name:'ZSSS-2H:APDC',name_ch:'ZSSS-2H:APDC',resourceID:'ZSSS-2H.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ac43d128-ab4c-4b6b-9dac-6afcd06d0294',pId:'ZSSS-Chart',name:'ZSSS-2J:APDC',name_ch:'ZSSS-2J:APDC',resourceID:'ZSSS-2J.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'a5525629-49ab-4ce4-b971-18c14180b34c',pId:'ZSSS-Chart',name:'ZSSS-2K:APDC',name_ch:'ZSSS-2K:APDC',resourceID:'ZSSS-2K.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'7b49b9be-9dd7-4233-9e4d-021502162d33',pId:'ZSSS-Chart',name:'ZSSS-2L:APDC',name_ch:'ZSSS-2L:APDC',resourceID:'ZSSS-2L.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZSYT',pId:'AD',name:'ZSYT-YANTAI/Penglai',name_ch:'ZSYT-烟台/蓬莱',resourceID:'ZSYT',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYT-areaTerrainObstacle',pId:'ZSYT',name:'AD 2.10 Aerodrome obstacles',name_ch:'AD 2.10 机场障碍物',resourceID:'ZSYT',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYT-areaTerrainObstacle-51',pId:'ZSYT-areaTerrainObstacle',name:'Obstacles within a circle with a radius of 15km',name_ch:'Obstacles within a circle with a radius of 15km',resourceID:'ZSYT',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYT-areaTerrainObstacle-52',pId:'ZSYT-areaTerrainObstacle',name:'Obstacles between two circles with the radius of 15km and 50km',name_ch:'Obstacles between two circles with the radius of 15km and 50km',resourceID:'ZSYT',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW',pId:'AD',name:'ZSYW-YIWU/Yiwu',name_ch:'ZSYW-义乌/义乌',resourceID:'ZSYW',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-airportPosMetiarial',pId:'ZSYW',name:'AD 2.2 Aerodrome geographical and administrative data',name_ch:'AD 2.2 机场地理位置和管理资料',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-airportApronTaxiway',pId:'ZSYW',name:'AD 2.8 Aprons, taxiways and check locations data',name_ch:'AD 2.8 停机坪、滑行道及校正位置数据',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-airportSurfaceGuideCMS',pId:'ZSYW',name:'AD 2.9 Surface movement guidance and control system and markings',name_ch:'AD 2.9 地面活动引导和管制系统与标识',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-areaTerrainObstacle',pId:'ZSYW',name:'AD 2.10 Aerodrome obstacles',name_ch:'AD 2.10 机场障碍物',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-rwyPhysical',pId:'ZSYW',name:'AD 2.12 Runway physical characteristics',name_ch:'AD 2.12 跑道物理特征',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-airportAdditionalLightPower',pId:'ZSYW',name:'AD 2.15 Other lighting, secondary power supply',name_ch:'AD 2.15 其它灯光,备份电源',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-CNMSDeviceItem',pId:'ZSYW',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-areaTerrainObstacle-51',pId:'ZSYW-areaTerrainObstacle',name:'Obstacles within a circle with a radius of 15km',name_ch:'Obstacles within a circle with a radius of 15km',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-areaTerrainObstacle-52',pId:'ZSYW-areaTerrainObstacle',name:'Obstacles between two circles with the radius of 15km and 50km',name_ch:'Obstacles between two circles with the radius of 15km and 50km',resourceID:'ZSYW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZSYW-Chart',pId:'ZSYW',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'1eb26ac6-06cd-4e66-a809-7517cd794399',pId:'ZSYW-Chart',name:'ZSYW-1:ADC',name_ch:'ZSYW-1:ADC',resourceID:'ZSYW-1.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'3890e83b-e472-41a3-90b5-590cb1a1dfa7',pId:'ZSYW-Chart',name:'ZSYW-4:AOC',name_ch:'ZSYW-4:AOC',resourceID:'ZSYW-4.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'91b04637-951c-4ef4-bbf2-f487a813089c',pId:'ZSYW-Chart',name:'ZSYW-7A:SID RWY02',name_ch:'ZSYW-7A:SID RWY02',resourceID:'ZSYW-7A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'841c0e08-92a3-447d-b1cd-1a7cf167daf1',pId:'ZSYW-Chart',name:'ZSYW-7B:SID RWY20',name_ch:'ZSYW-7B:SID RWY20',resourceID:'ZSYW-7B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'f2b8e3cc-6399-45c3-bcb7-114f65fe5e62',pId:'ZSYW-Chart',name:'ZSYW-7C:SID RNAV RWY02',name_ch:'ZSYW-7C:SID RNAV RWY02',resourceID:'ZSYW-7C.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'edf1f1cb-2a2b-4d0a-9a75-bd3b44d0f956',pId:'ZSYW-Chart',name:'ZSYW-7D:SID RNAV RWY20',name_ch:'ZSYW-7D:SID RNAV RWY20',resourceID:'ZSYW-7D.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'acabf6bf-0026-48ad-9b4d-ab1ff1c8f71f',pId:'ZSYW-Chart',name:'ZSYW-9A:STAR RWY02',name_ch:'ZSYW-9A:STAR RWY02',resourceID:'ZSYW-9A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'24de485e-88a4-4e49-90a0-317640fffc1e',pId:'ZSYW-Chart',name:'ZSYW-9B:STAR RWY20',name_ch:'ZSYW-9B:STAR RWY20',resourceID:'ZSYW-9B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'091f29e3-8e6b-4976-9c8d-354a8bc62368',pId:'ZSYW-Chart',name:'ZSYW-10C:IAC VOR/DME RWY02',name_ch:'ZSYW-10C:IAC VOR/DME RWY02',resourceID:'ZSYW-10C.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'5f8544fc-4a4b-48cb-bebc-19cf79777960',pId:'ZSYW-Chart',name:'ZSYW-10D:IAC VOR/DME RWY20',name_ch:'ZSYW-10D:IAC VOR/DME RWY20',resourceID:'ZSYW-10D.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZUCK',pId:'AD',name:'ZUCK-CHONGQING/Jiangbei',name_ch:'ZUCK-重庆/江北',resourceID:'ZUCK',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUCK-atsComFacility',pId:'ZUCK',name:'AD 2.18 ATS communication facilities',name_ch:'AD 2.18 空中交通服务通信设施',resourceID:'ZUCK',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUCK-CNMSDeviceItem',pId:'ZUCK',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZUCK',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUGY',pId:'AD',name:'ZUGY-GUIYANG/Longdongbao',name_ch:'ZUGY-贵阳/龙洞堡',resourceID:'ZUGY',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUGY-areaTerrainObstacle',pId:'ZUGY',name:'AD 2.10 Aerodrome obstacles',name_ch:'AD 2.10 机场障碍物',resourceID:'ZUGY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUGY-flightProcedure',pId:'ZUGY',name:'AD 2.22 Flight Procedures',name_ch:'AD 2.22 飞行程序',resourceID:'ZUGY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUGY-areaTerrainObstacle-51',pId:'ZUGY-areaTerrainObstacle',name:'Obstacles within a circle with a radius of 15km',name_ch:'Obstacles within a circle with a radius of 15km',resourceID:'ZUGY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUGY-areaTerrainObstacle-52',pId:'ZUGY-areaTerrainObstacle',name:'Obstacles between two circles with the radius of 15km and 50km',name_ch:'Obstacles between two circles with the radius of 15km and 50km',resourceID:'ZUGY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUGY-flightProcedure-32',pId:'ZUGY-flightProcedure',name:'4. Radar procedures and/or ADS-B procedures',name_ch:'4. 雷达程序和/或ADS-B程序',resourceID:'ZUGY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUGY-flightProcedure-33',pId:'ZUGY-flightProcedure',name:'5. Radio communication failure procedures',name_ch:'5. 无线电通信失效程序',resourceID:'ZUGY',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUGY-Chart',pId:'ZUGY',name:'2.24 Charts related to an aerodrome',name_ch:'2.24 机场航图',resourceID:'DIR',remark:'ADChart',sup:'',statu:'1',open:'false'},
+            {id:'914e99d3-dd02-4882-b297-23d32398d79b',pId:'ZUGY-Chart',name:'ZUGY-6:ATCSMAC',name_ch:'ZUGY-6:ATCSMAC',resourceID:'ZUGY-6.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'877241d7-a99d-46b2-8fd5-aca49fd0a424',pId:'ZUGY-Chart',name:'ZUGY-7A:SID RWY01',name_ch:'ZUGY-7A:SID RWY01',resourceID:'ZUGY-7A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'05cabbf8-fe3e-4afd-bdf8-ff54249b3abd',pId:'ZUGY-Chart',name:'ZUGY-7B:SID RWY19',name_ch:'ZUGY-7B:SID RWY19',resourceID:'ZUGY-7B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'b245a774-5c01-4d40-b772-3576ee4c0f8c',pId:'ZUGY-Chart',name:'ZUGY-10A:IAC ILS/DME y RWY01',name_ch:'ZUGY-10A:IAC ILS/DME y RWY01',resourceID:'ZUGY-10A.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'f9c28b2d-dd9b-4abc-82be-c080a6c71bda',pId:'ZUGY-Chart',name:'ZUGY-10B:IAC ILS/DME y RWY19',name_ch:'ZUGY-10B:IAC ILS/DME y RWY19',resourceID:'ZUGY-10B.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'9c37cd5c-7542-452c-a70b-a69f89a7224d',pId:'ZUGY-Chart',name:'ZUGY-10C:IAC VOR/DME RWY01',name_ch:'ZUGY-10C:IAC VOR/DME RWY01',resourceID:'ZUGY-10C.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'477df775-3154-4da0-8313-afb0a84f828a',pId:'ZUGY-Chart',name:'ZUGY-10D:IAC VOR/DME RWY19',name_ch:'ZUGY-10D:IAC VOR/DME RWY19',resourceID:'ZUGY-10D.pdf',remark:'ADChart',sup:'',statu:'1'},
+            {id:'ZULS',pId:'AD',name:'ZULS-LHASA/Gonggar',name_ch:'ZULS-拉萨/贡嘎',resourceID:'ZULS',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZULS-airportApronTaxiway',pId:'ZULS',name:'AD 2.8 Aprons, taxiways and check locations data',name_ch:'AD 2.8 停机坪、滑行道及校正位置数据',resourceID:'ZULS',remark:'AD',sup:'',statu:'1'},
+            {id:'ZULS-airportSurfaceGuideCMS',pId:'ZULS',name:'AD 2.9 Surface movement guidance and control system and markings',name_ch:'AD 2.9 地面活动引导和管制系统与标识',resourceID:'ZULS',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUUU',pId:'AD',name:'ZUUU-CHENGDU/Shuangliu',name_ch:'ZUUU-成都/双流',resourceID:'ZUUU',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUUU-CNMSDeviceItem',pId:'ZUUU',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZUUU',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUUU-flightProcedure',pId:'ZUUU',name:'AD 2.22 Flight Procedures',name_ch:'AD 2.22 飞行程序',resourceID:'ZUUU',remark:'AD',sup:'',statu:'1'},
+            {id:'ZUUU-flightProcedure-31',pId:'ZUUU-flightProcedure',name:'3. IFR flight procedures',name_ch:'3. 仪表飞行程序',resourceID:'ZUUU',remark:'AD',sup:'',statu:'1'},
+            {id:'ZWWW',pId:'AD',name:'ZWWW-URUMQI/Diwopu',name_ch:'ZWWW-乌鲁木齐/地窝堡',resourceID:'ZWWW',pdf:'',remark:'AD',sup:'',statu:'1'},
+            {id:'ZWWW-CNMSDeviceItem',pId:'ZWWW',name:'AD 2.19 Radio navigation and landing aids',name_ch:'AD 2.19 无线电导航和着陆设施',resourceID:'ZWWW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZWWW-flightProcedure',pId:'ZWWW',name:'AD 2.22 Flight Procedures',name_ch:'AD 2.22 飞行程序',resourceID:'ZWWW',remark:'AD',sup:'',statu:'1'},
+            {id:'ZWWW-flightProcedure-32',pId:'ZWWW-flightProcedure',name:'4. Radar procedures and/or ADS-B procedures',name_ch:'4. 雷达程序和/或ADS-B程序',resourceID:'ZWWW',remark:'AD',sup:'',statu:'1'},
+        ];
+        var sups = new Array();
+        var setting_en = {
+            data: {
+                simpleData: {
+                    enable: true,
+                    rootPId: ""
+                },
+                key: {
+                    name: "name"
+                }
+            },
+            view: {
+                nameIsHTML: true,
+                fontCss: setFontCss
+            },
+            callback: {
+                onClick: zTreeOnClick
+            }
+        };
+
+        var setting_ch = {
+            data: {
+                simpleData: {
+                    enable: true,
+                    rootPId: ""
+                },
+                key: {
+                    name: "name_ch"
+                }
+            },
+            view: {
+                nameIsHTML: true,
+                fontCss: setFontCss
+            },
+            callback: {
+                onClick: zTreeOnClick
+            }
+        };
+
+        function setFontCss(treeId, treeNode) {
+            return treeNode.statu == 2 ? {color:"red"} : {};
+        };
+
+        function zTreeOnClick(event, treeId, treeNode) {
+            try {
+                if(treeNode.resourceID == "DIR"){
+                    oldAirport = "";
+                    $("#divContentRight").html("<div style=\"padding:10px;\">" + treeNode.name + "</div>");
+                    $("#divSup").html("");
+                }else{
+                    if (treeNode.remark == "AD01")
+                    {
+                        oldAirport = "";
+                        //$("#divContentRight").html("<embed width='100%' height='100%' src='01/" + treeNode.resourceID + "'> </embed>");
+                        renderPDF(treeNode.resourceID, "divContentRight");
+                    }
+                    else if (treeNode.remark == "ADChart")
+                    {
+                        oldAirport = "";
+                        var temps = treeNode.pId.split("-");
+                        var temp = "";
+                        if (temps.length >1){
+                            temp =temps[0];
+                        }
+                        //$("#divContentRight").html("<embed width='100%' height='100%' src='Chart/" + temp + "/" + treeNode.resourceID + "'> </embed>");
+                        renderPDF("Chart/" + temp + "/" +treeNode.resourceID, "divContentRight");
+                    }
+                    else if (treeNode.remark == "AD")    //wangxb-显示机场html
+                    {
+                        var postion = "";
+                        var strs = treeNode.id.split("-");
+                        if (strs.length >1)
+                        {
+                            postion = strs[1];
+                        }
+
+                        var lag = "";
+                        if ($("#span_changeLag").text() == "CH")
+                        {
+                            lag = "_en";
+                        }
+                        if (treeNode.level==2)
+                        {
+                            oldAirport = treeNode.resourceID;
+                            var address = oldAirport + lag + ".htm?to=" + postion;
+                            $("#divContentRight").html("<iframe id='iFrameDocumentSon' width='100%' height='100%' frameborder='0' src='" +address+ "'></iframe>");
+                        }
+                        else if(treeNode.level==3||treeNode.level==4)
+                        {
+                            oldAirport = treeNode.resourceID;
+
+                            try
+                            {
+                                if (iFrameDocumentSon)
+                                    iFrameDocumentSon.window.setPosition(postion);
+                            }
+                            catch (err)
+                            {
+                                var address = oldAirport + lag + ".htm?g=0&to=" + postion;
+                                $("#divContentRight").html("<iframe id='iFrameDocumentSon' width='100%' height='100%' frameborder='0' src='" +address+ "'></iframe>");
+                            }
+
+                        }
+                    }
+                    else if(treeNode.remark == "1"||treeNode.remark == "2") //ENR、AD01
+                    {
+                        var pdfName = treeNode.resourceID;
+
+                        if(treeNode.remark !="ERC")
+                        {
+                            pdfName = pdfName.replace(" ","_").replace(".","_").replace(".","_").replace(".","_").replace(".","_").replace(".","_");
+                        }
+                        else
+                        {
+                            pdfName = treeNode.resourceID;
+                        }
+
+                        if(typeof(treeNode.pdf)!="undefined"){
+                            renderPDF('pdf/'+pdfName+'.pdf', "divContentRight");
+                        }
+                        else
+                        {
+                            var postion = "";
+                            var strs = treeNode.id.split("-");
+                            if (strs.length >1)
+                            {
+                                postion = strs[1];
+                            }
+
+                            var lag = "";
+                            if ($("#span_changeLag").text() == "CH")
+                            {
+                                lag = "_en";
+                            }
+                            oldAirport = treeNode.resourceID;
+                            var address = oldAirport + lag + ".htm?to=" + postion;
+                            $("#divContentRight").html("<iframe id='iFrameDocumentSon' width='100%' height='100%' frameborder='0' src='" +address+ "'></iframe>");
+                        }
+                    }
+                    else if(treeNode.remark == "ERC")
+                    {
+                        oldAirport = "";
+                        //$("#divContentRight").html("<embed width='100%' height='100%' src='pdf/"+ treeNode.resourceID + ".pdf'> </embed>");
+                        renderPDF("pdf/"+ treeNode.resourceID, "divContentRight");
+                    }
+                    else if(treeNode.remark == "0") //GEN
+                    {
+                        var pdfName = treeNode.resourceID;
+                        pdfName = pdfName.replace(" ","_").replace(".","_").replace(".","_").replace(".","_").replace(".","_").replace(".","_");
+
+                        if(typeof(treeNode.pdf)!="undefined"){
+                            renderPDF('pdf/'+pdfName+'.pdf', "divContentRight");
+                        }
+                        else
+                        {
+                            //对于修订单Gen0.2仍然链接pdf
+                            var postion = "";
+                            var strs = treeNode.id.split("-");
+                            if (strs.length >1)
+                            {
+                                postion = strs[1];
+                            }
+
+                            var lag = "";
+                            if ($("#span_changeLag").text() == "CH")
+                            {
+                                lag = "_en";
+                            }
+                            oldAirport = treeNode.resourceID;
+                            var address = oldAirport + lag + ".htm?to=" + postion;
+                            $("#divContentRight").html("<iframe id='iFrameDocumentSon' width='100%' height='100%' frameborder='0' src='" +address+ 			"'></iframe>");
+                        }
+                    }
+                    else
+                    {
+                        oldAirport = "";
+                        //$("#divContentRight").html("<embed width='100%' height='100%' src='" + treeNode.resourceID + "'> </embed>");
+                        renderPDF(treeNode.resourceID, "divContentRight");
+                    }
+                }
+            } catch (err) {
+                alert(err.Message);
+            }
+        };
+
+        $(document).ready(function () {
+            //替代scroll="no"
+            document.documentElement ? document.documentElement.style.overflow = "hidden" : document.body.style.overflow = "hidden";
+
+            $.fn.zTree.init($("#resourceTree"), setting_en, zNodes);
+
+            setAipMenuHeight();
+            $(window).resize(function () {
+                setAipMenuHeight();
+            });
+        });
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+
+        function setAipMenuHeight() {
+            //$(".content-Main").height(document.body.offsetHeight);
+            $("#divTree").height(document.body.offsetHeight - 35);
+        };
+        function openPage(){
+            var txt = $("#span_changeLag").text();
+            if (txt=="CH"){
+                $.fn.zTree.init($("#resourceTree"), setting_ch, zNodes);
+                openLagPage("");
+                $("#span_changeLag").html("EN");
+            }else{
+                $.fn.zTree.init($("#resourceTree"), setting_en, zNodes);
+                openLagPage("_en");
+                $("#span_changeLag").html("CH");
+            }
+        }
+        function openLagPage(lag){
+            if (oldAirport != "" && oldAirport != null){
+                var address = oldAirport + lag + ".htm";
+                $("#divContentRight").html("<iframe id='iFrameDocumentSon' width='100%' height='100%' frameborder='0' src='" +address+ "'></iframe>");
+            }
+        }
+        function openPDF(){
+            if (oldAirport != "" && oldAirport != null){
+                //alert(oldAirport);
+                //$("#divContentRight").html("<embed width='100%' height='100%' src='PDF/" + oldAirport + ".pdf'> </embed>");
+                renderPDF("PDF/" + oldAirport + ".pdf", "divContentRight");
+                oldAirport="";
+            }
+        }
+    </script>
+</head>
+<body onload="void('login');">
+<!--    <div id="" class="sup">
+</div>-->
+<div class="content-Main">
+    <div id="div-main-left" class="content-Left">
+        <div id="content-Left-Top" class="top">
+            <!--                <a href="javascript:openPDF()">
+                                <div class="cls_changeLag">
+                                    <span>PDF</span>
+                                </div>
+                            </a>-->
+            <a href="javascript:openPage()">
+                <div class="cls_changeLag">
+                    <span id="span_changeLag">CH</span>
+                </div>
+            </a>
+            <div style="height: 100%; text-align: center;">
+                AMDT File List
+            </div>
+        </div>
+        <div id="divTree" class="directoryTree">
+            <ul id="resourceTree" class="ztree"></ul>
+        </div>
+        <div style="text-align: center">
+        </div>
+    </div>
+    <div id="divContentRight" class="content-Right">
+        <iframe id="iFrameDocument" width="100%" height="100%" frameborder="0" src="../../Synopsis.htm"></iframe>
+    </div>
+</div>
+</body>
+</html>

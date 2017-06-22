@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="material-Html" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="icon" href="../../../Style/Image/eAIP.ico" type="image/x-icon" />
+    <link rel="Shortcut Icon" href="../../../Style/Image/eAIP.ico" type="image/x-icon" />
+    <link href="../../../Style/eAIP.materialVersion.css" rel="stylesheet" type="text/css" />
+    <title></title>
+    <script src="../../../Scripts/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../Scripts/Cookie.js" type="text/javascript"></script>
+    <script src="../../../Scripts/pdfjs/common.js"></script>
+    <script type="text/javascript">
+        void ('render function');
+        $(document).ready(function () {
+            //设置Title
+            document.title = "eAIP-2017 Nr.07";
+            //替代scroll="no"
+            document.documentElement ? document.documentElement.style.overflow = "hidden" : document.body.style.overflow = "hidden";
+            setAipMenuHeight();
+            $(window).resize(function () {
+                setAipMenuHeight();
+            });
+
+            $(".material-Nav li a").click(function () {
+                $(this).addClass('current').parent().siblings().children('a').removeClass('current');
+            }); //end click
+            $('.material-Nav li ul li a').click(function () {
+                $(this).parent().parent().parent().children('a').addClass('current').parent().siblings().children('a').removeClass('current');
+                $(this).removeClass('current');
+            }); //end click
+        });
+
+        function setAipMenuHeight() {
+            var h = document.body.offsetHeight - 134;
+            $("#divMain").height(h);
+            //$("#divMain").height(h);
+            //$("#resourceTree").height(h - 47);
+        };
+
+        function openPage(txt) {
+            if (txt == "DOWNLOAD") {
+                $("#divMain").html("<iframe id='iFrameDocument' width='100%' height='100%' frameborder='0' src='AIP/Download.htm'></iframe>");
+            }
+            else {
+                $("#divMain").html("<iframe id='iFrameDocument' width='100%' height='100%' frameborder='0' src='AIP/" + txt + "/Content.htm'></iframe>");
+            }
+        }
+
+        //关于对话框 add-wangxb 2014.4.3
+        function alertWin(title, openobjectid, w, h) {
+            var titleheight = "38px"; // 提示窗口标题高度
+            var bordercolor = "#666699"; // 提示窗口的边框颜色
+            var titlecolor = "#FFFFFF"; // 提示窗口的标题颜色
+            var titlebgcolor = "#666699"; // 提示窗口的标题背景色
+            var bgcolor = "#FFFFFF"; // 提示内容的背景色
+
+            var iWidth = document.documentElement.clientWidth;
+            var iHeight = document.documentElement.clientHeight;
+
+            //遮罩层div
+            var bgObj = document.createElement("div");
+            bgObj.id = "bgObjid";
+            bgObj.style.cssText = "position:absolute;left:0px;top:0px;width:" + Math.max(document.body.clientWidth, iWidth) + "px;height:" + Math.max(document.body.clientHeight, iHeight) + "px;filter:Alpha(Opacity=30);opacity:0.3;background-color:#000000;z-index:101;";
+            document.body.appendChild(bgObj);
+
+            //窗口div
+            var msgObj = document.createElement("div");
+            msgObj.id = "msgObjid";
+            //font:11px '宋体';
+            msgObj.style.cssText = " font-size:10pt; font-family: 微软雅黑; position:absolute;top:" + (iHeight - h) / 2 + "px;left:" + (iWidth - w) / 2 + "px;width:" + w + "px;height:" + h + "px;text-align:Right;border:1px solid " + " #2173AB" + ";background-color:" + bgcolor + ";line-height:32px;z-index:102;";
+            document.body.appendChild(msgObj);
+
+            var table = document.createElement("table");
+            msgObj.appendChild(table);
+            table.style.cssText = "margin:0px;border:0px;padding:0px;";
+            table.cellSpacing = 0;
+            //窗口标题
+            var tr = table.insertRow(-1);
+            var titleBar = tr.insertCell(-1);
+            titleBar.style.cssText = "width:100%;height:" + titleheight + "px;text-align:left;font:bold 11pt 'Arial';color:" + titlecolor + ";border:0px solid " + bordercolor + ";cursor:move;background-image:url(../../../Style/Image/bg_list_about.png);background-repeat:repeat-x;";  //background-color:" + titlebgcolor
+            titleBar.style.paddingLeft = "10px";
+            titleBar.innerHTML = title;
+
+            var moveX = 0;
+            var moveY = 0;
+            var moveTop = 0;
+            var moveLeft = 0;
+            var moveable = false;
+            var docMouseMoveEvent = document.onmousemove;
+            var docMouseUpEvent = document.onmouseup;
+            titleBar.onmousedown = function () {
+                var evt = getEvent();
+                moveable = true;
+                moveX = evt.clientX;
+                moveY = evt.clientY;
+                moveTop = parseInt(msgObj.style.top);
+                moveLeft = parseInt(msgObj.style.left);
+
+                document.onmousemove = function () {
+                    if (moveable) {
+                        var evt = getEvent();
+                        var x = moveLeft + evt.clientX - moveX;
+                        var y = moveTop + evt.clientY - moveY;
+                        if (x > 0 && (x + w < iWidth) && y > 0 && (y + h < iHeight)) {
+                            msgObj.style.left = x + "px";
+                            msgObj.style.top = y + "px";
+                        }
+                    }
+                };
+                document.onmouseup = function () {
+                    if (moveable) {
+                        document.onmousemove = docMouseMoveEvent;
+                        document.onmouseup = docMouseUpEvent;
+                        moveable = false;
+                        moveX = 0;
+                        moveY = 0;
+                        moveTop = 0;
+                        moveLeft = 0;
+                    }
+                };
+            }
+
+            var closeBtn = tr.insertCell(-1);
+            closeBtn.style.cssText = "cursor:pointer; padding:0px; background-image:url(../../../Style/Image/bg_list_about.png);"; //background-color:" + titlebgcolor
+            closeBtn.innerHTML = "<span id='openspan' style='font-size:16pt;padding-right:3px; color:" + titlecolor + ";'>×</span>";
+            closeBtn.onclick = function () {
+                document.body.removeChild(bgObj);
+                document.body.removeChild(msgObj);
+            }
+            var msgBox = table.insertRow(-1).insertCell(-1);
+            msgBox.style.cssText = "font:10pt 'Arial';";
+            msgBox.colSpan = 2;
+            msgBox.innerHTML = document.getElementById(openobjectid).innerHTML
+            //document.getElementById("msgObj").appendChild(msgBox);
+            // 获得事件Event对象，用于兼容IE和FireFox
+            function getEvent() {
+                return window.event || arguments.callee.caller.arguments[0];
+            }
+        }
+
+    </script>
+</head>
+<body onload="login();" class="material-Body">
+<div id="divTop" class="material-Top">
+    <div id="divTop_Logo" class="material-Top-Logo">
+        <img src="../../../Style/Image/logo-copy.png" width="854px" height="72px" alt="" /></div>
+    <div id="divTop_Bnt" class="material-Top-Bnt">
+        <a href="../../../Help/Help.htm" target="_blank"><span>Help</span></a>
+
+        <a href="#" onclick="javascript:alertWin('About eAIP','openwin',568,327);"><span>About</span></a>
+        <div  id ='openwin' style="position:absolute;cursor:hand;display:none;" >
+            <table style="  margin-left:30px; margin-top:10px; font-family: Arial; font-size:10pt;">
+                <tr style=" padding-top:30px; ">
+                    <td  align="center"><img alt="" src="../../../Style/Image/about-logo.png" width="178px" height="68px"/></td>
+                </tr>
+                <tr style=" height:25px;"></tr>
+                <tr style="  height:25px; ">
+                    <td align="left"><pre>Version: 1.0 (Build 201705251548)</td>
+                </tr>
+                <tr style="  height:25px; ">
+                    <td  align="center"><pre>Product by: <a href="http://www.aischina.com/" style="color:steelblue" target="_blank">Aeronautical Information Services Center ATMB CAAC Inc.</a></td>
+                </tr>
+                <tr style="  height:25px; ">
+                    <td  align="left"><pre>Fax: 86-10-67347230</td>
+                </tr>
+                <tr style="  height:25px; ">
+                    <td  align="left"><pre>Email: <a href="mailto:aip@aischina.com" style="color:steelblue">aip@aischina.com</a></td>
+                </tr>
+                <tr style="  height:55px; ">
+                <tr>
+                    <td  align="center" style="font-family: Arial; font-size:8pt;">Copyright  &copy; 2014 CAAC Inc. &nbsp;All Rights Reserved.</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div id="divNav" class="material-Nav">
+        <ul>
+            <li><a href="#">AIP</a>
+                <ul>
+                    <li><a href="javascript:openPage('GEN')">GEN</a></li>
+                    <li><a href="javascript:openPage('ENR')">ENR</a></li>
+                    <li><a href="javascript:openPage('AD')">AD</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:openPage('AMDT')" class="current">AMDT</a>
+                <ul>
+                </ul>
+            </li>
+            <li><a href="javascript:openPage('SUP')">SUPs</a>
+                <ul>
+                </ul>
+            </li>
+            <li><a href="javascript:openPage('AIC')">AICs</a>
+                <ul>
+                </ul>
+            </li>
+            <li><a href="javascript:openPage('NOTAM')">NOTAM</a>
+                <ul>
+                </ul>
+            </li>
+            <!--download tag--><li><a href="javascript:openPage('DOWNLOAD')">DOWNLOAD</a>
+            <ul>
+            </ul>
+        </li><!--end download tag-->
+        </ul>
+        <p>
+            &nbsp;</p>
+    </div>
+    <div id="divMain" class="material-Main">
+        <iframe id="iFrameDocument" width="100%" height="100%" frameborder="0" src="AIP/AMDT/Content.htm">
+        </iframe>
+    </div>
+    <div id="divBottom" class="material-Bottom">
+        <p  class="material-Bottom-Content">
+            <span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Version ：&nbsp;2017 Nr.07&nbsp;&nbsp;&nbsp;Effective time&nbsp;：&nbsp;1706211600&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publication
+            date&nbsp;：&nbsp;2017-5-15
+                </span>
+            <span class="material-Bottom-Content-License">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;京ICP备14005333号-1
+        </span>
+        </p>
+    </div>
+</body>
+</html>

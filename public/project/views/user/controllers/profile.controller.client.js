@@ -11,6 +11,8 @@
 
         vm.uid = currentUser._id;
         vm.user = currentUser;
+        vm.user.dateOfBirth = new Date(vm.user.dateOfBirth);
+        console.log(vm.user.dateOfBirth);
 
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;

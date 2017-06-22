@@ -3,11 +3,11 @@ input.form-control, textarea.form-control {
 }
 
 body {
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 140px;
+    padding-bottom: 70px;
 }
 
-.navbar-header {
+.nav1 .navbar-header {
     height: 60px;
 }
 
@@ -17,7 +17,7 @@ body {
     padding-right: 0;
 }
 
-.navbar.navbar-default.navbar-fixed-top .navbar-header,
+.nav1 .navbar-header,
 .navbar.navbar-default.navbar-fixed-bottom .navbar-header,
 .row.navbar-text {
     width: 100%;
@@ -36,16 +36,17 @@ body {
     color: #ebeef0;
 }
 
-.navbar-default {
+.nav1,
+.navbar.navbar-default.navbar-fixed-bottom {
     background-color: #f9ba00;
     border-color: #f9ba00;
 }
 
 .navbar-default .navbar-brand,
 .navbar.navbar-default a,
-.navbar-default .navbar-link,
+.navbar-text > .navbar-link,
 .container-fluid > .navbar-header {
-    color: white;
+    color: #000066;
 }
 
 .row .container-fluid {
@@ -86,6 +87,18 @@ body {
     border-color: #355088;
 }
 
+.btn-delete {
+    color: #fff;
+    background-color: #000066;
+    border-color: #000066;
+}
+
+.btn-delete:hover, .btn-delete:focus, .btn-delete:active, .btn-delete.active, .open>.dropdown-toggle.btn-delete {
+    color: #fff;
+    background-color: #0000a3;
+    border-color: #0000a3;
+}
+
 a {
     color: #00235f;
 }
@@ -95,7 +108,7 @@ a:hover {
 }
 
 #star-alliance {
-    padding-top: 5px;
+    padding-top: 2px;
 }
 
 .glyphicon {
@@ -103,7 +116,47 @@ a:hover {
     color: #00235f;
 }
 
+.glyphicon.glyphicon-plus {
+    padding-top: 5px;
+}
+
+.my-message .glyphicon,
+.others-message .glyphicon {
+    padding-top: 5px;
+    color: #ffffff;
+}
+
+td.my-message,
+td.others-message {
+    padding-top: 15px !important;
+}
+
 input.submitted.ng-invalid
 {
     border:1px solid #f00;
+}
+
+.message-time {
+    color: darkgray;
+}
+
+.my-message {
+    background-color: #ffffff;
+}
+
+.others-message {
+    background-color: #ffffff;
+    /* used to be #fffaeb */
+}
+
+.table.table-striped {
+    /*overflow-x: scroll;*/
+}
+
+tr.cancelled {
+    background-color: #f2dede;
+}
+
+tr.departed {
+    background-color: #dff0d8;
 }

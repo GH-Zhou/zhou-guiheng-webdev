@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
 
     roles: [{type: String,
         default: 'USER',
-        enum: ['USER', 'FACULTY', 'STUDENT', 'ADMIN']}],
+        enum: ['USER', 'CREW', 'ADMIN']}],
 
     facebook: {
         id:    String,
@@ -17,7 +17,10 @@ var userSchema = mongoose.Schema({
 
     email: String,
     phone: String,
-    // websites: [{type: mongoose.Schema.ObjectId, ref: "WebsiteModel"}],
+    messages: [{type: mongoose.Schema.ObjectId, ref: "MessageModel"}],
+    bookings: [{type: mongoose.Schema.ObjectId, ref: "BookingModel"}],
+    schedules: [{type: mongoose.Schema.ObjectId, ref: "ScheduleModel"}],
+    dateOfBirth: {type: Date, default: Date.now},
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "user"});
 

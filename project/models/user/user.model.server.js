@@ -10,8 +10,10 @@ userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
-// userModel.addWebsite = addWebsite;
-// userModel.deleteWebsite = deleteWebsite;
+userModel.addMessage = addMessage;
+userModel.deleteMessage = deleteMessage;
+userModel.addBooking = addBooking;
+userModel.deleteBooking = deleteBooking;
 
 module.exports = userModel;
 
@@ -63,22 +65,46 @@ function deleteUser(userId) {
     return userModel.remove({_id: userId});
 }
 
-// function addWebsite(userId, websiteId) {
-//     return userModel
-//         .findById(userId)
-//         .then(function (user) {
-//             user.websites.push(websiteId);
-//             return user.save();
-//         });
-// }
-//
-// function deleteWebsite(websiteId) {
-//     return userModel
-//         .find({websites:websiteId})
-//         .then(function (users) {
-//             var user = users[0];
-//             var index = user.websites.indexOf(websiteId);
-//             user.websites.splice(index, 1);
-//             return user.save();
-//         });
-// }
+function addMessage(username, messageId) {
+    return userModel
+        .findOne({username: username})
+        .then(function (user) {
+            user.messages.push(messageId);
+            return user.save();
+        });
+}
+
+function deleteMessage(messageId) {
+    return userModel
+        .find({messages:messageId})
+        .then(function (users) {
+            var user1 = users[0];
+            var user2= users[1];
+            var index1 = user1.messages.indexOf(messageId);
+            user1.messages.splice(index1, 1);
+            var index2 = user2.messages.indexOf(messageId);
+            user2.messages.splice(index2, 1);
+            user1.save();
+            user2.save();
+        });
+}
+
+function addBooking(userId, bookingId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.bookings.push(bookingId);
+            return user.save();
+        });
+}
+
+function deleteBooking(bookingId) {
+    return userModel
+        .find({bookings:bookingId})
+        .then(function (users) {
+            var user = users[0];
+            var index = user.bookings.indexOf(bookingId);
+            user.bookings.splice(index, 1);
+            return user.save();
+        });
+}

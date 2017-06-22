@@ -1,0 +1,16 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <a href="#!/public_profile/{{vm.user.username}}">
+        <h2>Public Profile</h2>
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">Username {{vm.user.username}}</li>
+        <li class="list-group-item">Email address {{vm.user.email}}</li>
+        <li class="list-group-item">Phone Number {{vm.user.phone}}</li>
+    </ul>
+
+    <a href="#!/chat_with/{{vm.user.username}}">Chat with him</a>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

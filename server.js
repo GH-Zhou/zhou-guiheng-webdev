@@ -1,4 +1,5 @@
 var app = require('./express');
+app.set('view engine', 'ejs');
 // var app = express();
 
 var bodyParser = require('body-parser');
@@ -40,8 +41,11 @@ app.use(app.express.static(__dirname + '/public'));
 // ourApp(app);
 
 // require ("./test/app.js")(app);
-require ("./assignment/app");
-// require ("./project/app");
+// require ("./assignment/app");
+require ("./project/app");
+// require("./ejs/hello/app")(app);
+// require("./ejs/forms/app")(app);
+// require("./ejs/math/app")(app);
 
 ///// LECTURES
 // var mongoose = require('mongoose');

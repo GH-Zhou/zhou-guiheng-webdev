@@ -31,6 +31,22 @@
                 controller: 'RegisterController',
                 controllerAs: 'vm'
             })
+            .when('/admin', {
+                templateUrl: 'views/admin/templates/admin.view.client.html',
+                controller: 'AdminUserController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/user', {
+                templateUrl: 'views/admin/templates/admin-users.view.client.html',
+                controller: 'AdminUserController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'ProfileController',
@@ -39,15 +55,85 @@
                     currentUser: checkLoggedIn
                 }
             })
-            .when('/operations/flightstatus/departures/:airport/:date/:timeStart', {
-                templateUrl: 'flightDepartureInfo.view.client.html',
-                controller: 'FlightDepartureInfoController',
-                controllerAs: 'vm'
+            .when('/public_profile/:username', {
+                templateUrl: 'views/user/templates/public-profile.view.client.html',
+                controller: 'PublicProfileController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/chat_with/:username', {
+                templateUrl: 'views/message/templates/message.view.client.html',
+                controller: 'MessageController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/booking/new', {
+                templateUrl: 'views/booking/templates/booking-new.view.client.html',
+                controller: 'NewBookingController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/booking', {
+                templateUrl: 'views/booking/templates/booking-list.view.client.html',
+                controller: 'BookingListController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/booking/:bookingId', {
+                templateUrl: 'views/booking/templates/booking-edit.view.client.html',
+                controller: 'EditBookingController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/schedule/', {
+                templateUrl: 'views/schedule/templates/schedule-list.view.client.html',
+                controller: 'ScheduleListController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/schedule/:scheduleId', {
+                templateUrl: 'views/schedule/templates/schedule-detail.view.client.html',
+                controller: 'ScheduleDetailController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/operations/flightstatus/:airport/:date/:timeStart', {
+                templateUrl: 'views/flight/template/flight-information.view.client.html',
+                controller: 'FlightInformationController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedInWithAnonymous
+                }
+            })
+            .when('/operations/flightstatus/', {
+                templateUrl: 'views/flight/template/flight-status.view.client.html',
+                controller: 'FlightStatusController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedInWithAnonymous
+                }
             })
             .when('/operations/flightstatus/:flightNumber/:date', {
-                templateUrl: 'flightStatus.view.client.html',
+                templateUrl: 'views/flight/template/flight-status.view.client.html',
                 controller: 'FlightStatusController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedInWithAnonymous
+                }
             })
     }
 
@@ -61,6 +147,21 @@
                     $location.url('/login');
                 } else {
                     deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function checkLoggedInWithAnonymous(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .loggedin()
+            .then(function (user) {
+                if(user !== '0') {
+                    deferred.resolve(user);
+                } else {
+                    deferred.resolve();
                 }
             });
 

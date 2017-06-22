@@ -24,7 +24,7 @@ app.get    ('/api/lufthansa/user', findUserByCredentials);
 app.post   ('/api/lufthansa/user', isAdmin, createUser);
 app.delete ('/api/lufthansa/user/:userId', isAdmin, deleteUser);
 app.put    ('/api/lufthansa/user/:userId', updateUser); // to be protected
-app.post   ('/api/lufthansa/login', passport.authenticate('Project'), login);
+app.post   ('/api/lufthansa/login', passport.authenticate('local'), login);
 app.post   ('/api/lufthansa/logout', logout);
 app.get    ('/api/lufthansa/loggedin', loggedin);
 app.get    ('/api/lufthansa/checkAdmin', checkAdmin);

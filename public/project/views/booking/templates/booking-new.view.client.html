@@ -1,0 +1,84 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <a href="#!/booking/new">
+        <h2>Available flights for you</h2>
+    </a>
+    <div class="row">
+        <div class="col-xs-3">
+            <label for="origin">Origin</label>
+            <input type="text"
+                   class="form-control"
+                   ng-model="vm.origin"
+                   placeholder="eg: FRA"
+                   id="origin"/>
+        </div>
+        <div class="col-xs-3">
+            <label for="destination">Destination</label>
+            <input type="text"
+                   class="form-control"
+                   ng-model="vm.destination"
+                   placeholder="eg: JFK"
+                   id="destination"/>
+        </div>
+        <div class="col-xs-2">
+            <label for="date">Date</label>
+            <input type="date"
+                   class="form-control"
+                   ng-model="vm.date"
+                   placeholder="eg: yyyy-MM-dd"
+                   id="date"/>
+        </div>
+        <div class="col-xs-2">
+            <label></label>
+            <form name="stops">
+                    <input type="radio" ng-model="vm.directFlights" value="true">
+                    Non-stop<br/>
+                    <input type="radio" ng-model="vm.directFlights" value="false">
+                    With stops
+            </form>
+        </div>
+
+        <div class="col-xs-2">
+            <label></label>
+            <a ng-click="vm.getAvailableFlights(vm.origin, vm.destination, vm.date, vm.directFlights)"
+               class="btn btn-block btn-primary">
+                Find Flights
+            </a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Origin</th>
+            <th>Departure Time</th>
+            <th>Destination</th>
+            <th>Arrival Time</th>
+            <th>Airlines</th>
+            <th>Flight Number</th>
+            <th>Duration</th>
+            <th>Aircraft</th>
+            <th>Lowest fare</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="schedule in vm.schedules">
+            <td>{{schedule.Flight.Departure.AirportCode}}</td>
+            <td>{{schedule.Flight.Departure.ScheduledTimeLocal.DateTime}}</td>
+            <td>{{schedule.Flight.Arrival.AirportCode}}</td>
+            <td>{{schedule.Flight.Arrival.ScheduledTimeLocal.DateTime}}</td>
+            <td>{{schedule.Flight.MarketingCarrier.AirlineID}}</td>
+            <td>{{schedule.Flight.MarketingCarrier.FlightNumber}}</td>
+            <td>{{schedule.TotalJourney.Duration}}</td>
+            <td>{{schedule.Flight.Equipment.AircraftCode}}</td>
+            <td></td>
+            <td><a ng-click="vm.createBooking(vm.uid, schedule)"
+                   class="btn btn-block btn-primary">Book Now</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

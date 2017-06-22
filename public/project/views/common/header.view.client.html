@@ -1,31 +1,43 @@
-<link href="../../../project/css/user.style.css" rel="stylesheet"/>
+<link href="../../../project/css/style.css" rel="stylesheet"/>
 
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
+    <div class="container-fluid nav1">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
                 <img width="160" src="../../../project/images/Lufthansa_Logo.png"/>
             </a>
-            <p class="navbar-text pull-right">
-                <a href="#!/login" class="navbar-link">
-                    Login
-                </a>
-                |
-                <a href="#!/register" class="navbar-link">
-                    Register
-                </a>
-                <!--<span class="glyphicon glyphicon-user"></span>-->
-            </p>
+            <div class="navbar-text pull-right">
+                <span ng-show="vm.user._id" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span> Hello, <a href="#!/profile"><b>{{vm.user.username}}</b> | </a>
+                </span>
+                <span ng-show="vm.user.roles.indexOf('ADMIN')>-1" class="navbar-link"><a href="#!/admin">Admin | </a></span>
+                <span ng-show="vm.user.roles.indexOf('CREW')>-1" class="navbar-link"><a href="#!/crew">Crew | </a></span>
+                <span ng-show="!vm.user._id" class="navbar-link">
+                    <a href="#!/login"><span class="glyphicon glyphicon-user"></span> Login | </a>
+                </span>
+                <span ng-show="!vm.user._id" class="navbar-link"><a href="#!/register">Register</a></span>
+                <span ng-show="vm.user._id" class="navbar-link"><a ng-click="vm.logout()">Logout</a></span>
+            </div>
         </div>
     </div>
-</nav>
+    <div class="container-fluid nav2">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#!/booking/new">Plan Your Trip</a></li>
+                <li><a href="#!/operations/flightstatus">Flight Status</a></li>
+                <li><a href="#">During Your Trip</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
 
-<nav>
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Plan Your Trip</a></li>
-        <li><a href="#">Flight Status</a></li>
-        <li><a href="#">During Your Trip</a></li>
-        <li><a href="#">About</a></li>
-    </ul>
 </nav>

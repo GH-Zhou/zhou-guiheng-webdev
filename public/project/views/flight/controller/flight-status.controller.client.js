@@ -5,22 +5,26 @@
 
     function FlightStatusController ($routeParams,
                                      $location,
-                                     FlightStatusService) {
+                                     flightService,
+                                     userService,
+                                     currentUser) {
         var vm = this;
         // vm.getFlightStatus = getFlightStatus;
-
+        vm.user = currentUser;
         vm.flightNumber = $routeParams['flightNumber'];
         vm.date = $routeParams['date'];
+
+        vm.logout = logout;
 
         function init() {
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/flightstatus/';
 
-            var bearer_token = "q5exx5d6tvxkvc35y8bje9az";
+            var bearer_token = "awd3zbqfdc2j8vjk2zmubf99";
 
             url += vm.flightNumber + '/' + vm.date;
 
-            FlightStatusService
+            flightService
                 .getFlightStatus(url, bearer_token)
                 .then(function (flight){
                     vm.flight = flight;
@@ -28,6 +32,13 @@
         }
         init();
 
+        function logout(){
+            userService
+                .logout()
+                .then(function (){
+                    location.reload();
+                })
+        }
         // function getFlightStatus(flightNumber, date) {
         //
         // }

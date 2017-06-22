@@ -1,0 +1,37 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <a href="#!/booking">
+        <h2>My Bookings</h2>
+    </a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Booking ID</td>
+            <td>Date of Booking</td>
+            <td>Departure from</td>
+            <td>Departure Time Local</td>
+            <td>Arrival At</td>
+            <td>Arrival Time Local</td>
+            <td>Flight Number</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody ng-repeat="booking in vm.bookings" id="tbody">
+            <tr>
+                <td>{{booking._id}}</td>
+                <td>{{booking.dateCreated | date}}</td>
+                <td>{{vm.flights[$index].departure_airport}}</td>
+                <td>{{vm.flights[$index].departure_scheduled_time | date:"HH:mm"}}</td>
+                <td>{{vm.flights[$index].arrival_airport}}</td>
+                <td>{{vm.flights[$index].arrival_scheduled_time | date:"HH:mm"}}</td>
+                <td>{{vm.flights[$index].marketing_carrier}}{{vm.flights[$index].marketing_flight_number}}</td>
+                <td><a class="btn btn-primary btn-block"
+                       href="#!/operations/flightstatus/{{vm.flights[$index].marketing_carrier}}{{vm.flights[$index].marketing_flight_number}}/{{vm.flights[$index].departure_scheduled_time | date:'yyyy-MM-dd'}}">Check Status</a></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

@@ -1,0 +1,56 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<!--<h3>Messages</h3>-->
+<div class="container-fluid">
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Chat with {{vm.other_username}}</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <td>
+            <input ng-model="vm.message"
+                   placeholder="message"
+                   class="form-control"/>
+        </td>
+        <td>
+            <button ng-click="vm.createMessage(vm.message)"
+                    class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="message in vm.messages">
+        <td class="my-message" ng-if="message.from === vm.user.username">
+            <div align="right">
+                <p><b>{{message.text}}</b></p>
+                <div class="message-time">
+                    <b><i>You</i></b> sent on {{message.date | date:"MM-dd h:mm a"}}
+                </div>
+            </div>
+        </td>
+        <td class="others-message" ng-if="message.to === vm.user.username">
+            <div align="left">
+                <p><b>{{message.text}}</b></p>
+                <div class="message-time">
+                    <b><i>{{message.from}}</i></b> sent on {{message.date | date:"MM-dd h:mm a"}}
+                </div>
+            </div>
+        </td>
+        <td ng-class="message.from === vm.user.username ? 'my-message' : 'others-message'">
+            <div ng-show="message.from === vm.user.username">
+                <button ng-click="vm.deleteMessage(message)"
+                        id="delete" class="btn btn-delete pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

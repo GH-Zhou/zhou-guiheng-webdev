@@ -12,3 +12,7 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 mongoose.connect(connectionString);
 
 require('./services/user.service.server');
+require('./services/message.service.server');
+require('./services/booking.service.server');
+require('./services/flight.service.server');
+require('./services/schedule.service.server');

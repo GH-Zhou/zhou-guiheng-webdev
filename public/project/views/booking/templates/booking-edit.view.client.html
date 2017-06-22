@@ -1,0 +1,42 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="col-xs-12 col-sm-8">
+
+    <label>Booking ID</label>
+    <br>
+    {{vm.booking._id}}
+    <br>
+    <br>
+    <!--<div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>-->
+
+    <label>Booking Date</label>
+    <br>
+    {{vm.booking.dateCreated}}
+    <br>
+    <br>
+    <label for="food">Food</label>
+    <input type="text"
+           class="form-control"
+           ng-model="vm.booking.food"
+           placeholder="Food"
+           id="food"/>
+
+    <!--<label for="destination">Destination</label>-->
+    <!--<input type="text"-->
+           <!--class="form-control"-->
+           <!--ng-model="vm.booking.destination"-->
+           <!--placeholder="Destination"-->
+           <!--id="destination"/>-->
+
+    <a ng-click="vm.updateBooking(vm.bid, vm.booking)"
+       class="btn btn-block btn-success">
+        Update this trip
+    </a>
+    <a ng-click="vm.deleteBooking(vm.bid)"
+       class="btn btn-block btn-danger">
+        Cancel this trip
+    </a>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

@@ -1,23 +1,9 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#!/profile">
-                Profile
-            </a>
-            <p class="navbar-text pull-right">
-                <a ng-click="vm.updateUser(vm.uid, vm.user)" class="navbar-link">
-                    <span class="glyphicon glyphicon-ok">
-                    </span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
-
-
 <div class="container-fluid">
+    <a href="#!/profile">
+        <h2>Profile</h2>
+    </a>
     <div ng-show="vm.message" class="alert alert-info">{{vm.message}}</div>
     <form>
         <div class="form-group">
@@ -50,13 +36,24 @@
                    type="text"
                    class="form-control" id="last-name" placeholder="Wonderland">
         </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input ng-model="vm.user.dateOfBirth"
+                   type="date"
+                   class="form-control"
+                   id="dob">
+        </div>
     </form>
 
+
+
+    <a class="btn btn-primary btn-block"
+       href="#!/booking">View your bookings</a>
     <a class="btn btn-success btn-block"
        ng-click="vm.updateUser(vm.uid, vm.user)">Update</a>
-    <a class="btn btn-danger btn-block"
+    <a class="btn btn-delete btn-block"
        ng-click="vm.unregister()">Unregister</a>
-    <a class="btn btn-warning  btn-block"
+    <a class="btn btn-danger  btn-block"
        ng-click="vm.logout()">Logout</a>
 </div>
 
