@@ -1,7 +1,7 @@
 var app = require('../../express');
 var scheduleModel = require('../models/schedule/schedule.model.server');
 
-app.post('/api/user/:userId/schedule', isAdmin, createSchedule);
+app.post('/api/schedule/:userId/:flightId', isAdmin, createSchedule);
 app.get('/api/user/:userId/schedule', findAllSchedulesForUser);
 app.get('/api/schedule/:scheduleId', findScheduleById);
 app.get('/api/schedules', isAdmin, findAllSchedules);
@@ -22,8 +22,9 @@ function isAdmin(req, res, next) {
 function createSchedule(req, res) {
     var schedule = req.body;
     var userId = req.params.userId;
+    var flightId = req.params.flightId;
     scheduleModel
-        .createSchedule(userId, schedule)
+        .createSchedule(userId, flightId, schedule)
         .then(function (schedule) {
             res.json(schedule);
         }, function (err) {

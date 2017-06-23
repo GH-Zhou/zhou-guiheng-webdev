@@ -40,6 +40,7 @@
             vm.selected = true;
             vm.booking = angular.copy(booking);
             vm._user = angular.copy(vm.users[index]);
+            vm._flights = angular.copy(vm.flights[index]);
         }
 
         function updateBooking(booking) {
@@ -64,17 +65,19 @@
         }
 
         function loadFlights (bookings) {
+            // console.log(vm.bookings);
             for (var b in bookings) {
-                subflights = [];
-                for (var f in bookings[b].flights) {
-                    flightService
-                        .findFlightById(bookings[b].flights[f])
-                        .then(function (flight) {
-                            subflights.push(flight);
-                        });
-                }
-                vm.flights.push(subflights);
+                // subflights = [];
+                // for (var f in bookings[b].flights) {
+                flightService
+                    .findFlightById(bookings[b].flights[0])
+                    .then(function (flight) {
+                        // subflights.push(flight);
+                        vm.flights.push([flight]);
+                    });
+                // }
             }
+            console.log(vm.flights);
         }
 
         function loadUsers (bookings) {

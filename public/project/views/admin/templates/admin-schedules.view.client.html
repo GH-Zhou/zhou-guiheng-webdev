@@ -38,8 +38,8 @@
                     <input type="text" ng-model="vm._flight.carrier_flight_number" class="form-control"/>
                 </div>
                 <div class="col-xs-2 col-sm-1">
-                    <span ng-click="vm.updateSchedule(vm.schedule, $index);vm.schedule={};vm._user={};vm._flight={}" class="glyphicon glyphicon-ok pull-right"></span>
-                    <span ng-click="vm.createSchedule(vm._user, vm._flight);vm.schedule={};vm._user={};vm._flight={}" class="glyphicon glyphicon-plus pull-right"></span>
+                    <span ng-click="vm.updateSchedule(vm.schedule, vm._user.username, vm._flight.departure_scheduled_time, vm._flight.carrier_flight_number);vm.schedule={};vm._user={};vm._flight={}" class="glyphicon glyphicon-ok pull-right"></span>
+                    <span ng-click="vm.createSchedule(vm._user.username, vm._flight);vm.schedule={};vm._user={};vm._flight={}" class="glyphicon glyphicon-plus pull-right"></span>
                 </div>
 
             </div>
@@ -56,7 +56,8 @@
                     <div ng-repeat="flight in vm.flights[$index]">{{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}</div>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-3">
-                    <div ng-repeat="flight in vm.flights[$index]">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</div>
+                    <div ng-repeat="flight in vm.flights[$index]">
+                        <span class="label label-primary">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</span></div>
                 </div>
                 <div class="col-xs-2 col-sm-1">
                     <span ng-click="vm.selectSchedule(schedule, $index)" class="glyphicon glyphicon-pencil pull-right"></span>
@@ -117,13 +118,13 @@
                         </div>
                     </div>
                 </li>
-                <li ng-repeat="flight in vm.flights" class="list-group-item">
+                <li ng-repeat="flight in vm._flights" class="list-group-item">
                     <div class="row">
                         <div class="hidden-xs col-xs-5">
                             {{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}
                         </div>
                         <div class="col-xs-6 col-sm-4">
-                            {{flight.marketing_carrier}}{{flight.marketing_flight_number}}
+                            <span class="label label-primary">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</span>
                         </div>
                         <div class="col-xs-6 col-sm-3">
                             <a ng-click="vm.selectFlight(flight)" class="btn btn-success btn-block">

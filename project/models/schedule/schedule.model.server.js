@@ -15,11 +15,11 @@ scheduleModel.deleteFlight = deleteFlight;
 
 module.exports = scheduleModel;
 
-function createSchedule(userId, schedule) {
-    schedule._user = userId;
+function createSchedule(userId, flightId, schedule) {
     return scheduleModel.create(schedule)
         .then(function (schedule) {
             userModel.addSchedule(userId, schedule._id); // add reference of schedule to user
+            flightModel.addSchedule(flightId, schedule._id);
             return schedule;
         });
 }

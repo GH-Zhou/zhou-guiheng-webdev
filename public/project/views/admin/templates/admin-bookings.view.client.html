@@ -18,8 +18,11 @@
                 <div class="visible-lg col-lg-1">
                     Lounge
                 </div>
-                <div class="hidden-xs col-sm-3 col-lg-3">
+                <div class="hidden-xs col-sm-3 col-lg-1">
                     Price
+                </div>
+                <div class="visible-lg col-lg-2">
+                    Date
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
                     Flight Number
@@ -38,20 +41,41 @@
                     <input ng-model="vm._user.username" class="form-control" ng-disabled="vm.selected"/>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <input ng-model="vm.booking.food" class="form-control"/>
+                    <form name="food" ng-init="vm.booking.food='Yes'">
+                        <label>
+                            <input type="radio" ng-model="vm.booking.food" value="Yes"/>
+                            Yes
+                        </label><br/>
+                        <label>
+                            <input type="radio" ng-model="vm.booking.food" value="No"/>
+                            No
+                        </label><br/>
+                    </form>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <input ng-model="vm.booking.lounge" class="form-control"/>
+                    <form name="lounge"  ng-init="vm.booking.lounge='Yes'">
+                        <label>
+                            <input type="radio" ng-model="vm.booking.lounge" value="Yes"/>
+                            Yes
+                        </label><br/>
+                        <label>
+                            <input type="radio" ng-model="vm.booking.lounge" value="No"/>
+                            No
+                        </label><br/>
+                    </form>
                 </div>
-                <div class="hidden-xs col-sm-3 col-lg-3">
+                <div class="hidden-xs col-sm-3 col-lg-1">
                     <b>{{vm.booking.price}}</b>
+                </div>
+                <div class="visible-lg col-lg-2">
+                    <div ng-repeat="flight in vm._flights"><b>{{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}</b></div>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
                     <div ng-repeat="flight in vm._flights"><b>{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</b></div>
                 </div>
                 <div class="col-xs-2 col-sm-1">
                     <span ng-click="vm.updateBooking(vm.booking);vm.booking={};vm._user={};vm._flights={}" class="glyphicon glyphicon-ok pull-right"></span>
-                    <a href="#!/booking/new/{{vm._user.username}}"><span class="glyphicon glyphicon-plus pull-right"></span></a>
+                    <a href="#!/booking/new/{{vm._user.username}}/{{vm.booking.food}}/{{vm.booking.lounge}}"><span class="glyphicon glyphicon-plus pull-right"></span></a>
                 </div>
 
             </div>
@@ -70,8 +94,11 @@
                 <div class="visible-lg col-lg-1">
                     {{booking.lounge}}
                 </div>
-                <div class="hidden-xs col-sm-3 col-lg-3">
+                <div class="hidden-xs col-sm-3 col-lg-1">
                     {{booking.price}}
+                </div>
+                <div class="visible-lg col-lg-2">
+                    <div ng-repeat="flight in vm.flights[$index]">{{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}</div>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
                     <div ng-repeat="flight in vm.flights[$index]">

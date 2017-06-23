@@ -1,9 +1,14 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
 <div class="container-fluid">
-    <h3>Details of schedule <span ng-show="vm.flight">- Flight {{vm.flight.marketing_carrier}}{{vm.flight.marketing_flight_number}}</span></h3>
+    <h3>Details of schedule
+        <span ng-show="vm.flight">- Flight {{vm.flight.marketing_carrier}}{{vm.flight.marketing_flight_number}}
+         <a class="btn btn-delete"
+            href="#!/operations/flightstatus/{{vm.flight.marketing_carrier}}{{vm.flight.marketing_flight_number}}/{{vm.flight.departure_scheduled_time | date:'yyyy-MM-dd'}}">
+             Check Flight Status</a>
+        </span>
+    </h3>
 
-    <a href="#!/operations/flightstatus/{{vm.flight.marketing_carrier}}{{vm.flight.marketing_flight_number}}/{{vm.flight.departure_scheduled_time | date:'yyyy-MM-dd'}}">
     <div class="row">
         <div class="col-xs-6">
             <h4>Crew members in this flight</h4>

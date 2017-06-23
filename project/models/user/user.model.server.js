@@ -15,6 +15,7 @@ userModel.addMessage = addMessage;
 userModel.deleteMessage = deleteMessage;
 userModel.addBooking = addBooking;
 userModel.deleteBooking = deleteBooking;
+userModel.addSchedule = addSchedule;
 userModel.deleteSchedule = deleteSchedule;
 
 module.exports = userModel;
@@ -111,6 +112,15 @@ function deleteBooking(bookingId) {
             var user = users[0];
             var index = user.bookings.indexOf(bookingId);
             user.bookings.splice(index, 1);
+            return user.save();
+        });
+}
+
+function addSchedule(userId, scheduleId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.schedules.push(scheduleId);
             return user.save();
         });
 }

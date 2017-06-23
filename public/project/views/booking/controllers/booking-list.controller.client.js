@@ -23,15 +23,15 @@
 
         function loadFlights(bookings) {
             for (var b in bookings) {
-                subflights = [];
-                for (var f in bookings[b].flights) {
+                // subflights = [];
+                // for (var f in bookings[b].flights) {
                     flightService
-                        .findFlightById(bookings[b].flights[f])
+                        .findFlightById(bookings[b].flights[0])
                         .then(function (flight) {
-                            subflights.push(flight);
+                            // subflights.push(flight);
+                            vm.flights.push([flight]);
                         });
-                }
-                vm.flights.push(subflights);
+                // }
             }
         }
 

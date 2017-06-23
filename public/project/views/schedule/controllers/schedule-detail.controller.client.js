@@ -35,18 +35,28 @@
                 .findFlightById(schedule.flights[0])
                 .then(function (flight) {
                     vm.flight = flight;
+
                     for (var b in flight.bookings) {
                         bookingService
-                            .findUserById(flight.bookings[b]._user)
-                            .then(function (user) {
-                                vm.users.push(user);
-                            })
+                            .findBookingById(flight.bookings[b])
+                            .then(function (booking) {
+                                userService
+                                    .findUserById(booking._user)
+                                    .then(function (user) {
+                                        vm.users.push(user);
+                                    })
+                            });
                     }
+
                     for (var s in flight.schedules) {
                         scheduleService
-                            .findUserById(flight.schedules[s]._user)
-                            .then(function (user) {
-                                vm.crew.push(user);
+                            .findScheduleById(flight.schedules[s])
+                            .then(function (schedule) {
+                                userService
+                                    .findUserById(schedule._user)
+                                    .then(function (user) {
+                                        vm.crew.push(user);
+                                    });
                             })
                     }
                 });

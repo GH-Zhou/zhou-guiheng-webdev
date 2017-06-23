@@ -11,8 +11,8 @@ app.delete('/api/flight/:flightId', isAdmin, deleteFlight);
 app.get('/api/flight/:carrier/:flightNumber/:departureTime', findFlightByFlightInfo);
 app.post('/api/flight/:flightId/:bookingId', addBooking);
 app.delete('/api/flight/:bookingId', deleteBooking);
-app.post('/api/flight/:flightId/:scheduleId', isAdmin, addSchedule); // ADMIN
-app.delete('/api/flight/:scheduleId', isAdmin, deleteSchedule); // ADMIN
+app.post('/api/flight/:flightId/schedule/:scheduleId', isAdmin, addSchedule); // ADMIN
+app.delete('/api/flight/schedule/:scheduleId', isAdmin, deleteSchedule); // ADMIN
 
 function isAdmin(req, res, next) {
     if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {

@@ -20,6 +20,7 @@
             updateUser: updateUser,
             deleteUser: deleteUser,
             unregister: unregister,
+            addSchedule: addSchedule,
             deleteSchedule: deleteSchedule
         };
         return api;
@@ -139,6 +140,15 @@
             var url = "/api/lufthansa/user/" + userId;
             return $http
                 .delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function addSchedule (userId, scheduleId) {
+            var url = "/api/lufthansa/user/" + userId + "/schedule/" + scheduleId;
+            return $http
+                .post(url)
                 .then(function (response) {
                     return response.data;
                 });

@@ -31,7 +31,8 @@ app.get    ('/api/lufthansa/loggedin', loggedin);
 app.get    ('/api/lufthansa/checkAdmin', checkAdmin);
 app.post   ('/api/lufthansa/register', register);
 app.post   ('/api/lufthansa/unregister', unregister);
-app.delete ('/api/lufthansa/schedule/:scheduleId', deleteSchedule);
+app.post   ('/api/lufthansa/user/:userId/schedule/:scheduleId', isAdmin, addSchedule);
+app.delete ('/api/lufthansa/schedule/:scheduleId', isAdmin, deleteSchedule);
 
 app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get('/auth/facebook/callback',
@@ -212,6 +213,19 @@ function findUserByUsername (req, res) {
         }, function () {
             user = null;
             res.send(user);
+        });
+}
+
+function addSchedule (req, res) {
+    var userId = req.params.userId;
+    var scheduleId = req.params.scheduleId;
+
+    userModel
+        .addSchedule(userId, scheduleId)
+        .then(function () {
+            res.sendStatus(200);
+        }, function (err) {
+            res.send(err);
         });
 }
 

@@ -20,6 +20,7 @@
         init();
 
         function getAvailableFlights(flight) { // from API
+            vm.selected = false;
             vm.showAvailableFlights = true;
 
             origin = flight.departure_airport;
@@ -52,38 +53,41 @@
                 });
         }
 
-        function createFlightOnly(flight) {
-            var carrier = flight.marketing_carrier;
-            var flightNumber = flight.marketing_flight_number;
-            var departureTime = flight.departure_scheduled_time;
+        function createFlightOnly(schedule) {
+
+            var flightObj = {
+                departure_airport: schedule.Flight.Departure.AirportCode,
+                departure_scheduled_time: schedule.Flight.Departure.ScheduledTimeLocal.DateTime,
+                departure_terminal: schedule.Flight.Departure.Terminal.Name,
+                arrival_airport: schedule.Flight.Arrival.AirportCode,
+                arrival_scheduled_time: schedule.Flight.Arrival.ScheduledTimeLocal.DateTime,
+                arrival_terminal: schedule.Flight.Arrival.Terminal.Name,
+                marketing_carrier: schedule.Flight.MarketingCarrier.AirlineID,
+                marketing_flight_number: schedule.Flight.MarketingCarrier.FlightNumber,
+                equipment: schedule.Flight.Equipment.AircraftCode,
+                journey_duration: schedule.TotalJourney.Duration
+            };
+
+            var carrier = flightObj.marketing_carrier;
+            var flightNumber = flightObj.marketing_flight_number;
+            var departureTime = flightObj.departure_scheduled_time;
 
             flightService
                 .findFlightByFlightInfo(carrier, flightNumber, departureTime)
-                .then(function (schedule) {
+                .then(function (flight) {
+                    if (flight === null || flight === '' || typeof flight === 'undefined') {
+                        flightService
+                            .createFlightOnly(flightObj) // create a new flight ONLY without adding references
+                            .then(findAllFlights);
+                    } else {
+                        vm.error = "The flight you selected has been created already!"
+                    }
 
-                    var flightObj = {
-                        departure_airport: schedule.Flight.Departure.AirportCode,
-                        departure_scheduled_time: schedule.Flight.Departure.ScheduledTimeLocal.DateTime,
-                        departure_terminal: schedule.Flight.Departure.Terminal.Name,
-                        arrival_airport: schedule.Flight.Arrival.AirportCode,
-                        arrival_scheduled_time: schedule.Flight.Arrival.ScheduledTimeLocal.DateTime,
-                        arrival_terminal: schedule.Flight.Arrival.Terminal.Name,
-                        marketing_carrier: schedule.Flight.MarketingCarrier.AirlineID,
-                        marketing_flight_number: schedule.Flight.MarketingCarrier.FlightNumber,
-                        equipment: schedule.Flight.Equipment.AircraftCode,
-                        journey_duration: schedule.TotalJourney.Duration
-                    };
-
-                    flightService
-                        .createFlightOnly(flightObj) // create a new flight ONLY without adding references
-                        .then(findAllFlights);
-
-                }, function () {
-                    vm.error = "Failed! No requested flight found!";
                 });
         }
 
         function deleteFlight(flight) {
+            vm.selected = false;
             vm.showAvailableFlights = false;
             flightService
                 .deleteFlight(flight._id)
@@ -91,11 +95,13 @@
         }
 
         function selectFlight(flight) {
+            vm.selected = true;
             vm.flight = angular.copy(flight);
             vm.flight.departure_scheduled_time = new Date(flight.departure_scheduled_time);
         }
 
         function updateFlight(flight) {
+            vm.selected = false;
             vm.showAvailableFlights = false;
 
             var carrier = flight.marketing_carrier;

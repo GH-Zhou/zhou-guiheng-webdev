@@ -51,8 +51,8 @@
                 });
         }
 
-        function createSchedule (userId, schedule) {
-            var url = "/api/user/" + userId + "/schedule";
+        function createSchedule (userId, flightId, schedule) {
+            var url = "/api/schedule/" + userId + "/" + flightId;
             return $http
                 .post(url, schedule)
                 .then(function (response) {

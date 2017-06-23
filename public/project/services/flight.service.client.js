@@ -153,7 +153,7 @@
         }
 
         function addSchedule (flightId, scheduleId) {
-            var url = "/api/flight/" + flightId + "/" + scheduleId;
+            var url = "/api/flight/" + flightId + "/schedule/" + scheduleId;
             return $http
                 .post(url)
                 .then(function (response) {
@@ -162,7 +162,7 @@
         }
 
         function deleteSchedule (scheduleId) {
-            var url = "/api/flight/schedule" + scheduleId;
+            var url = "/api/flight/schedule/" + scheduleId;
             return $http
                 .delete(url)
                 .then(function (response) {

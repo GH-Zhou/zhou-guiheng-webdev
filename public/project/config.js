@@ -103,7 +103,7 @@
                     currentUser: checkLoggedIn
                 }
             })
-            .when('/booking/new/:username', {
+            .when('/booking/new/:username/:food/:lounge', {
                 templateUrl: 'views/booking/templates/booking-new.view.client.html',
                 controller: 'NewBookingController',
                 controllerAs: 'vm',

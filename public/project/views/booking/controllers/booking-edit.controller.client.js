@@ -7,14 +7,17 @@
                                     $location,
                                     currentUser,
                                     bookingService,
-                                    userService) {
+                                    userService,
+                                    flightService) {
         var vm = this;
 
+        vm.user = currentUser;
         vm.uid = currentUser._id;
         vm.bid = $routeParams['bookingId'];
 
         vm.deleteBooking = deleteBooking;
         vm.updateBooking = updateBooking;
+
         vm.logout = logout;
 
         function init() {
@@ -30,6 +33,12 @@
                     console.log(booking);
                     vm.booking = booking;
                     vm.oldBooking = angular.copy(vm.booking);
+
+                    flightService
+                        .findFlightById(vm.booking.flights[0])
+                        .then(function (flight){
+                            vm.flight = flight;
+                        });
                 });
         }
         init();

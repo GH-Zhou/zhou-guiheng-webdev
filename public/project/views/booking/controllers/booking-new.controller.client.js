@@ -22,14 +22,27 @@
                 });
         }
         vm.user = currentUser;
+        vm.food = $routeParams.food;
+        vm.lounge = $routeParams.lounge;
+
+
         vm.createBooking = createBooking;
         vm.getAvailableFlights = getAvailableFlights;
         vm.logout =logout;
 
         function createBooking (uid, schedule) {
-            var booking = {
-                dateCreated: new Date()
-            };
+            if (vm.food && vm.lounge) {
+                booking = {
+                    dateCreated: new Date(),
+                    food: vm.food,
+                    lounge: vm.lounge
+                };
+            } else {
+                booking = {
+                    dateCreated: new Date()
+                };
+            }
+
 
             bookingService
                 .createBooking(uid, booking)
