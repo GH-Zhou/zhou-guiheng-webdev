@@ -3,6 +3,7 @@ var flightSchema = require('./flight.schema.server');
 var flightModel = mongoose.model('FlightModel', flightSchema);
 
 flightModel.createFlight = createFlight;
+flightModel.createFlightOnly = createFlightOnly;
 flightModel.findFlightById = findFlightById;
 flightModel.findAllFlightsForBooking = findAllFlightsForBooking;
 flightModel.findAllFlights = findAllFlights;
@@ -22,6 +23,13 @@ function createFlight(bookingId, flight) { // A certain Flight will be created f
         .then(function (flight) {
             var bookingModel = require('../booking/booking.model.server');
             bookingModel.addFlight(bookingId, flight._id); // add reference of flight to booking
+            return flight;
+        });
+}
+
+function createFlightOnly(flight){
+    return flightModel.create(flight)
+        .then(function (flight) {
             return flight;
         });
 }

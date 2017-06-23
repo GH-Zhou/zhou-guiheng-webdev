@@ -12,7 +12,10 @@
         this.findFlightById = findFlightById;
         this.findAllFlights = findAllFlights;
         this.createFlight = createFlight;
+        this.createFlightOnly = createFlightOnly;
         this.findAllFlightsForBooking = findAllFlightsForBooking;
+        this.updateFlight = updateFlight;
+        this.deleteFlight = deleteFlight;
 
         this.addBooking = addBooking;
         this.deleteBooking = deleteBooking;
@@ -77,6 +80,15 @@
                 });
         }
 
+        function createFlightOnly (flightObj) {
+            var url = "/api/flight/new";
+            return $http
+                .post(url, flightObj)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
         function findAllFlightsForBooking (bookingId) {
             var url = "/api/flights/booking/" + bookingId;
             return $http
@@ -99,6 +111,24 @@
             var url = "/api/flights";
             return $http
                 .get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function updateFlight(flightId, newFlight) {
+            var url = "/api/flight/" + flightId;
+            return $http
+                .put(url, newFlight)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function deleteFlight(flightId) {
+            var url = "/api/flight/" + flightId;
+            return $http
+                .delete(url)
                 .then(function (response) {
                     return response.data;
                 });

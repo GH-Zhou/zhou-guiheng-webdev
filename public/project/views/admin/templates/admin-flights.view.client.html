@@ -1,28 +1,28 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
 <div class="container-fluid">
-    <h2>Manage Bookings</h2>
+    <h2>Manage Flights with API</h2>
 
     <ul class="list-group">
         <li class="list-group-item active">
             <div class="row">
                 <div class="hidden-xs col-sm-3 col-lg-2">
-                    Booking ID (Last 10 chars)
+                    Flight ID (Last 10 chars)
                 </div>
                 <div class="col-xs-5 col-sm-2 col-lg-2">
-                    Username
+                    Flight Number
                 </div>
                 <div class="visible-lg col-lg-1">
-                    Food
+                    Origin
                 </div>
                 <div class="visible-lg col-lg-1">
-                    Lounge
+                    Destination
                 </div>
                 <div class="hidden-xs col-sm-3 col-lg-3">
-                    Price
+                    Scheduled Time of Departure
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
-                    Flight Number
+                    Date of Departure
                 </div>
                 <div class="col-xs-2 col-sm-1">
                 </div>
@@ -32,59 +32,91 @@
         <li class="list-group-item edit">
             <div class="row">
                 <div class="hidden-xs col-sm-3 col-lg-2 ID">
-                    <b>{{vm.booking._id.slice(-10)}}</b>
+                    <b>{{vm.flight._id.slice(-10)}}</b>
                 </div>
                 <div class="col-xs-5 col-sm-2 col-lg-2">
-                    <input ng-model="vm._user.username" class="form-control" ng-disabled="vm.selected"/>
+                    <b>{{vm.flight.marketing_carrier}}{{vm.flight.marketing_flight_number}}</b>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <input ng-model="vm.booking.food" class="form-control"/>
+                    <input ng-model="vm.flight.departure_airport" class="form-control"/>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <input ng-model="vm.booking.lounge" class="form-control"/>
+                    <input ng-model="vm.flight.arrival_airport" class="form-control"/>
                 </div>
                 <div class="hidden-xs col-sm-3 col-lg-3">
-                    <b>{{vm.booking.price}}</b>
+                    <b>{{vm.flight.departure_scheduled_time | date:'hh:mm a'}}</b>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
-                    <div ng-repeat="flight in vm._flights"><b>{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</b></div>
+                    <input type="date" ng-model="vm.flight.departure_scheduled_time" class="form-control"/>
                 </div>
                 <div class="col-xs-2 col-sm-1">
-                    <span ng-click="vm.updateBooking(vm.booking);vm.booking={};vm._user={};vm._flights={}" class="glyphicon glyphicon-ok pull-right"></span>
-                    <a href="#!/booking/new/{{vm._user.username}}"><span class="glyphicon glyphicon-plus pull-right"></span></a>
+                    <span ng-click="vm.updateFlight(vm.flight);vm.flight={}" class="glyphicon glyphicon-ok pull-right"></span>
+                    <a ng-click="vm.getAvailableFlights(vm.flight);vm.flight={}"><span class="glyphicon glyphicon-plus pull-right"></span></a>
                 </div>
 
             </div>
         </li>
-        <li ng-repeat="booking in vm.bookings" class="list-group-item">
+        <li ng-repeat="flight in vm.flights" class="list-group-item">
             <div class="row">
                 <div class="hidden-xs col-sm-3 col-lg-2 ID">
-                    {{booking._id.slice(-10)}}
+                    {{flight._id.slice(-10)}}
                 </div>
                 <div class="col-xs-5 col-sm-2 col-lg-2">
-                    {{vm.users[$index].username}}
+                    {{flight.marketing_carrier}}{{flight.marketing_flight_number}}
                 </div>
                 <div class="visible-lg col-lg-1">
-                    {{booking.food}}
+                    {{flight.departure_airport}}
                 </div>
                 <div class="visible-lg col-lg-1">
-                    {{booking.lounge}}
+                    {{flight.arrival_airport}}
                 </div>
                 <div class="hidden-xs col-sm-3 col-lg-3">
-                    {{booking.price}}
+                    {{flight.departure_scheduled_time | date:'hh:mm a'}}
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
-                    <div ng-repeat="flight in vm.flights[$index]">
-                        <span class="label label-primary">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</span></div>
+                    {{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}
                 </div>
                 <div class="col-xs-2 col-sm-1">
-                    <span ng-click="vm.selectBooking(booking, $index)" class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span ng-click="vm.deleteBooking(booking)" class="glyphicon glyphicon-remove pull-right"></span>
+                    <span ng-click="vm.selectFlight(flight, $index)" class="glyphicon glyphicon-pencil pull-right"></span>
+                    <span ng-click="vm.deleteFlight(flight)" class="glyphicon glyphicon-remove pull-right"></span>
                 </div>
             </div>
 
         </li>
     </ul>
+
+    <table class="table" ng-show="vm.showAvailableFlights">
+        <thead>
+        <tr>
+            <th>Origin</th>
+            <th>Departure Time</th>
+            <th>Destination</th>
+            <th>Arrival Time</th>
+            <th>Airlines</th>
+            <th>Flight Number</th>
+            <th>Duration</th>
+            <th>Aircraft</th>
+            <th>Lowest fare</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="schedule in vm.schedules">
+            <td>{{schedule.Flight.Departure.AirportCode}}</td>
+            <td>{{schedule.Flight.Departure.ScheduledTimeLocal.DateTime}}</td>
+            <td>{{schedule.Flight.Arrival.AirportCode}}</td>
+            <td>{{schedule.Flight.Arrival.ScheduledTimeLocal.DateTime}}</td>
+            <td>{{schedule.Flight.MarketingCarrier.AirlineID}}</td>
+            <td>{{schedule.Flight.MarketingCarrier.FlightNumber}}</td>
+            <td>{{schedule.TotalJourney.Duration}}</td>
+            <td>{{schedule.Flight.Equipment.AircraftCode}}</td>
+            <td></td>
+            <td><a ng-click="vm.createFlightOnly(schedule)"
+                   class="btn btn-block btn-primary">Add</a></td>
+
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

@@ -4,9 +4,10 @@ var flightModel = require('../models/flight/flight.model.server');
 app.post('/api/flight/booking/:bookingId', createFlight);
 app.get('/api/flights/booking/:bookingId', findAllFlightsForBooking);
 app.get('/api/flight/:flightId', findFlightById);
+app.post('/api/flight/new', isAdmin, createFlightOnly);
 app.get('/api/flights', isAdmin, findAllFlights);
-app.put('/api/flight/:flightId', updateFlight);
-app.delete('/api/flight/:flightId', deleteFlight);
+app.put('/api/flight/:flightId', isAdmin, updateFlight);
+app.delete('/api/flight/:flightId', isAdmin, deleteFlight);
 app.get('/api/flight/:carrier/:flightNumber/:departureTime', findFlightByFlightInfo);
 app.post('/api/flight/:flightId/:bookingId', addBooking);
 app.delete('/api/flight/:bookingId', deleteBooking);
@@ -26,6 +27,17 @@ function createFlight(req, res) {
     var bookingId = req.params.bookingId;
     flightModel
         .createFlight(bookingId, flight)
+        .then(function (flight) {
+            res.json(flight);
+        }, function (err) {
+            res.send(err);
+        });
+}
+
+function createFlightOnly(req, res) {
+    var flight = req.body;
+    flightModel
+        .createFlightOnly(flight)
         .then(function (flight) {
             res.json(flight);
         }, function (err) {

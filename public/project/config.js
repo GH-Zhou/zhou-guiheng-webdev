@@ -63,6 +63,14 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/flight', {
+                templateUrl: 'views/admin/templates/admin-flights.view.client.html',
+                controller: 'AdminFlightController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
             .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'ProfileController',
