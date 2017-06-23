@@ -20,6 +20,7 @@ passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 app.get    ('/api/lufthansa/user/:userId', findUserById);
 app.get    ('/api/lufthansa/user', findUserByUsername);
 app.get    ('/api/lufthansa/users', isAdmin, findAllUsers);
+app.get    ('/api/lufthansa/crew', isAdmin, findAllCrew);
 app.get    ('/api/lufthansa/user', findUserByCredentials);
 app.post   ('/api/lufthansa/user', isAdmin, createUser);
 app.delete ('/api/lufthansa/user/:userId', isAdmin, deleteUser);
@@ -30,6 +31,7 @@ app.get    ('/api/lufthansa/loggedin', loggedin);
 app.get    ('/api/lufthansa/checkAdmin', checkAdmin);
 app.post   ('/api/lufthansa/register', register);
 app.post   ('/api/lufthansa/unregister', unregister);
+app.delete ('/api/lufthansa/schedule/:scheduleId', deleteSchedule);
 
 app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get('/auth/facebook/callback',
@@ -53,6 +55,15 @@ function findAllUsers(req, res) {
             res.json(users);
         })
 }
+
+function findAllCrew(req, res) {
+    userModel
+        .findAllCrew()
+        .then(function (crew) {
+            res.json(crew);
+        })
+}
+
 
 function localStrategy(username, password, done) {
     userModel
@@ -201,6 +212,17 @@ function findUserByUsername (req, res) {
         }, function () {
             user = null;
             res.send(user);
+        });
+}
+
+function deleteSchedule (req, res) {
+    var scheduleId = req.params.scheduleId;
+    userModel
+        .deleteSchedule(scheduleId)
+        .then(function () {
+            res.sendStatus(200);
+        }, function (err) {
+            res.send(err);
         });
 }
 

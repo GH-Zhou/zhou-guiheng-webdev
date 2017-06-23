@@ -1,5 +1,47 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
-{{vm.schedules}}
+<div class="container-fluid">
+    <h3>Your schedules</h3>
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="hidden-xs col-sm-3 col-lg-3">
+                    Schedule ID (10 chars)
+                </div>
+                <div class="col-xs-5 col-sm-2 col-lg-2">
+                    Route
+                </div>
+                <div class="hidden-xs col-sm-3 col-lg-3">
+                    Date of Flight
+                </div>
+                <div class="col-xs-5 col-sm-3 col-lg-3">
+                    Flight Number
+                </div>
+                <div class="col-xs-2 col-sm-1">
+                </div>
+
+            </div>
+        </li>
+        <li ng-repeat="schedule in vm.schedules" class="list-group-item">
+            <div class="row">
+                <div class="hidden-xs col-sm-3 col-lg-3 ID">
+                    {{schedule._id.slice(-10)}}
+                </div>
+                <div class="col-xs-5 col-sm-2 col-lg-2">
+                    <div ng-repeat="flight in vm.flights[$index]">{{flight.departure_airport}}-{{flight.arrival_airport}}</div>
+                </div>
+                <div class="hidden-xs col-sm-3 col-lg-3">
+                    <div ng-repeat="flight in vm.flights[$index]">{{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}</div>
+                </div>
+                <div class="col-xs-5 col-sm-3 col-lg-3">
+                    <div ng-repeat="flight in vm.flights[$index]">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</div>
+                </div>
+                <div class="col-xs-2 col-sm-1">
+                    <a href="#!/schedule/{{schedule._id}}" class="btn btn-primary btn-block">Details</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

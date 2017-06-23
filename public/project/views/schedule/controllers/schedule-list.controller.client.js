@@ -5,7 +5,7 @@
 
     function ScheduleListController ($routeParams, currentUser, scheduleService, userService) {
         var vm = this;
-
+        vm.user = currentUser;
         vm.uid = currentUser._id;
         vm.logout = logout;
 
@@ -14,9 +14,26 @@
                 .findAllSchedulesForUser(vm.uid) // for crew
                 .then(function (schedules) {
                     vm.schedules = schedules;
+
+                    vm.flights = [];
+                    loadFlights(vm.schedules);
                 });
         }
         init();
+
+        function loadFlights (schedules) {
+            for (var s in schedules) {
+                subflights = [];
+                for (var f in schedules[s].flights) {
+                    flightService
+                        .findFlightById(schedules[s].flights[f])
+                        .then(function (flight) {
+                            subflights.push(flight);
+                        });
+                }
+                vm.flights.push(subflights);
+            }
+        }
 
         function logout(){
             userService

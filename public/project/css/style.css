@@ -59,8 +59,8 @@ body {
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     z-index: 2;
     color: #fff;
-    background-color: #637a87;
-    border-color: #637a87;
+    background-color: #f9ba00;
+    border-color: #f9ba00;
 }
 
 .btn-primary {
@@ -159,4 +159,16 @@ tr.cancelled {
 
 tr.departed {
     background-color: #dff0d8;
+}
+
+.ID {
+    color: darkgray;
+}
+
+.edit {
+    background-color: #fffaeb;
+}
+
+.label-primary {
+    background-color: #000066;
 }

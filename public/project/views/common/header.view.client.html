@@ -11,7 +11,7 @@
                     <span class="glyphicon glyphicon-user"></span> Hello, <a href="#!/profile"><b>{{vm.user.username}}</b> | </a>
                 </span>
                 <span ng-show="vm.user.roles.indexOf('ADMIN')>-1" class="navbar-link"><a href="#!/admin">Admin | </a></span>
-                <span ng-show="vm.user.roles.indexOf('CREW')>-1" class="navbar-link"><a href="#!/crew">Crew | </a></span>
+                <span ng-show="vm.user.roles.indexOf('CREW')>-1" class="navbar-link"><a href="#!/schedule">Crew | </a></span>
                 <span ng-show="!vm.user._id" class="navbar-link">
                     <a href="#!/login"><span class="glyphicon glyphicon-user"></span> Login | </a>
                 </span>

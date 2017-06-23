@@ -6,7 +6,7 @@
     function ScheduleListController ($routeParams, currentUser, scheduleService, userService) {
         var vm = this;
 
-        vm.scheduleId = $rooteParams['scheduleId'];
+        vm.scheduleId = $routeParams['scheduleId'];
         vm.uid = currentUser._id;
         vm.logout = logout;
 

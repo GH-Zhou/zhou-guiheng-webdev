@@ -2,7 +2,8 @@
 
 <div class="container-fluid">
     <a href="#!/booking/new">
-        <h2>Available flights for you</h2>
+        <h2 ng-show="vm.other_username">Book flights for {{vm.other_username}}</h2>
+        <h2 ng-show="!vm.other_username">Book your flights</h2>
     </a>
     <div class="row">
         <div class="col-xs-3">

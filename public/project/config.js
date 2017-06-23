@@ -47,6 +47,22 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/booking', {
+                templateUrl: 'views/admin/templates/admin-bookings.view.client.html',
+                controller: 'AdminBookingController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/schedule', {
+                templateUrl: 'views/admin/templates/admin-schedules.view.client.html',
+                controller: 'AdminScheduleController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'ProfileController',
@@ -79,6 +95,14 @@
                     currentUser: checkLoggedIn
                 }
             })
+            .when('/booking/new/:username', {
+                templateUrl: 'views/booking/templates/booking-new.view.client.html',
+                controller: 'NewBookingController',
+                controllerAs: 'vm',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .when('/booking', {
                 templateUrl: 'views/booking/templates/booking-list.view.client.html',
                 controller: 'BookingListController',
@@ -95,7 +119,7 @@
                     currentUser: checkLoggedIn
                 }
             })
-            .when('/schedule/', {
+            .when('/schedule', {
                 templateUrl: 'views/schedule/templates/schedule-list.view.client.html',
                 controller: 'ScheduleListController',
                 controllerAs: 'vm',
@@ -119,7 +143,7 @@
                     currentUser: checkLoggedInWithAnonymous
                 }
             })
-            .when('/operations/flightstatus/', {
+            .when('/operations/flightstatus', {
                 templateUrl: 'views/flight/template/flight-status.view.client.html',
                 controller: 'FlightStatusController',
                 controllerAs: 'vm',

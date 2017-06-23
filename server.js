@@ -41,8 +41,8 @@ app.use(app.express.static(__dirname + '/public'));
 // ourApp(app);
 
 // require ("./test/app.js")(app);
-require ("./assignment/app");
-// require ("./project/app");
+// require ("./assignment/app");
+require ("./project/app");
 // require("./ejs/hello/app")(app);
 // require("./ejs/forms/app")(app);
 // require("./ejs/math/app")(app);

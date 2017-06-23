@@ -11,7 +11,16 @@
                                    userService) {
         var vm = this;
 
-        vm.uid = currentUser._id;
+        if ($routeParams.username === null || typeof $routeParams.username === 'undefined') {
+            vm.uid = currentUser._id;
+        } else {
+            vm.other_username = $routeParams.username;
+            userService
+                .findUserByUsername(vm.other_username)
+                .then(function (user) {
+                    vm.uid = user._id;
+                });
+        }
         vm.user = currentUser;
         vm.createBooking = createBooking;
         vm.getAvailableFlights = getAvailableFlights;
@@ -52,13 +61,21 @@
                                 flightService
                                     .createFlight(bookingId, flightObj) // create a new flight and add reference
                                     .then(function () {
-                                        $location.url('/booking');
+                                        if ($routeParams.username === null || typeof $routeParams.username === 'undefined') {
+                                            $location.url('/booking');
+                                        } else {
+                                            $location.url('/admin/booking');
+                                        }
                                     });
                             } else {
                                 bookingService
                                     .addFlight(bookingId, flight._id) // add reference only
                                     .then(function () {
-                                        $location.url('/booking');
+                                        if ($routeParams.username === null || typeof $routeParams.username === 'undefined') {
+                                            $location.url('/booking');
+                                        } else {
+                                            $location.url('/admin/booking');
+                                        }
                                     });
                             }
                         });
@@ -79,7 +96,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/schedules/';
 
-            var bearer_token = "awd3zbqfdc2j8vjk2zmubf99";
+            var bearer_token = "ybm9gf3xw7ezqpzv9uwf8y32";
 
             url += origin + '/' + destination + '/' + date + "?limit=100&directFlights=" + directFlights;
 

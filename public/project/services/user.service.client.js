@@ -11,6 +11,7 @@
             findUserByCredentials: findUserByCredentials,
             findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
+            findAllCrew: findAllCrew,
             login: login,
             logout: logout,
             loggedin: loggedin,
@@ -18,7 +19,8 @@
             register: register,
             updateUser: updateUser,
             deleteUser: deleteUser,
-            unregister: unregister
+            unregister: unregister,
+            deleteSchedule: deleteSchedule
         };
         return api;
 
@@ -66,6 +68,16 @@
                     return response.data;
                 });
         }
+
+        function findAllCrew () {
+            var url = "/api/lufthansa/crew";
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
 
         function login(username, password) {
             var url = "/api/lufthansa/login";
@@ -125,6 +137,15 @@
 
         function deleteUser (userId) {
             var url = "/api/lufthansa/user/" + userId;
+            return $http
+                .delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function deleteSchedule (scheduleId) {
+            var url = "/api/lufthansa/schedule/" + scheduleId;
             return $http
                 .delete(url)
                 .then(function (response) {

@@ -21,13 +21,13 @@
             <tr>
                 <td>{{booking._id}}</td>
                 <td>{{booking.dateCreated | date}}</td>
-                <td>{{vm.flights[$index].departure_airport}}</td>
-                <td>{{vm.flights[$index].departure_scheduled_time | date:"HH:mm"}}</td>
-                <td>{{vm.flights[$index].arrival_airport}}</td>
-                <td>{{vm.flights[$index].arrival_scheduled_time | date:"HH:mm"}}</td>
-                <td>{{vm.flights[$index].marketing_carrier}}{{vm.flights[$index].marketing_flight_number}}</td>
-                <td><a class="btn btn-primary btn-block"
-                       href="#!/operations/flightstatus/{{vm.flights[$index].marketing_carrier}}{{vm.flights[$index].marketing_flight_number}}/{{vm.flights[$index].departure_scheduled_time | date:'yyyy-MM-dd'}}">Check Status</a></td>
+                <td><div ng-repeat="flight in vm.flights[$index]">{{flight.departure_airport}}</div></td>
+                <td><div ng-repeat="flight in vm.flights[$index]">{{flight.departure_scheduled_time | date:"HH:mm"}}</div></td>
+                <td><div ng-repeat="flight in vm.flights[$index]">{{flight.arrival_airport}}</div></td>
+                <td><div ng-repeat="flight in vm.flights[$index]">{{flight.arrival_scheduled_time | date:"HH:mm"}}</div></td>
+                <td><div ng-repeat="flight in vm.flights[$index]">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</div></td>
+                <td><div ng-repeat="flight in vm.flights[$index]"><a class="btn btn-primary btn-block"
+                       href="#!/operations/flightstatus/{{flight.marketing_carrier}}{{flight.marketing_flight_number}}/{{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}">Check Status</a></div></td>
             </tr>
 
         </tbody>

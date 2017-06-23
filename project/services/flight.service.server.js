@@ -4,14 +4,22 @@ var flightModel = require('../models/flight/flight.model.server');
 app.post('/api/flight/booking/:bookingId', createFlight);
 app.get('/api/flights/booking/:bookingId', findAllFlightsForBooking);
 app.get('/api/flight/:flightId', findFlightById);
+app.get('/api/flights', isAdmin, findAllFlights);
 app.put('/api/flight/:flightId', updateFlight);
 app.delete('/api/flight/:flightId', deleteFlight);
 app.get('/api/flight/:carrier/:flightNumber/:departureTime', findFlightByFlightInfo);
 app.post('/api/flight/:flightId/:bookingId', addBooking);
 app.delete('/api/flight/:bookingId', deleteBooking);
-app.post('/api/flight/:flightId/:scheduleId', addSchedule); // ADMIN
-app.delete('/api/flight/:scheduleId', deleteSchedule); // ADMIN
+app.post('/api/flight/:flightId/:scheduleId', isAdmin, addSchedule); // ADMIN
+app.delete('/api/flight/:scheduleId', isAdmin, deleteSchedule); // ADMIN
 
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+        next(); // continue to next middleware;
+    } else {
+        res.sendStatus(401);
+    }
+}
 
 function createFlight(req, res) {
     var flight = req.body;
@@ -45,6 +53,14 @@ function findFlightById(req, res) {
         }, function (err) {
             res.send(err);
         });
+}
+
+function findAllFlights(req, res) {
+    flightModel
+        .findAllFlights()
+        .then(function (flights) {
+            res.json(flights);
+        })
 }
 
 function updateFlight(req, res) {

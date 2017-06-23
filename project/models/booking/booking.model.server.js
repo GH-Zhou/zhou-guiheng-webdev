@@ -7,6 +7,7 @@ var flightModel = require('../flight/flight.model.server');
 bookingModel.createBooking = createBooking;
 bookingModel.findBookingById = findBookingById;
 bookingModel.findAllBookingsForUser = findAllBookingsForUser;
+bookingModel.findAllBookings = findAllBookings;
 bookingModel.updateBooking = updateBooking;
 bookingModel.deleteBooking = deleteBooking;
 bookingModel.addFlight = addFlight;
@@ -31,6 +32,10 @@ function findAllBookingsForUser(userId) {
     return bookingModel.find({_user: userId})
         .populate('_user')
         .exec();
+}
+
+function findAllBookings() {
+    return bookingModel.find();
 }
 
 function updateBooking(bookingId, newBooking) {

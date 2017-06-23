@@ -8,6 +8,7 @@
         // APIs
         this.findAllSchedulesForUser = findAllSchedulesForUser;
         this.findScheduleById = findScheduleById;
+        this.findAllSchedules = findAllSchedules;
         this.deleteSchedule = deleteSchedule;
         this.createSchedule = createSchedule;
         this.updateSchedule = updateSchedule;
@@ -25,6 +26,15 @@
 
         function findScheduleById (scheduleId) {
             var url = "/api/schedule/" + scheduleId;
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findAllSchedules () {
+            var url = "/api/schedules";
             return $http
                 .get(url)
                 .then(function (response) {

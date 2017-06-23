@@ -1,86 +1,85 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
 <div class="container-fluid">
-    <h2>Manage Users</h2>
+    <h2>Manage Bookings</h2>
 
     <ul class="list-group">
         <li class="list-group-item active">
             <div class="row">
                 <div class="hidden-xs col-sm-3 col-lg-2">
-                    User ID (Last 10 chars)
+                    Booking ID (Last 10 chars)
                 </div>
                 <div class="col-xs-5 col-sm-2 col-lg-2">
                     Username
                 </div>
                 <div class="visible-lg col-lg-1">
-                    First Name
+                    Food
                 </div>
                 <div class="visible-lg col-lg-1">
-                    Last Name
+                    Lounge
                 </div>
                 <div class="hidden-xs col-sm-3 col-lg-3">
-                    Email
+                    Price
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
-                    Roles
+                    Flight Number
                 </div>
                 <div class="col-xs-2 col-sm-1">
                 </div>
 
             </div>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item edit">
             <div class="row">
                 <div class="hidden-xs col-sm-3 col-lg-2 ID">
-                    {{vm._user._id.slice(-10)}}
+                    <b>{{vm.booking._id.slice(-10)}}</b>
                 </div>
                 <div class="col-xs-5 col-sm-2 col-lg-2">
-                    <input ng-model="vm._user.username" class="form-control"/>
+                    <input ng-model="vm._user.username" class="form-control" ng-disabled="vm.selected"/>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <input ng-model="vm._user.firstName" class="form-control"/>
+                    <input ng-model="vm.booking.food" class="form-control"/>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <input ng-model="vm._user.lastName" class="form-control"/>
+                    <input ng-model="vm.booking.lounge" class="form-control"/>
                 </div>
                 <div class="hidden-xs col-sm-3 col-lg-3">
-                    <input ng-model="vm._user.email" class="form-control"/>
+                    <b>{{vm.booking.price}}</b>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
-                    <input ng-model="vm._user.roles" class="form-control"/>
+                    <div ng-repeat="flight in vm._flights"><b>{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</b></div>
                 </div>
                 <div class="col-xs-2 col-sm-1">
-                    <span ng-click="vm.updateUser(vm._user);vm._user={}" class="glyphicon glyphicon-ok pull-right"></span>
-                    <span ng-click="vm.createUser(vm._user);vm._user={}" class="glyphicon glyphicon-plus pull-right"></span>
+                    <span ng-click="vm.updateBooking(vm.booking);vm.booking={};vm._user={};vm._flights={}" class="glyphicon glyphicon-ok pull-right"></span>
+                    <a href="#!/booking/new/{{vm._user.username}}"><span class="glyphicon glyphicon-plus pull-right"></span></a>
                 </div>
 
             </div>
         </li>
-        <li ng-repeat="_user in vm.users" class="list-group-item">
+        <li ng-repeat="booking in vm.bookings" class="list-group-item">
             <div class="row">
                 <div class="hidden-xs col-sm-3 col-lg-2 ID">
-                    {{_user._id.slice(-10)}}
+                    {{booking._id.slice(-10)}}
                 </div>
                 <div class="col-xs-5 col-sm-2 col-lg-2">
-                    {{_user.username}}
+                    {{vm.users[$index].username}}
                 </div>
                 <div class="visible-lg col-lg-1">
-                    {{_user.firstName}}
+                    {{booking.food}}
                 </div>
                 <div class="visible-lg col-lg-1">
-                    {{_user.lastName}}
+                    {{booking.lounge}}
                 </div>
                 <div class="hidden-xs col-sm-3 col-lg-3">
-                    {{_user.email}}
+                    {{booking.price}}
                 </div>
                 <div class="col-xs-5 col-sm-3 col-lg-2">
-                    <span ng-repeat="role in _user.roles">
-                        <span class="label label-default">{{role}}</span>
-                    </span>
+                    <div ng-repeat="flight in vm.flights[$index]">
+                        <span class="label label-primary">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</span></div>
                 </div>
                 <div class="col-xs-2 col-sm-1">
-                    <span ng-click="vm.selectUser(_user)" class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span ng-click="vm.deleteUser(_user)" class="glyphicon glyphicon-remove pull-right"></span>
+                    <span ng-click="vm.selectBooking(booking, $index)" class="glyphicon glyphicon-pencil pull-right"></span>
+                    <span ng-click="vm.deleteBooking(booking)" class="glyphicon glyphicon-remove pull-right"></span>
                 </div>
             </div>
 

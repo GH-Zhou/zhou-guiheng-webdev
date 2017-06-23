@@ -4,10 +4,20 @@ var bookingModel = require('../models/booking/booking.model.server');
 app.post('/api/user/:userId/booking', createBooking);
 app.get('/api/user/:userId/booking', findAllBookingsForUser);
 app.get('/api/booking/:bookingId', findBookingById);
+app.get('/api/bookings', isAdmin, findAllBookings);
 app.put('/api/booking/:bookingId', updateBooking);
 app.delete('/api/booking/:bookingId', deleteBooking);
 app.post('/api/booking/:bookingId/:flightId', addFlight);
 app.delete('/api/booking/:flightId', deleteFlight);
+
+
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+        next(); // continue to next middleware;
+    } else {
+        res.sendStatus(401);
+    }
+}
 
 function createBooking(req, res) {
     var booking = req.body;
@@ -41,6 +51,14 @@ function findBookingById(req, res) {
         }, function (err) {
             res.send(err);
         });
+}
+
+function findAllBookings(req, res) {
+    bookingModel
+        .findAllBookings()
+        .then(function (bookings) {
+            res.json(bookings);
+        })
 }
 
 function updateBooking(req, res) {

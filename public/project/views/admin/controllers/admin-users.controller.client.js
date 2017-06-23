@@ -18,25 +18,25 @@
         }
         init();
 
-        function createUser(user) {
+        function createUser(_user) {
             userService
-                .createUser(user)
+                .createUser(_user)
                 .then(findAllUsers);
         }
 
-        function deleteUser(user) {
+        function deleteUser(_user) {
             userService
-                .deleteUser(user._id)
+                .deleteUser(_user._id)
                 .then(findAllUsers);
         }
 
-        function selectUser(user) {
-            vm.user = angular.copy(user);
+        function selectUser(_user) {
+            vm._user = angular.copy(_user);
         }
 
-        function updateUser(user) {
+        function updateUser(_user) {
             userService
-                .updateUser(user._id, user)
+                .updateUser(_user._id, _user)
                 .then(findAllUsers);
         }
 

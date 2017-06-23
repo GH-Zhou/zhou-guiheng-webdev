@@ -8,12 +8,12 @@
         var vm = this;
 
         // vm.uid = currentUser._id;
-        vm.visitor = currentUser;
-        vm.username = $routeParams.username;
+        vm.user = currentUser;
+        vm.other_username = $routeParams.username;
 
         function init() {
             userService
-                .findUserByUsername(vm.username)
+                .findUserByUsername(vm.other_username)
                 .then(renderUser);
         }
         init();
@@ -23,8 +23,8 @@
         // }
         // init();
 
-        function renderUser (user) {
-            vm.user = user;
+        function renderUser (other_user) {
+            vm.other_user = other_user;
         }
 
     }

@@ -16,16 +16,24 @@
                 .then(function (bookings) {
                     vm.bookings = bookings;
                     vm.flights = [];
-                    for (var b in vm.bookings) {
-                        flightService
-                            .findFlightById(vm.bookings[b].flights[0])
-                            .then(function (flight) {
-                                vm.flights.push(flight);
-                            });
-                    }
+                    loadFlights(vm.bookings);
                 });
         }
         init();
+
+        function loadFlights(bookings) {
+            for (var b in bookings) {
+                subflights = [];
+                for (var f in bookings[b].flights) {
+                    flightService
+                        .findFlightById(bookings[b].flights[f])
+                        .then(function (flight) {
+                            subflights.push(flight);
+                        });
+                }
+                vm.flights.push(subflights);
+            }
+        }
 
         function logout(){
             userService

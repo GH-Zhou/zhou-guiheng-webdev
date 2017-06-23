@@ -1,13 +1,23 @@
 var app = require('../../express');
 var scheduleModel = require('../models/schedule/schedule.model.server');
 
-app.post('/api/user/:userId/schedule', createSchedule);
+app.post('/api/user/:userId/schedule', isAdmin, createSchedule);
 app.get('/api/user/:userId/schedule', findAllSchedulesForUser);
 app.get('/api/schedule/:scheduleId', findScheduleById);
-app.put('/api/schedule/:scheduleId', updateSchedule);
-app.delete('/api/schedule/:scheduleId', deleteSchedule);
-app.post('/api/schedule/:scheduleId/:flightId', addFlight);
-app.delete('/api/schedule/:flightId', deleteFlight);
+app.get('/api/schedules', isAdmin, findAllSchedules);
+app.put('/api/schedule/:scheduleId', isAdmin, updateSchedule);
+app.delete('/api/schedule/:scheduleId', isAdmin, deleteSchedule);
+app.post('/api/schedule/:scheduleId/:flightId', isAdmin, addFlight);
+app.delete('/api/schedule/:flightId', isAdmin, deleteFlight);
+
+
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+        next(); // continue to next middleware;
+    } else {
+        res.sendStatus(401);
+    }
+}
 
 function createSchedule(req, res) {
     var schedule = req.body;
@@ -41,6 +51,14 @@ function findScheduleById(req, res) {
         }, function (err) {
             res.send(err);
         });
+}
+
+function findAllSchedules(req, res) {
+    scheduleModel
+        .findAllSchedules()
+        .then(function (schedules) {
+            res.json(schedules);
+        })
 }
 
 function updateSchedule(req, res) {

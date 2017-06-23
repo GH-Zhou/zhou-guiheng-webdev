@@ -7,6 +7,7 @@ var flightModel = require('../flight/flight.model.server');
 scheduleModel.createSchedule = createSchedule;
 scheduleModel.findScheduleById = findScheduleById;
 scheduleModel.findAllSchedulesForUser = findAllSchedulesForUser;
+scheduleModel.findAllSchedules = findAllSchedules;
 scheduleModel.updateSchedule = updateSchedule;
 scheduleModel.deleteSchedule = deleteSchedule;
 scheduleModel.addFlight = addFlight;
@@ -31,6 +32,10 @@ function findAllSchedulesForUser(userId) {
     return scheduleModel.find({_user: userId})
         .populate('_user')
         .exec();
+}
+
+function findAllSchedules() {
+    return scheduleModel.find();
 }
 
 function updateSchedule(scheduleId, newSchedule) {

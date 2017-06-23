@@ -5,6 +5,7 @@ var userModel = mongoose.model('UserModel', userSchema);
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
 userModel.findAllUsers = findAllUsers;
+userModel.findAllCrew = findAllCrew;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserByFacebookId = findUserByFacebookId;
@@ -14,6 +15,7 @@ userModel.addMessage = addMessage;
 userModel.deleteMessage = deleteMessage;
 userModel.addBooking = addBooking;
 userModel.deleteBooking = deleteBooking;
+userModel.deleteSchedule = deleteSchedule;
 
 module.exports = userModel;
 
@@ -32,6 +34,10 @@ function findUserById(userId) {
 
 function findAllUsers() {
     return userModel.find();
+}
+
+function findAllCrew() {
+    return userModel.find({roles:'CREW'});
 }
 
 function findUserByUsername(username) {
@@ -105,6 +111,17 @@ function deleteBooking(bookingId) {
             var user = users[0];
             var index = user.bookings.indexOf(bookingId);
             user.bookings.splice(index, 1);
+            return user.save();
+        });
+}
+
+function deleteSchedule(scheduleId){
+    return userModel
+        .find({schedules:scheduleId})
+        .then(function (users) {
+            var user = users[0];
+            var index = user.schedules.indexOf(scheduleId);
+            user.schedules.splice(index, 1);
             return user.save();
         });
 }

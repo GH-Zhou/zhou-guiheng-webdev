@@ -8,6 +8,7 @@
         // APIs
         this.findAllBookingsForUser = findAllBookingsForUser;
         this.findBookingById = findBookingById;
+        this.findAllBookings = findAllBookings;
         this.deleteBooking = deleteBooking;
         this.createBooking = createBooking;
         this.updateBooking = updateBooking;
@@ -25,6 +26,15 @@
 
         function findBookingById (bookingId) {
             var url = "/api/booking/" + bookingId;
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findAllBookings () {
+            var url = "/api/bookings";
             return $http
                 .get(url)
                 .then(function (response) {

@@ -5,6 +5,7 @@ var flightModel = mongoose.model('FlightModel', flightSchema);
 flightModel.createFlight = createFlight;
 flightModel.findFlightById = findFlightById;
 flightModel.findAllFlightsForBooking = findAllFlightsForBooking;
+flightModel.findAllFlights = findAllFlights;
 flightModel.updateFlight = updateFlight;
 flightModel.deleteFlight = deleteFlight;
 flightModel.findFlightByFlightInfo = findFlightByFlightInfo;
@@ -33,6 +34,10 @@ function findAllFlightsForBooking(bookingId) {
     return flightModel.find({_booking: bookingId})
         .populate('_booking')
         .exec();
+}
+
+function findAllFlights() {
+    return flightModel.find();
 }
 
 function updateFlight(flightId, newFlight) {
