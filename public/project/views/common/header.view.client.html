@@ -31,11 +31,23 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#!/booking/new">Plan Your Trip</a></li>
-                <li><a href="#!/operations/flightstatus">Flight Status</a></li>
-                <li><a href="#">During Your Trip</a></li>
-                <li><a href="#">About</a></li>
+                <li ng-class="vm.url === '/' ? 'active' : ''">
+                    <a href="#">Home</a></li>
+
+                <li ng-class="vm.url === '/booking/new' ? 'active' : ''">
+                    <a href="#!/booking/new" ng-show="vm.user.roles.indexOf('PASSENGER')>-1">Plan Your Trips</a></li>
+
+                <li ng-class="vm.url === '/booking' ? 'active' : ''">
+                    <a href="#!/booking" ng-show="vm.user.roles.indexOf('PASSENGER')>-1">Find Your Trips</a></li>
+
+                <li ng-class="vm.url === '/schedule' ? 'active' : ''">
+                    <a href="#!/schedule" ng-show="vm.user.roles.indexOf('CREW')>-1">View Your Schedules</a></li>
+
+                <li ng-class="vm.url === '/admin' ? 'active' : ''">
+                    <a href="#!/admin" ng-show="vm.user.roles.indexOf('ADMIN')>-1">Administration Page</a></li>
+
+                <li ng-class="vm.url === '/operations/flightstatus' ? 'active' : ''">
+                    <a href="#!/operations/flightstatus">Flight Status</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->

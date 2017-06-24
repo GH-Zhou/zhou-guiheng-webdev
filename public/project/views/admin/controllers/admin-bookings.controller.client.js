@@ -6,12 +6,14 @@
     function adminBookingController(bookingService, currentUser, flightService, userService) {
         var vm = this;
 
+        vm.url = window.location.href.split('#!')[1];
+        vm.user = currentUser;
+
         // vm.createBooking = createBooking;
         vm.deleteBooking = deleteBooking;
         vm.selectBooking = selectBooking;
         vm.updateBooking = updateBooking;
         vm.logout = logout;
-        vm.user = currentUser;
 
         function init() {
             findAllBookings();

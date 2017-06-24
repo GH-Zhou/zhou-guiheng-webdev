@@ -14,6 +14,8 @@
         vm.scheduleId = $routeParams['scheduleId'];
         vm.user = currentUser;
         vm.uid = currentUser._id;
+        vm.url = window.location.href.split('#!')[1];
+
         vm.logout = logout;
 
         function init() {

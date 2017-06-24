@@ -5,9 +5,10 @@
 
     function BookingListController ($routeParams, currentUser, bookingService, userService, flightService) {
         var vm = this;
-
         vm.uid = currentUser._id;
         vm.user = currentUser;
+        vm.url = window.location.href.split('#!')[1];
+
         vm.logout = logout;
 
         function init() {

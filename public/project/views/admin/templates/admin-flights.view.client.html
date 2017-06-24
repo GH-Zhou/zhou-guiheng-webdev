@@ -2,7 +2,10 @@
 
 <div class="container-fluid">
     <h2>Manage Flights with API</h2>
-
+    <p>Update: Use the latest flight information obtained from API to update.</p>
+    <div ng-show="vm.error1" class="alert alert-danger">{{vm.error1}}</div>
+    <div ng-show="vm.error2" class="alert alert-danger">{{vm.error2}}</div>
+    <div ng-show="vm.error3" class="alert alert-danger">{{vm.error3}}</div>
     <ul class="list-group">
         <li class="list-group-item active">
             <div class="row">
@@ -85,39 +88,42 @@
         </li>
     </ul>
 
-    <div ng-show="vm.showAvailableFlights">
+    <div ng-show="!vm.schedules && !vm.error && vm.waiting" class="alert alert-info">{{vm.waiting}}</div>
+    <div class="alert alert-danger" ng-show="vm.error">{{vm.error}}</div>
+    <div ng-show="vm.showAvailableFlights && vm.schedules">
         <h3>Available Flights</h3>
-        <div class="alert alert-danger" ng-show="vm.error">{{vm.error}}</div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Origin</th>
-                <th>Departure Time</th>
-                <th>Destination</th>
-                <th>Arrival Time</th>
-                <th>Airlines</th>
-                <th>Flight Number</th>
-                <th>Duration</th>
-                <th>Aircraft</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="schedule in vm.schedules">
-                <td>{{schedule.Flight.Departure.AirportCode}}</td>
-                <td>{{schedule.Flight.Departure.ScheduledTimeLocal.DateTime}}</td>
-                <td>{{schedule.Flight.Arrival.AirportCode}}</td>
-                <td>{{schedule.Flight.Arrival.ScheduledTimeLocal.DateTime}}</td>
-                <td>{{schedule.Flight.MarketingCarrier.AirlineID}}</td>
-                <td>{{schedule.Flight.MarketingCarrier.FlightNumber}}</td>
-                <td>{{schedule.TotalJourney.Duration}}</td>
-                <td>{{schedule.Flight.Equipment.AircraftCode}}</td>
-                <td><a ng-click="vm.createFlightOnly(schedule)"
-                       class="btn btn-block btn-primary">Add</a></td>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Origin</th>
+                    <th>Departure Time</th>
+                    <th>Destination</th>
+                    <th>Arrival Time</th>
+                    <th>Airlines</th>
+                    <th>Flight Number</th>
+                    <th>Duration</th>
+                    <th>Aircraft</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="schedule in vm.schedules">
+                    <td>{{schedule.Flight.Departure.AirportCode}}</td>
+                    <td>{{schedule.Flight.Departure.ScheduledTimeLocal.DateTime}}</td>
+                    <td>{{schedule.Flight.Arrival.AirportCode}}</td>
+                    <td>{{schedule.Flight.Arrival.ScheduledTimeLocal.DateTime}}</td>
+                    <td>{{schedule.Flight.MarketingCarrier.AirlineID}}</td>
+                    <td>{{schedule.Flight.MarketingCarrier.FlightNumber}}</td>
+                    <td>{{schedule.TotalJourney.Duration}}</td>
+                    <td>{{schedule.Flight.Equipment.AircraftCode}}</td>
+                    <td><a ng-click="vm.createFlightOnly(schedule)"
+                           class="btn btn-block btn-primary">Add</a></td>
 
-            </tr>
-            </tbody>
-        </table>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

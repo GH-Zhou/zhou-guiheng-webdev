@@ -2,14 +2,12 @@
 
 <title>Get the all the Flight Information of a particular Flight</title>
 <body>
-<div class="container">
-    <br>
+<div class="container-fluid">
+    <h3 id="FlightHeader">Flight Status of {{vm.flightNumber}}</h3>
 
-    <h1>Flight Status Response</h1>
-
-    <br/>
-    <div>
-        <h3 id="FlightHeader">Flights with {{vm.flightNumber}}</h3>
+    <div ng-show="!vm.flight && !vm.error && vm.waiting" class="alert alert-info">{{vm.waiting}}</div>
+    <div class="alert alert-danger" ng-show="vm.error">{{vm.error}}</div>
+    <div ng-show="vm.flight">
         <div class="table-responsive">
             <table class="table table-striped" id="table">
                 <tbody id="tbody">

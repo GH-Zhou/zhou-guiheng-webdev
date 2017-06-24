@@ -6,6 +6,9 @@
     function adminScheduleController(scheduleService, currentUser, flightService, userService) {
         var vm = this;
 
+        vm.user = currentUser;
+        vm.url = window.location.href.split('#!')[1];
+
         vm.createSchedule = createSchedule;
         vm.deleteSchedule = deleteSchedule;
         vm.selectSchedule = selectSchedule;
@@ -15,7 +18,7 @@
         vm.selectCrew = selectCrew;
         vm.selectFlight = selectFlight;
         vm.logout = logout;
-        vm.user = currentUser;
+
 
         function init() {
             findAllSchedules();

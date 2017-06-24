@@ -24,6 +24,7 @@
         vm.user = currentUser;
         vm.food = $routeParams.food;
         vm.lounge = $routeParams.lounge;
+        vm.url = window.location.href.split('#!')[1];
 
 
         vm.createBooking = createBooking;
@@ -95,9 +96,42 @@
                 });
         }
 
-        function getAvailableFlights (origin, destination, date, directFlights) {
+        function getAvailableFlights (origin, destination, date) {
+            vm.error = null;
+            vm.schedules = null;
+
+            // handling exceptions for inputs
+            if (origin === null || origin === '' || typeof origin === 'undefined') {
+                vm.error1 = 'Origin field required!';
+                vm.error2 = null;
+                vm.error3 = null;
+                return;
+            }
+
+            if (destination === null || destination === '' || typeof destination === 'undefined') {
+                vm.error1 = null;
+                vm.error2 = 'Destination field required!';
+                vm.error3 = null;
+                return;
+            }
+
+            if (date === null || date === '' || typeof date === 'undefined') {
+                vm.error1 = null;
+                vm.error2 = null;
+                vm.error3 = 'Date field required!';
+                return;
+            }
+
+            vm.error1 = null;
+            vm.error2 = null;
+            vm.error3 = null;
+
+            vm.waiting = "Please wait a second...";
+
+            // variable pre-processing
             vm.oldOrigin = angular.copy(origin);
             vm.oldDestination = angular.copy(destination);
+            directFlights = true;
             var dd = ((date.getDate()<10) ? '0':'' ) + date.getDate();
             //January is 0!
             var mm = ((date.getMonth()<9) ? '0':'' ) + (date.getMonth() + 1);
@@ -109,16 +143,26 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/schedules/';
 
-            var bearer_token = "ybm9gf3xw7ezqpzv9uwf8y32";
+            var bearer_token = "e2uksssycuwg3mr3hss2vuhq";
 
             url += origin + '/' + destination + '/' + date + "?limit=100&directFlights=" + directFlights;
 
             flightService
                 .getAvailableFlights(url, bearer_token)
                 .then(function (schedules){
-                    console.log(schedules);
                     vm.schedules = schedules;
+
+                    for (var s in vm.schedules) {
+                        vm.schedules[s].price = priceConverter(vm.schedules[s].TotalJourney.Duration)
+                    }
+                }, function () {
+                    vm.error = "Sorry, the flight you requested is not found!"
                 });
+        }
+
+        function priceConverter (duration) {
+            var durationParts = duration.split(/[A-Za-z]/);
+            return parseInt(durationParts[2])*58 + parseInt(durationParts[3])*2;
         }
 
         function logout(){

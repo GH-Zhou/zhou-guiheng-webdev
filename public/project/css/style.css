@@ -172,3 +172,7 @@ tr.departed {
 .label-primary {
     background-color: #000066;
 }
+
+.waiting {
+    color: darkgray;
+}

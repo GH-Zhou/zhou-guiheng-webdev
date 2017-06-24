@@ -14,6 +14,7 @@
         vm.user = currentUser;
         vm.uid = currentUser._id;
         vm.bid = $routeParams['bookingId'];
+        vm.url = window.location.href.split('#!')[1];
 
         vm.deleteBooking = deleteBooking;
         vm.updateBooking = updateBooking;

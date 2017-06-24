@@ -152,8 +152,8 @@
                 }
             })
             .when('/operations/flightstatus', {
-                templateUrl: 'views/flight/template/flight-status.view.client.html',
-                controller: 'FlightStatusController',
+                templateUrl: 'views/flight/template/flight-information.view.client.html',
+                controller: 'FlightInformationController',
                 controllerAs: 'vm',
                 resolve: {
                     currentUser: checkLoggedInWithAnonymous

@@ -12,10 +12,20 @@
 
         vm.user = currentUser;
         vm.airport = $routeParams['airport'];
-        vm.date = new Date($routeParams['date'].replace('-', '\/'));
-        vm.timeStart = $routeParams['timeStart'];
+        if (vm.airport === null || vm.airport === '' || typeof vm.airport === 'undefined') {
+            vm.airport = null;
+        } else {
+            vm.date = new Date($routeParams['date'].replace('-', '\/'));
+            vm.timeStart = $routeParams['timeStart'];
+        }
 
-        vm.getAllFlightInformationByAirport = getAllFlightInformationByAirport;
+        vm.tab = 'Airport';
+        vm.url = window.location.href.split('#!')[1];
+        console.log(vm.flight);
+
+        vm.getAllFlightInformationByAirport = getAllFlightInformationByAirport; // by Airport
+        vm.getFlightStatus = getFlightStatus; // by Flight Number
+        vm.toggleTab = toggleTab;
         vm.logout = logout;
 
         function logout(){
@@ -27,6 +37,8 @@
         }
 
         function getAllFlightInformationByAirport(airport, date, time_start, flightType) {
+            vm.error = null;
+            vm.flights = null;
 
             // handling exceptions for inputs
             if (airport === null || airport === '' || typeof airport === 'undefined') {
@@ -91,7 +103,68 @@
                 .getAllFlightInformationByAirport(url, bearer_token)
                 .then(function (flights){
                     vm.flights = flights;
+                }, function () {
+                    vm.error = "No flight found! Please recheck the inputs."
                 });
+        }
+
+        function getFlightStatus(flightNumber, date) {
+            vm.error = null;
+            vm.flight = null;
+
+            // handling exceptions for inputs
+            if (flightNumber === null || flightNumber === '' || typeof flightNumber === 'undefined') {
+                vm.error1 = 'Flight Number field required!';
+                vm.error2 = null;
+                return;
+            }
+
+            if (date === null || date === '' || typeof date === 'undefined') {
+                vm.error1 = null;
+                vm.error2 = 'Date field required!';
+                return;
+            }
+
+            vm.error1 = null;
+            vm.error2 = null;
+
+            // all the inputs are acceptable
+            vm.waiting = "Please wait a second...";
+            vm.oldFlightNumber = angular.copy(flightNumber);
+
+            // format date
+            var dd = ((date.getDate()<10) ? '0':'' ) + date.getDate();
+            //January is 0!
+            var mm = ((date.getMonth()<9) ? '0':'' ) + (date.getMonth() + 1);
+            var yyyy = date.getFullYear();
+
+            date = yyyy +'-' + mm + '-' + dd;
+            vm.dateFormat = date;
+
+            var host = 'api.lufthansa.com';
+            var url = 'https://'+host+'/v1/operations/flightstatus/';
+
+            var bearer_token = "e2uksssycuwg3mr3hss2vuhq";
+
+            url += flightNumber + '/' + date;
+
+            flightService
+                .getFlightStatus(url, bearer_token)
+                .then(function (flight){
+                    vm.flight = flight;
+                }, function () {
+                    vm.error = "No flight found! Please recheck the inputs."
+                });
+        }
+
+        function toggleTab(tab) {
+            if (tab === 'Airport') {
+                vm.waiting = null;
+                vm.tab = 'Airport';
+            } else {
+                vm.waiting = null;
+                vm.tab = 'FlightNumber';
+            }
         }
 
     }

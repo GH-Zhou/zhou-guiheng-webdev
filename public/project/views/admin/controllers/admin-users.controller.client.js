@@ -6,12 +6,15 @@
     function adminUserController(userService, currentUser) {
         var vm = this;
 
+        vm.user = currentUser;
+        vm.url = window.location.href.split('#!')[1];
+
         vm.createUser = createUser;
         vm.deleteUser = deleteUser;
         vm.selectUser = selectUser;
         vm.updateUser = updateUser;
         vm.logout = logout;
-        vm.user = currentUser;
+
 
         function init() {
             findAllUsers();

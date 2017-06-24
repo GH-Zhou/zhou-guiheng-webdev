@@ -6,13 +6,16 @@
     function adminFlightController(currentUser, flightService, userService) {
         var vm = this;
 
+        vm.user = currentUser;
+        vm.url = window.location.href.split('#!')[1];
+
         vm.getAvailableFlights = getAvailableFlights;
         vm.createFlightOnly = createFlightOnly;
         vm.deleteFlight = deleteFlight;
         vm.selectFlight = selectFlight;
         vm.updateFlight = updateFlight;
         vm.logout = logout;
-        vm.user = currentUser;
+
 
         function init() {
             findAllFlights();
@@ -20,6 +23,36 @@
         init();
 
         function getAvailableFlights(flight) { // from API
+
+            vm.error = null;
+
+            // handling exceptions for inputs
+            if (flight.departure_airport === null || flight.departure_airport === '' || typeof flight.departure_airport === 'undefined') {
+                vm.error1 = 'Origin field required!';
+                vm.error2 = null;
+                vm.error3 = null;
+                return;
+            }
+
+            if (flight.arrival_airport === null || flight.arrival_airport === '' || typeof flight.arrival_airport === 'undefined') {
+                vm.error1 = null;
+                vm.error2 = 'Destination field required!';
+                vm.error3 = null;
+                return;
+            }
+
+            if (flight.departure_scheduled_time === null || flight.departure_scheduled_time === '' || typeof flight.departure_scheduled_time === 'undefined') {
+                vm.error1 = null;
+                vm.error2 = null;
+                vm.error3 = 'Date of Departure field required!';
+                return;
+            }
+
+            vm.error1 = null;
+            vm.error2 = null;
+            vm.error3 = null;
+
+
             vm.selected = false;
             vm.showAvailableFlights = true;
 
@@ -30,6 +63,8 @@
 
             vm.oldOrigin = angular.copy(origin);
             vm.oldDestination = angular.copy(destination);
+            vm.waiting = "Please wait a second...";
+
             var dd = ((date.getDate()<10) ? '0':'' ) + date.getDate();
             //January is 0!
             var mm = ((date.getMonth()<9) ? '0':'' ) + (date.getMonth() + 1);
@@ -41,7 +76,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/schedules/';
 
-            var bearer_token = "ybm9gf3xw7ezqpzv9uwf8y32";
+            var bearer_token = "e2uksssycuwg3mr3hss2vuhq";
 
             url += origin + '/' + destination + '/' + date + "?limit=100&directFlights=" + directFlights;
 
@@ -50,6 +85,8 @@
                 .then(function (schedules){
                     console.log(schedules);
                     vm.schedules = schedules;
+                }, function (){
+                    vm.error = "No flight found. Please recheck your inputs."
                 });
         }
 
@@ -130,7 +167,7 @@
                         .then(findAllFlights);
 
                 }, function () {
-                    vm.error = "Failed! No requested flight found!";
+                    vm.error = "Failed! No flight found!";
                 });
         }
 

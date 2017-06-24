@@ -1,20 +1,29 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
-<div class="container-fluid">
+
+
+<div class="container-fluid" ng-show="!vm.bookings.length">
+    <h2 align="center">We don't have any booking record for you.</h2>
+    <br>
+    <br>
+    <a href="#!/booking/new" class="btn btn-primary btn-block">Why not book one now?</a>
+</div>
+<div class="container-fluid" ng-show="vm.bookings.length">
     <a href="#!/booking">
-        <h2>My Bookings</h2>
+        <h2>Your Bookings</h2>
     </a>
-    <div class="table-responsive">
+    <div class="table-responsive" ng-show="vm.bookings">
         <table class="table table-hover">
             <thead>
             <tr>
                 <td>Booking ID (10 chars)</td>
                 <td>Date of Booking</td>
                 <td>Departure from</td>
-                <td>Departure Time Local</td>
+                <td>Departure Time</td>
                 <td>Arrival At</td>
-                <td>Arrival Time Local</td>
+                <td>Arrival Time</td>
                 <td>Flight Number</td>
+                <td>Price</td>
                 <td></td>
             </tr>
             </thead>
