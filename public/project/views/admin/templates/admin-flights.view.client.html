@@ -1,11 +1,12 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
 <div class="container-fluid">
-    <h2>Manage Flights with API</h2>
+    <h3>Manage Flights with API</h3>
     <p>Update: Use the latest flight information obtained from API to update.</p>
     <div ng-show="vm.error1" class="alert alert-danger">{{vm.error1}}</div>
     <div ng-show="vm.error2" class="alert alert-danger">{{vm.error2}}</div>
     <div ng-show="vm.error3" class="alert alert-danger">{{vm.error3}}</div>
+    <div ng-show="vm.error4" class="alert alert-danger">{{vm.error4}}</div>
     <ul class="list-group">
         <li class="list-group-item active">
             <div class="row">
@@ -125,6 +126,8 @@
             </table>
         </div>
     </div>
+
+    <a href="#!/admin" class="btn btn-delete">Back</a>
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

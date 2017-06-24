@@ -1,11 +1,14 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
-
-<!--<h3>Messages</h3>-->
 <div class="container-fluid">
+    <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+    <a href="#!/profile" class="btn btn-delete">Back to your profile</a>
+</div>
+
+<div class="container-fluid" ng-show="!vm.error">
     <table class="table">
     <thead>
     <tr>
-        <th>Chat with {{vm.other_username}}</th>
+        <th><h3>Chat with <span class="label label-primary">{{vm.other_username}}</span></h3></th>
         <th>&nbsp;</th>
     </tr>
     <tr>

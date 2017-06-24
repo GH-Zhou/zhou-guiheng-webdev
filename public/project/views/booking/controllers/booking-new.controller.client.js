@@ -24,23 +24,27 @@
         vm.user = currentUser;
         vm.food = $routeParams.food;
         vm.lounge = $routeParams.lounge;
+        vm.origin = $routeParams.origin;
+        vm.destination = $routeParams.destination;
         vm.url = window.location.href.split('#!')[1];
 
 
         vm.createBooking = createBooking;
         vm.getAvailableFlights = getAvailableFlights;
-        vm.logout =logout;
+        vm.logout = logout;
 
         function createBooking (uid, schedule) {
             if (vm.food && vm.lounge) {
                 booking = {
                     dateCreated: new Date(),
                     food: vm.food,
-                    lounge: vm.lounge
+                    lounge: vm.lounge,
+                    price: schedule.price
                 };
             } else {
                 booking = {
-                    dateCreated: new Date()
+                    dateCreated: new Date(),
+                    price: schedule.price
                 };
             }
 
@@ -61,7 +65,9 @@
                         marketing_carrier: schedule.Flight.MarketingCarrier.AirlineID,
                         marketing_flight_number: schedule.Flight.MarketingCarrier.FlightNumber,
                         equipment: schedule.Flight.Equipment.AircraftCode,
-                        journey_duration: schedule.TotalJourney.Duration
+                        journey_duration: schedule.TotalJourney.Duration,
+                        dateCreated: new Date(),
+                        dateUpdated: new Date()
                     };
 
                     var carrier = flightObj.marketing_carrier;
@@ -143,7 +149,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/schedules/';
 
-            var bearer_token = "e2uksssycuwg3mr3hss2vuhq";
+            var bearer_token = "zdye89e9yque74zytxdzun2d";
 
             url += origin + '/' + destination + '/' + date + "?limit=100&directFlights=" + directFlights;
 

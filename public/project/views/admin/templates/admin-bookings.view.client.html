@@ -1,7 +1,7 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
 <div class="container-fluid">
-    <h2>Manage Bookings</h2>
+    <h3>Manage Bookings</h3>
 
     <ul class="list-group">
         <li class="list-group-item active">
@@ -95,7 +95,7 @@
                     {{booking.lounge}}
                 </div>
                 <div class="hidden-xs col-sm-3 col-lg-1">
-                    {{booking.price}}
+                    ${{booking.price}}
                 </div>
                 <div class="visible-lg col-lg-2">
                     <div ng-repeat="flight in vm.flights[$index]">{{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}</div>
@@ -112,6 +112,9 @@
 
         </li>
     </ul>
+
+    <a href="#!/admin" class="btn btn-delete">Back</a>
 </div>
+
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

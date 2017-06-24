@@ -21,7 +21,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/flightstatus/';
 
-            var bearer_token = "e2uksssycuwg3mr3hss2vuhq";
+            var bearer_token = "zdye89e9yque74zytxdzun2d";
 
             url += vm.flightNumber + '/' + vm.date;
 
@@ -32,7 +32,7 @@
                 .then(function (flight){
                     vm.flight = flight;
                 }, function () {
-                    vm.error = "Sorry, the flight status of this flight is unavailable."
+                    vm.error = "Sorry, the status of this flight is unavailable."
                 });
         }
         init();

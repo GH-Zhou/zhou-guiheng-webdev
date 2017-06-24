@@ -21,7 +21,9 @@ var flightSchema = mongoose.Schema({
     operating_flight_number: String,
     equipment: String,
     journey_duration: String,
-    flight_status: String
+    flight_status: String,
+    dateCreated: {type: Date, default: Date.now},
+    dateUpdated: {type: Date, default: Date.now}
 }, {collection: "flight"});
 
 module.exports = flightSchema;

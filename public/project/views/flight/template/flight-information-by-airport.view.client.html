@@ -2,8 +2,9 @@
 <div ng-show="vm.error2" class="alert alert-danger">{{vm.error2}}</div>
 <div ng-show="vm.error3" class="alert alert-danger">{{vm.error3}}</div>
 <div ng-show="vm.error4" class="alert alert-danger">{{vm.error4}}</div>
-<div class="row">
-    <div class="col-xs-3">
+
+
+    <div>
         <label for="airport">Airport</label>
         <input type="text"
                class="form-control"
@@ -11,7 +12,7 @@
                placeholder="eg: FRA"
                id="airport" required/>
     </div>
-    <div class="col-xs-3">
+    <div>
         <label for="date">Date</label>
         <input type="date"
                class="form-control"
@@ -19,7 +20,7 @@
                placeholder="eg: yyyy-MM-dd"
                id="date" required/>
     </div>
-    <div class="col-xs-2">
+    <div>
         <label for="time_start">Time Start</label>
         <input type="text"
                class="form-control"
@@ -27,28 +28,20 @@
                placeholder="eg: 09:00"
                id="time_start" required/>
     </div>
-    <div class="col-xs-2">
-        <label></label>
+    <div>
         <form name="flightType">
-            <label>
-                <input type="radio" ng-model="vm.flightType" value="departures">
-                Departures
-            </label><br/>
-            <label>
-                <input type="radio" ng-model="vm.flightType" value="arrivals">
-                Arrivals
-            </label><br/>
+            <label><input type="radio" ng-model="vm.flightType" value="departures"> Departures  </label>
+            <label><input type="radio" ng-model="vm.flightType" value="arrivals"> Arrivals</label><br/>
         </form>
     </div>
 
-    <div class="col-xs-2">
-        <label></label>
+    <div>
         <a ng-click="vm.getAllFlightInformationByAirport(vm.airport, vm.date, vm.timeStart, vm.flightType)"
            class="btn btn-block btn-primary">
             Search
         </a>
     </div>
-</div>
+
 <br/>
 <br/>
 <div ng-show="!vm.flights && !vm.error && vm.waiting" class="alert alert-info">{{vm.waiting}}</div>
@@ -85,7 +78,7 @@
                 <td>{{flight.Arrival.ActualTimeLocal.DateTime.slice(-5)}}</td>
                 <td>{{flight.Arrival.ScheduledTimeLocal.DateTime.slice(-5)}}</td>
                 <td>{{flight.Arrival.Terminal.Name}}</td>
-                <td>{{flight.OperatingCarrier.AirlineID}}{{flight.OperatingCarrier.FlightNumber}}</td>
+                <td><span class="label label-primary">{{flight.OperatingCarrier.AirlineID}}{{flight.OperatingCarrier.FlightNumber}}</span></td>
                 <td ng-show="flight.FlightStatus.Definition !== 'No status'">{{flight.FlightStatus.Definition.split(" ")[1]}}</td>
                 <td ng-show="flight.FlightStatus.Definition === 'No status'">{{flight.FlightStatus.Definition}}</td>
                 <td><a class="btn btn-primary btn-block"

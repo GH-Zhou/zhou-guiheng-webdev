@@ -24,7 +24,7 @@ function createUser(user) {
     if (user.roles) {
         user.roles = user.roles.split(',');
     } else {
-        user.roles = ['USER'];
+        user.roles = ['PASSENGER'];
     }
     return userModel.create(user);
 }

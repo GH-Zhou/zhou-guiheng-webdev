@@ -95,7 +95,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/flightstatus/' + flightType + '/';
 
-            var bearer_token = "ybm9gf3xw7ezqpzv9uwf8y32";
+            var bearer_token = "zdye89e9yque74zytxdzun2d";
 
             url += airport + '/' + date + 'T' +  time_start + "?limit=100";
 
@@ -159,9 +159,15 @@
 
         function toggleTab(tab) {
             if (tab === 'Airport') {
+                vm.error1 = null;
+                vm.error2 = null;
+                vm.error = null;
                 vm.waiting = null;
                 vm.tab = 'Airport';
             } else {
+                vm.error1 = null;
+                vm.error2 = null;
+                vm.error = null;
                 vm.waiting = null;
                 vm.tab = 'FlightNumber';
             }

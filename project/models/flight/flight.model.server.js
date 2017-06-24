@@ -57,7 +57,10 @@ function deleteFlight(flightId) {
         .remove({_id: flightId})
         .then(function (status) {
             var bookingModel = require('../booking/booking.model.server');
-            return bookingModel.deleteFlight(flightId);
+            var scheduleModel = require('../schedule/schedule.model.server');
+            bookingModel.deleteFlight(flightId);
+            scheduleModel.deleteFlight(flightId);
+            return status;
         });
 }
 

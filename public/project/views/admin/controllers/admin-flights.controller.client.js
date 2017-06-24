@@ -76,7 +76,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/schedules/';
 
-            var bearer_token = "e2uksssycuwg3mr3hss2vuhq";
+            var bearer_token = "zdye89e9yque74zytxdzun2d";
 
             url += origin + '/' + destination + '/' + date + "?limit=100&directFlights=" + directFlights;
 
@@ -102,12 +102,15 @@
                 marketing_carrier: schedule.Flight.MarketingCarrier.AirlineID,
                 marketing_flight_number: schedule.Flight.MarketingCarrier.FlightNumber,
                 equipment: schedule.Flight.Equipment.AircraftCode,
-                journey_duration: schedule.TotalJourney.Duration
+                journey_duration: schedule.TotalJourney.Duration,
+                dateCreated: new Date(),
+                dateUpdated: new Date()
             };
 
             var carrier = flightObj.marketing_carrier;
             var flightNumber = flightObj.marketing_flight_number;
             var departureTime = flightObj.departure_scheduled_time;
+
 
             flightService
                 .findFlightByFlightInfo(carrier, flightNumber, departureTime)
@@ -145,29 +148,42 @@
             var flightNumber = flight.marketing_flight_number;
             var departureTime = flight.departure_scheduled_time;
 
-            flightService
-                .findFlightByFlightInfo(carrier, flightNumber, departureTime)
-                .then(function (schedule) {
+            var host = 'api.lufthansa.com';
+            var url = 'https://'+host+'/v1/operations/flightstatus/';
 
+            var bearer_token = "zdye89e9yque74zytxdzun2d";
+
+            // format date
+            var dd = ((departureTime.getDate()<10) ? '0':'' ) + departureTime.getDate();
+            //January is 0!
+            var mm = ((departureTime.getMonth()<9) ? '0':'' ) + (departureTime.getMonth() + 1);
+            var yyyy = departureTime.getFullYear();
+
+            date = yyyy +'-' + mm + '-' + dd;
+
+            url += carrier + flightNumber + '/' + date;
+
+            flightService
+                .getFlightStatus(url, bearer_token)
+                .then(function (n_Flight){
                     var newFlight = {
-                        departure_airport: schedule.Flight.Departure.AirportCode,
-                        departure_scheduled_time: schedule.Flight.Departure.ScheduledTimeLocal.DateTime,
-                        departure_terminal: schedule.Flight.Departure.Terminal.Name,
-                        arrival_airport: schedule.Flight.Arrival.AirportCode,
-                        arrival_scheduled_time: schedule.Flight.Arrival.ScheduledTimeLocal.DateTime,
-                        arrival_terminal: schedule.Flight.Arrival.Terminal.Name,
-                        marketing_carrier: schedule.Flight.MarketingCarrier.AirlineID,
-                        marketing_flight_number: schedule.Flight.MarketingCarrier.FlightNumber,
-                        equipment: schedule.Flight.Equipment.AircraftCode,
-                        journey_duration: schedule.TotalJourney.Duration
+                        departure_airport: n_Flight.Departure.AirportCode,
+                        departure_scheduled_time: n_Flight.Departure.ScheduledTimeLocal.DateTime,
+                        departure_terminal: n_Flight.Departure.Terminal.Name,
+                        arrival_airport: n_Flight.Arrival.AirportCode,
+                        arrival_scheduled_time: n_Flight.Arrival.ScheduledTimeLocal.DateTime,
+                        arrival_terminal: n_Flight.Arrival.Terminal.Name,
+                        marketing_carrier: n_Flight.MarketingCarrier.AirlineID,
+                        marketing_flight_number: n_Flight.MarketingCarrier.FlightNumber,
+                        equipment: n_Flight.Equipment.AircraftCode,
+                        dateUpdated: new Date()
                     };
 
                     flightService
                         .updateFlight(flight._id, newFlight)
                         .then(findAllFlights);
-
                 }, function () {
-                    vm.error = "Failed! No flight found!";
+                    vm.error4 = "Sorry, the request failed!"
                 });
         }
 

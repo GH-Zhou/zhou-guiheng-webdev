@@ -12,7 +12,6 @@
         vm.uid = currentUser._id;
         vm.user = currentUser;
         vm.user.dateOfBirth = new Date(vm.user.dateOfBirth);
-        console.log(vm.user.dateOfBirth);
 
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
@@ -30,6 +29,7 @@
         // init();
 
         function updateUser (userId, user) {
+            vm.error = null;
             userService
                 .updateUser(userId, user)
                 .then(function () {

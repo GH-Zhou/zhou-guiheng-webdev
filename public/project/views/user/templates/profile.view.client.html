@@ -45,8 +45,18 @@
         </div>
     </form>
 
+    <div class="row">
+        <div class="col-xs-6">
+            <label for="chat">Chat with</label>
+            <input ng-model="vm.chatWith" type="text" class="form-control" id="chat">
+        </div>
+        <div class="col-xs-6">
+            <label>Confirm and go</label>
+            <a href="#!/chat_with/{{vm.chatWith}}" class="btn btn-info btn-block">Go</a>
+        </div>
+    </div>
 
-
+    <br>
     <a class="btn btn-primary btn-block" ng-show="vm.user.roles.indexOf('ADMIN')<=-1 && vm.user.roles.indexOf('CREW')<=-1"
        href="#!/booking">View your bookings</a>
     <a class="btn btn-info btn-block" ng-show="vm.user.roles.indexOf('CREW')>-1"

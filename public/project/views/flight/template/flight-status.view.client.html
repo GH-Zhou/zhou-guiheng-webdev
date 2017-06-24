@@ -3,22 +3,26 @@
 <title>Get the all the Flight Information of a particular Flight</title>
 <body>
 <div class="container-fluid">
-    <h3 id="FlightHeader">Flight Status of {{vm.flightNumber}}</h3>
-
+    <h3 id="FlightHeader">Flight Status of <span class="label label-primary">{{vm.flightNumber}}</span></h3>
+    <br>
     <div ng-show="!vm.flight && !vm.error && vm.waiting" class="alert alert-info">{{vm.waiting}}</div>
-    <div class="alert alert-danger" ng-show="vm.error">{{vm.error}}</div>
+    <div ng-show="vm.error">
+        <div class="alert alert-danger">{{vm.error}}</div>
+        <a href="#!/operations/flightstatus" class="btn btn-primary btn-block">Start a new flight search</a>
+    </div>
+
     <div ng-show="vm.flight">
         <div class="table-responsive">
             <table class="table table-striped" id="table">
                 <tbody id="tbody">
                     <tr><th>Departure from</th><td>{{vm.flight.Departure.AirportCode}}</td></tr>
-                    <tr><th>Departure Time Local</th><td>{{vm.flight.Departure.ActualTimeLocal.DateTime}}</td></tr>
+                    <tr><th>Departure Time Local</th><td>{{vm.flight.Departure.ActualTimeLocal.DateTime.replace('T', ' ')}}</td></tr>
                     <tr><th>Departure Time Status</th><td>{{vm.flight.Departure.TimeStatus.Definition}}</td></tr>
                     <tr><th>Terminal Departure</th><td>{{vm.flight.Departure.Terminal.Name}}</td></tr>
                     <tr><th>Gate Departure</th><td>{{vm.flight.Departure.Terminal.Gate}}</td></tr>
 
                     <tr><th>Arrival at</th><td>{{vm.flight.Arrival.AirportCode}}</td></tr>
-                    <tr><th>Arrival Time Local</th><td>{{vm.flight.Arrival.ActualTimeLocal.DateTime}}</td></tr>
+                    <tr><th>Arrival Time Local</th><td>{{vm.flight.Arrival.ActualTimeLocal.DateTime.replace('T', ' ')}}</td></tr>
                     <tr><th>Arrival Time Status</th><td>{{vm.flight.Arrival.TimeStatus.Definition}}</td></tr>
                     <tr><th>Terminal Arrival</th><td>{{vm.flight.Arrival.Terminal.Name}}</td></tr>
                     <tr><th>Gate Arrival</th><td>{{vm.flight.Arrival.Terminal.Gate}}</td></tr>

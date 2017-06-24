@@ -22,6 +22,16 @@
                 .then(function (messages){
                     vm.messages = messages;
                 });
+
+            userService
+                .findUserByUsername(vm.other_username)
+                .then(function (user) {
+                    if (user === null || typeof user === 'undefined') {
+                        vm.error = "Sorry, we couldn't find the user you requested.";
+                    } else {
+                        vm.error = null;
+                    }
+                });
         }
         init();
 

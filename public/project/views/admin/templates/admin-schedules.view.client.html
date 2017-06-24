@@ -68,32 +68,35 @@
         </li>
     </ul>
 
+    <a href="#!/admin" class="btn btn-delete">Back</a>
+    <br>
+    <br>
     <div class="row">
         <div class="col-xs-6">
             <h4>Look up available crew</h4>
             <ul class="list-group">
                 <li class="list-group-item active">
                     <div class="row">
-                        <div class="hidden-xs col-sm-5">
+                        <div class="hidden-xs col-sm-4">
                             Crew ID (10 chars)
                         </div>
-                        <div class="col-xs-8 col-sm-5">
+                        <div class="col-xs-4 col-sm-4">
                             Name
                         </div>
-                        <div class="col-xs-4 col-sm-2">
+                        <div class="col-xs-8 col-sm-4">
 
                         </div>
                     </div>
                 </li>
                 <li ng-repeat="_crew in vm.crew" class="list-group-item">
                     <div class="row">
-                        <div class="hidden-xs col-sm-5">
+                        <div class="hidden-xs col-sm-4">
                             {{_crew._id.slice(-10)}}
                         </div>
-                        <div class="col-xs-8 col-sm-5">
+                        <div class="col-xs-4 col-sm-4">
                             {{_crew.username}}
                         </div>
-                        <div class="col-xs-4 col-sm-2">
+                        <div class="col-xs-8 col-sm-4">
                             <a ng-click="vm.selectCrew(_crew)" class="btn btn-primary btn-block">
                                 Select
                             </a>
@@ -107,26 +110,26 @@
             <ul class="list-group">
                 <li class="list-group-item active">
                     <div class="row">
-                        <div class="hidden-xs col-sm-5">
+                        <div class="hidden-xs col-sm-4">
                             Date of Departure
                         </div>
-                        <div class="col-xs-6 col-sm-4">
+                        <div class="col-xs-4 col-sm-4">
                             Flight Number
                         </div>
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-8 col-sm-4">
 
                         </div>
                     </div>
                 </li>
                 <li ng-repeat="flight in vm._flights" class="list-group-item">
                     <div class="row">
-                        <div class="hidden-xs col-xs-5">
+                        <div class="hidden-xs col-xs-4">
                             {{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}
                         </div>
-                        <div class="col-xs-6 col-sm-4">
+                        <div class="col-xs-4 col-sm-4">
                             <span class="label label-primary">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</span>
                         </div>
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-8 col-sm-4">
                             <a ng-click="vm.selectFlight(flight)" class="btn btn-success btn-block">
                                 Select
                             </a>
