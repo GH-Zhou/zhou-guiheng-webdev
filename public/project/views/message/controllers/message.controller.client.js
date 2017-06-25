@@ -28,6 +28,8 @@
                 .then(function (user) {
                     if (user === null || typeof user === 'undefined') {
                         vm.error = "Sorry, we couldn't find the user you requested.";
+                    } else if (user._id === currentUser._id) {
+                        vm.error = "You cannot chat with yourself!";
                     } else {
                         vm.error = null;
                     }

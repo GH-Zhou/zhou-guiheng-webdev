@@ -2,7 +2,7 @@
 
 <title>Get the all the Flight Information of a particular Flight</title>
 <body>
-<div class="container-fluid">
+<div class="container">
     <h3 id="FlightHeader">Flight Status of <span class="label label-primary">{{vm.flightNumber}}</span></h3>
     <br>
     <div ng-show="!vm.flight && !vm.error && vm.waiting" class="alert alert-info">{{vm.waiting}}</div>
@@ -37,8 +37,35 @@
             </table>
         </div>
     </div>
-    <!--<pre class="pre-scrollable">-->
-		<!--</pre>-->
+
+    <h3 ng-show="vm.user">Who chose this flight?</h3>
+    <div ng-show="!vm.users && vm.error1" class="alert alert-danger">{{vm.error1}}</div>
+    <ul class="list-group" ng-show="vm.users">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-xs-4 col-sm-6">
+                    Username
+                </div>
+                <div class="col-xs-8 col-sm-6">
+
+                </div>
+            </div>
+        </li>
+        <li ng-repeat="_user in vm.users" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-4 col-sm-6">
+                    <h5>{{_user.username}}</h5>
+                </div>
+                <div class="col-xs-8 col-sm-6">
+                    <a href="#!/public_profile/{{_user.username}}" class="btn btn-success btn-block">
+                        Profile
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
 </div>
 
 <script type="text/javascript">
