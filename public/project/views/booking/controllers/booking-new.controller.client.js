@@ -162,7 +162,7 @@
                         vm.schedules[s].price = priceConverter(vm.schedules[s].TotalJourney.Duration)
                     }
                 }, function () {
-                    vm.error = "Sorry, the flight you requested is not found!"
+                    vm.error = "Sorry, the flight you requested is not found! Please note that schedules are available for today and up to 360 days in the future.";
                 });
         }
 

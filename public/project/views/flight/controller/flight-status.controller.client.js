@@ -44,7 +44,7 @@
                             getPassengersByFlight(flight); // used for the display of data in local database
                         })
                 }, function () {
-                    vm.error = "Sorry, the status of this flight is unavailable."
+                    vm.error = "Sorry, the status of this flight is unavailable. Please note that the available date range is from 7 days in the past until 5 days in the future.";
                 });
 
 

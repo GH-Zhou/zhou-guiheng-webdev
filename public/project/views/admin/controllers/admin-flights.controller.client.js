@@ -27,21 +27,21 @@
             vm.error = null;
 
             // handling exceptions for inputs
-            if (flight.departure_airport === null || flight.departure_airport === '' || typeof flight.departure_airport === 'undefined') {
+            if (vm.flight.departure_airport === null || vm.flight.departure_airport === '' || typeof vm.flight.departure_airport === 'undefined') {
                 vm.error1 = 'Origin field required!';
                 vm.error2 = null;
                 vm.error3 = null;
                 return;
             }
 
-            if (flight.arrival_airport === null || flight.arrival_airport === '' || typeof flight.arrival_airport === 'undefined') {
+            if (vm.flight.arrival_airport === null || vm.flight.arrival_airport === '' || typeof vm.flight.arrival_airport === 'undefined') {
                 vm.error1 = null;
                 vm.error2 = 'Destination field required!';
                 vm.error3 = null;
                 return;
             }
 
-            if (flight.departure_scheduled_time === null || flight.departure_scheduled_time === '' || typeof flight.departure_scheduled_time === 'undefined') {
+            if (vm.flight.departure_scheduled_time === null || vm.flight.departure_scheduled_time === '' || typeof vm.flight.departure_scheduled_time === 'undefined') {
                 vm.error1 = null;
                 vm.error2 = null;
                 vm.error3 = 'Date of Departure field required!';
@@ -86,7 +86,7 @@
                     console.log(schedules);
                     vm.schedules = schedules;
                 }, function (){
-                    vm.error = "No flight found. Please recheck your inputs."
+                    vm.error = "No flight found! Please note that schedules are available for today and up to 360 days in the future."
                 });
         }
 
@@ -183,7 +183,7 @@
                         .updateFlight(flight._id, newFlight)
                         .then(findAllFlights);
                 }, function () {
-                    vm.error4 = "Sorry, the request failed!"
+                    vm.error4 = "Sorry, the request failed! Please note that the available date range is from 7 days in the past until 5 days in the future."
                 });
         }
 

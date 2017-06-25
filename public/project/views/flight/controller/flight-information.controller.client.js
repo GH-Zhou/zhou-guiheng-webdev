@@ -104,7 +104,7 @@
                 .then(function (flights){
                     vm.flights = flights;
                 }, function () {
-                    vm.error = "No flight found! Please recheck the inputs."
+                    vm.error = "No flight found! Please note that the permitted range for flights returned is from yesterday until 5 days in the future in 4 hours ranges."
                 });
         }
 

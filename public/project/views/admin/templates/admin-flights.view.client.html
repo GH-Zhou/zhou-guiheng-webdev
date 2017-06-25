@@ -111,12 +111,12 @@
                 <tbody>
                 <tr ng-repeat="schedule in vm.schedules">
                     <td>{{schedule.Flight.Departure.AirportCode}}</td>
-                    <td>{{schedule.Flight.Departure.ScheduledTimeLocal.DateTime}}</td>
+                    <td>{{schedule.Flight.Departure.ScheduledTimeLocal.DateTime.slice(-5)}}</td>
                     <td>{{schedule.Flight.Arrival.AirportCode}}</td>
-                    <td>{{schedule.Flight.Arrival.ScheduledTimeLocal.DateTime}}</td>
+                    <td>{{schedule.Flight.Arrival.ScheduledTimeLocal.DateTime.slice(-5)}}</td>
                     <td>{{schedule.Flight.MarketingCarrier.AirlineID}}</td>
                     <td>{{schedule.Flight.MarketingCarrier.FlightNumber}}</td>
-                    <td>{{schedule.TotalJourney.Duration}}</td>
+                    <td>{{schedule.TotalJourney.Duration.slice(2)}}</td>
                     <td>{{schedule.Flight.Equipment.AircraftCode}}</td>
                     <td><a ng-click="vm.createFlightOnly(schedule)"
                            class="btn btn-block btn-primary">Add</a></td>
