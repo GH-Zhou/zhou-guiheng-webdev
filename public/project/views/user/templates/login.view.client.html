@@ -13,7 +13,7 @@
                ng-class="{submitted:vm.submitted1}"
                id="username"
                class="form-control"
-               placeholder="AmericanAir" required/>
+               placeholder="Lufthansa" required/>
         <div ng-show="vm.error1" class="alert alert-danger">{{vm.error1}}</div>
 
         <label for="password">Password</label>
@@ -22,7 +22,7 @@
                ng-class="{submitted:vm.submitted2}"
                id="password"
                class="form-control"
-               placeholder="AAL2017password" required/>
+               placeholder="LH2017password" required/>
         <div ng-show="vm.error2" class="alert alert-danger">{{vm.error2}}</div>
 
         <a data-ng-click="vm.login(username, password)"
@@ -36,6 +36,10 @@
         <a href="/auth/facebook" class="btn btn-facebook btn-block">
             <span class="fa fa-facebook-official"></span>
             Facebook
+        </a>
+        <a href="/auth/google" class="btn btn-danger btn-block">
+            <span class="fa fa-google-plus"></span>
+            Google
         </a>
 
     </div>

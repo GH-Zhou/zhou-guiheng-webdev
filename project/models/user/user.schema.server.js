@@ -15,6 +15,11 @@ var userSchema = mongoose.Schema({
         token: String
     },
 
+    google: {
+        id:    String,
+        token: String
+    },
+
     email: String,
     phone: String,
     messages: [{type: mongoose.Schema.ObjectId, ref: "MessageModel"}],

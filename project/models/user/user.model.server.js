@@ -9,6 +9,7 @@ userModel.findAllCrew = findAllCrew;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.addMessage = addMessage;
@@ -55,6 +56,11 @@ function findUserByCredentials(username, password) {
 function findUserByFacebookId(facebookId) {
     return userModel
         .findOne({'facebook.id': facebookId});
+}
+
+function findUserByGoogleId(googleId) {
+    return userModel
+        .findOne({'google.id': googleId});
 }
 
 function updateUser(userId, newUser) {

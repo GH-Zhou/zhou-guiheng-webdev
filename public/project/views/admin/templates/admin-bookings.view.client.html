@@ -24,10 +24,10 @@
                 <div class="visible-lg col-lg-2">
                     Date
                 </div>
-                <div class="col-xs-5 col-sm-3 col-lg-2">
+                <div class="col-xs-4 col-sm-2 col-lg-1">
                     Flight Number
                 </div>
-                <div class="col-xs-2 col-sm-1">
+                <div class="col-xs-3 col-sm-2">
                 </div>
 
             </div>
@@ -70,12 +70,12 @@
                 <div class="visible-lg col-lg-2">
                     <div ng-repeat="flight in vm._flights"><b>{{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}</b></div>
                 </div>
-                <div class="col-xs-5 col-sm-3 col-lg-2">
+                <div class="col-xs-4 col-sm-2 col-lg-1">
                     <div ng-repeat="flight in vm._flights"><b>{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</b></div>
                 </div>
-                <div class="col-xs-2 col-sm-1">
-                    <span ng-click="vm.updateBooking(vm.booking);vm.booking={};vm._user={};vm._flights={}" class="glyphicon glyphicon-ok pull-right"></span>
-                    <a href="#!/booking/new/{{vm._user.username}}/{{vm.booking.food}}/{{vm.booking.lounge}}"><span class="glyphicon glyphicon-plus pull-right"></span></a>
+                <div class="col-xs-3 col-sm-2">
+                    <span ng-click="vm.updateBooking(vm.booking);vm.booking={};vm._user={};vm._flights={}" class="glyphicon glyphicon-ok pull-right">&nbsp</span>
+                    <a href="#!/booking/new/{{vm._user.username}}/{{vm.booking.food}}/{{vm.booking.lounge}}"><span class="glyphicon glyphicon-plus pull-right">&nbsp</span></a>
                 </div>
 
             </div>
@@ -100,13 +100,13 @@
                 <div class="visible-lg col-lg-2">
                     <div ng-repeat="flight in vm.flights[$index]">{{flight.departure_scheduled_time | date:'yyyy-MM-dd'}}</div>
                 </div>
-                <div class="col-xs-5 col-sm-3 col-lg-2">
+                <div class="col-xs-4 col-sm-2 col-lg-2">
                     <div ng-repeat="flight in vm.flights[$index]">
                         <span class="label label-primary">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</span></div>
                 </div>
-                <div class="col-xs-2 col-sm-1">
-                    <span ng-click="vm.selectBooking(booking, $index)" class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span ng-click="vm.deleteBooking(booking)" class="glyphicon glyphicon-remove pull-right"></span>
+                <div class="col-xs-3 col-sm-2 col-lg-1">
+                    <span ng-click="vm.selectBooking(booking, $index)" class="glyphicon glyphicon-pencil pull-right">&nbsp</span>
+                    <span ng-click="vm.deleteBooking(booking)" class="glyphicon glyphicon-remove pull-right">&nbsp</span>
                 </div>
             </div>
 
