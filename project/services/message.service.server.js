@@ -5,7 +5,7 @@ var messageModel = require('../models/message/message.model.server');
 app.get    ('/api/lufthansa/message', findMessagesBetweenTwoUsers);
 app.get    ('/api/lufthansa/message/:messageId', findMessageById);
 app.post   ('/api/lufthansa/message', createMessage);
-app.put    ('/api/lufthansa/message',updateMessage);
+app.put    ('/api/lufthansa/message/:messageId',updateMessage);
 app.delete ('/api/lufthansa/message/:messageId', deleteMessage);
 
 

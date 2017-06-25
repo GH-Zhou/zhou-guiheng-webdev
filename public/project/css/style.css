@@ -116,9 +116,9 @@ a:hover {
     color: #00235f;
 }
 
-.glyphicon.glyphicon-plus {
-    padding-top: 5px;
-}
+/*.glyphicon.glyphicon-plus {*/
+    /*padding-top: 5px;*/
+/*}*/
 
 .my-message .glyphicon,
 .others-message .glyphicon {

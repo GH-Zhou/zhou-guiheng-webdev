@@ -1,4 +1,5 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
+<br>
 <div class="container-fluid">
     <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
     <a href="#!/profile" class="btn btn-delete">Back to your profile</a>
@@ -13,12 +14,16 @@
     </tr>
     <tr>
         <td>
-            <input ng-model="vm.message"
+            <input ng-model="vm.message.text"
                    placeholder="message"
                    class="form-control"/>
         </td>
         <td>
-            <button ng-click="vm.createMessage(vm.message)"
+            <button ng-click="vm.updateMessage(vm.message)"
+                    id="update" class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-ok"></span>
+            </button>
+            <button ng-click="vm.createMessage(vm.message.text)"
                     class="btn btn-primary pull-right">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
@@ -45,6 +50,10 @@
         </td>
         <td ng-class="message.from === vm.user.username ? 'my-message' : 'others-message'">
             <div ng-show="message.from === vm.user.username">
+                <button ng-click="vm.selectMessage(message)"
+                        id="select" class="btn btn-delete pull-right">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
                 <button ng-click="vm.deleteMessage(message)"
                         id="delete" class="btn btn-delete pull-right">
                     <span class="glyphicon glyphicon-remove"></span>

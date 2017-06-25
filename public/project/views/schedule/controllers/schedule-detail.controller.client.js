@@ -26,6 +26,7 @@
 
                     vm.users = [];
                     vm.crew =[];
+                    vm.bookings = [];
 
                     loadCrewAndManifest(vm.schedule);
                 });
@@ -37,11 +38,12 @@
                 .findFlightById(schedule.flights[0])
                 .then(function (flight) {
                     vm.flight = flight;
-
                     for (var b in flight.bookings) {
                         bookingService
                             .findBookingById(flight.bookings[b])
                             .then(function (booking) {
+                                vm.bookings.push(booking);
+
                                 userService
                                     .findUserById(booking._user)
                                     .then(function (user) {

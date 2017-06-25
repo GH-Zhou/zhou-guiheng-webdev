@@ -12,7 +12,8 @@
         vm.other_username = $routeParams.username;
 
         vm.createMessage = createMessage;
-        // vm.updateMessage = updateMessage;
+        vm.updateMessage = updateMessage;
+        vm.selectMessage = selectMessage;
         vm.deleteMessage = deleteMessage;
         vm.logout = logout;
 
@@ -37,10 +38,10 @@
         }
         init();
 
-        function createMessage(message) {
+        function createMessage(message_text) {
             // vm.message_out = "";
             var obj = {
-                text: message,
+                text: message_text,
                 from: vm.user.username,
                 to: vm.other_username,
                 date: new Date()
@@ -50,9 +51,21 @@
                 .then(init);
         }
 
-        // function updateMessage(message) {
-        //
-        // }
+        function updateMessage(message) {
+            var newMessage = {
+                text: message.text,
+                from: message.from,
+                to: message.to,
+                date: message.date
+            };
+            messageService
+                .updateMessage(message._id, newMessage)
+                .then(init);
+        }
+
+        function selectMessage(message) {
+            vm.message = angular.copy(message);
+        }
 
         function deleteMessage(message) {
             messageService
