@@ -97,7 +97,7 @@
 
             var bearer_token = "zdye89e9yque74zytxdzun2d";
 
-            url += airport + '/' + date + 'T' +  time_start + "?limit=100";
+            url += airport + '/' + date + 'T' +  time_start + "?limit=80";
 
             flightService
                 .getAllFlightInformationByAirport(url, bearer_token)
