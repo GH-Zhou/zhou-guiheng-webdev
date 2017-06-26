@@ -48,7 +48,7 @@
     <div class="row">
         <div class="col-xs-6">
             <label for="chat">Chat with</label>
-            <input ng-model="vm.chatWith" type="text" class="form-control" id="chat">
+            <input ng-model="vm.chatWith" type="text" class="form-control" id="chat" placeholder="e.g. admin">
         </div>
         <div class="col-xs-6">
             <label>Confirm and go</label>
@@ -60,7 +60,7 @@
     <a class="btn btn-primary btn-block" ng-show="vm.user.roles.indexOf('ADMIN')<=-1 && vm.user.roles.indexOf('CREW')<=-1"
        href="#!/booking">View your bookings</a>
     <a class="btn btn-info btn-block" ng-show="vm.user.roles.indexOf('CREW')>-1"
-       href="#!/schedule">View your schedule</a>
+       href="#!/schedule">View your schedules</a>
     <a class="btn btn-primary btn-block" ng-show="vm.user.roles.indexOf('ADMIN')>-1"
        href="#!/admin">Administration Page</a>
     <a class="btn btn-success btn-block"
