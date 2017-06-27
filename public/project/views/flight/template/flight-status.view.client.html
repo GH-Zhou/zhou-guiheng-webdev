@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div ng-show="vm.error1" class="alert alert-danger">{{vm.error1}}</div>
+    <div ng-show="vm.user && vm.error1" class="alert alert-danger">{{vm.error1}}</div>
     <div ng-show="vm.user && vm.users && !vm.error1">
         <h3>Who chose this flight?</h3>
         <ul class="list-group" ng-show="vm.users">
