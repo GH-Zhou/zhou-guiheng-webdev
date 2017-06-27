@@ -95,7 +95,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/flightstatus/' + flightType + '/';
 
-            var bearer_token = "4j8pv69w2ht5jydwz73kf9dd";
+            var bearer_token = "mnhc6gbxvr8w4frv7na5nn4n";
 
             url += airport + '/' + date + 'T' +  time_start + "?limit=80";
 
@@ -144,7 +144,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/flightstatus/';
 
-            var bearer_token = "4j8pv69w2ht5jydwz73kf9dd";
+            var bearer_token = "mnhc6gbxvr8w4frv7na5nn4n";
 
             url += flightNumber + '/' + date;
 

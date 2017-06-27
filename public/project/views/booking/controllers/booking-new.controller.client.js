@@ -149,7 +149,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/schedules/';
 
-            var bearer_token = "4j8pv69w2ht5jydwz73kf9dd";
+            var bearer_token = "mnhc6gbxvr8w4frv7na5nn4n";
 
             url += origin + '/' + destination + '/' + date + "?limit=100&directFlights=" + directFlights;
 
