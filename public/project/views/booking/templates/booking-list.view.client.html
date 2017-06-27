@@ -8,7 +8,7 @@
     <br>
     <a href="#!/booking/new" class="btn btn-primary btn-block">Why not book one now?</a>
 </div>
-<div class="container" ng-show="vm.bookings.length">
+<div class="container-fluid" ng-show="vm.bookings.length">
 
     <h2>Your Bookings</h2>
 
@@ -33,9 +33,9 @@
                     <td><h5>{{booking._id.slice(-10)}}</h5></td>
                     <td><h5>{{booking.dateCreated | date}}</h5></td>
                     <td><h5><div ng-repeat="flight in vm.flights[$index]">{{flight.departure_airport}}</div></h5></td>
-                    <td><h5><div ng-repeat="flight in vm.flights[$index]">{{flight.departure_scheduled_time | date:"HH:mm"}}</div></h5></td>
+                    <td><h5><div ng-repeat="flight in vm.flights[$index]">{{flight.departure_scheduled_time | date:"HH:mm, MM/dd/yyyy"}}</div></h5></td>
                     <td><h5><div ng-repeat="flight in vm.flights[$index]">{{flight.arrival_airport}}</div></h5></td>
-                    <td><h5><div ng-repeat="flight in vm.flights[$index]">{{flight.arrival_scheduled_time | date:"HH:mm"}}</div></h5></td>
+                    <td><h5><div ng-repeat="flight in vm.flights[$index]">{{flight.arrival_scheduled_time | date:"HH:mm, MM/dd/yyyy"}}</div></h5></td>
                     <td><h5><div ng-repeat="flight in vm.flights[$index]">{{flight.marketing_carrier}}{{flight.marketing_flight_number}}</div></h5></td>
                     <td><h4>${{booking.price}}</h4></td>
                     <td><div ng-repeat="flight in vm.flights[$index]">

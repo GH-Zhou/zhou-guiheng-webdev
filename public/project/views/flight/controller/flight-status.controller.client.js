@@ -40,6 +40,10 @@
                     flightService
                         .findFlightByFlightInfo(carrier, flightNumber, departureTime)
                         .then(function (flight) {
+                            if (flight === null || typeof flight === 'undefined') {
+                                vm.error1 = "Currently no one booked this flight.";
+                                return;
+                            }
                             vm.users = [];
                             getPassengersByFlight(flight); // used for the display of data in local database
                         })
@@ -52,8 +56,8 @@
         init();
 
         function getPassengersByFlight(flight) {
-            if (flight.bookings === null || typeof flight.bookings === 'undefined') {
-                vm.error1 = "Currently no one booked this flight."
+            if (flight.bookings.length === 0 || flight.bookings === null || typeof flight.bookings === 'undefined') {
+                vm.error1 = "Currently no one booked this flight.";
             }
             for (var b in flight.bookings) {
 
