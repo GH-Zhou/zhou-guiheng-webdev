@@ -76,7 +76,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/schedules/';
 
-            var bearer_token = "mnhc6gbxvr8w4frv7na5nn4n";
+            var bearer_token = "bey8rwhjcqtrvjebazqef3f5";
 
             url += origin + '/' + destination + '/' + date + "?limit=100&directFlights=" + directFlights;
 
@@ -151,7 +151,7 @@
             var host = 'api.lufthansa.com';
             var url = 'https://'+host+'/v1/operations/flightstatus/';
 
-            var bearer_token = "mnhc6gbxvr8w4frv7na5nn4n";
+            var bearer_token = "bey8rwhjcqtrvjebazqef3f5";
 
             // format date
             var dd = ((departureTime.getDate()<10) ? '0':'' ) + departureTime.getDate();
