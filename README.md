@@ -10,7 +10,7 @@ This repository is the working space for the course CS5610 Web Development.
 1. Link to my assignment: https://webdev-summer-1-2017.herokuapp.com/assignment/index.html
 
 # How to roam in my project?
-1. Try to login, with Username/Password being Alice/Alice (for a passenger), Bob/Bob (for a crew member), or Admin/Admin (for an administrator).
+1. Try to login, with "Username/Password" being "Alice/Alice" (for a passenger), "Bob/Bob" (for a crew member), or "admin/admin" (for an administrator).
 1. You can also register for a new account as a passenger.
 1. As a passenger, you can view, manage, or add your booking.
 1. As a crew member, you can view your schedule of flights to serve and the flight details including manifest.
